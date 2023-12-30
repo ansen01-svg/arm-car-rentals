@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.2",
+    "@mui/material": "^5.15.2",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
-    "next-auth": "^4.24.5",
     "next-sanity": "^7.0.5",
     "nodemailer": "^6.9.7",
     "react": "^18",
