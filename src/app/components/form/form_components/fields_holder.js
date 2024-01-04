@@ -1,6 +1,6 @@
 export default function FieldsHolder({ children }) {
   return (
-    <div className="w-1/2 flex flex-col items-center content-center gap-3 md:flex-row md:gap-5">
+    <div className="w-full flex items-center content-center gap-3 md:w-1/2 md:gap-5">
       {children}
     </div>
   );
