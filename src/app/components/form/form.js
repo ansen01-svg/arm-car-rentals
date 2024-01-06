@@ -18,15 +18,19 @@ export default function Form() {
     dateString: dayjs().add(1, "day").format("DD/MM/YY").toString(),
   });
   const [pickupTime, setPickupTime] = useState({
-    time: dayjs(dayjs().format()),
-    timeString: null,
+    time: dayjs("2023-02-06T09:38"),
+    timeString: dayjs("2023-02-06T09:38").format("HH:mm a"),
   });
   const [dropoffTime, setDropoffTime] = useState({
-    time: dayjs(dayjs().format()),
-    timeString: null,
+    time: dayjs("2023-02-06T09:38"),
+    timeString: dayjs("2023-02-06T09:38").format("HH:mm a"),
   });
   const [minDate, setMinDate] = useState(null);
   const [disablePastPickupTime, setDisablePastPickupTime] = useState(false);
+
+  // console.log(dayjs(new Date(Date.now() + 7200000))
+  //     .format("HH:mm a")
+  //     .toString())
 
   const router = useRouter();
 
@@ -66,7 +70,7 @@ export default function Form() {
     // if (pickupDate.dateString === dayjs().format("DD/MM/YY")) {
     // }
 
-    const link = `/cars?pickupDate=${pickupDate}&dropoffDate=${dropoffDate}&pickupTime=${pickupTime}&dropoffTime=${dropoffTime}`;
+    const link = `/cars?pickupDate=${pickupDate.dateString}&dropoffDate=${dropoffDate.dateString}&pickupTime=${pickupTime.time}&dropoffTime=${dropoffTime.time}`;
     router.push(link);
   };
 
