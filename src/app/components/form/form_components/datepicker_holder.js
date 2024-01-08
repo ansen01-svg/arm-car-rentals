@@ -3,12 +3,12 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function DatePickerHolder(props) {
-  const { labelTitle, value, handleChange, minDate } = props;
+  const { labelTitle, value, handleChange, minDate, size } = props;
 
   const { mobileScreen } = useWindowWidth();
 
   return (
-    <div className="w-1/2 h-14 border-[1px] border-slate-300 rounded">
+    <div className="w-1/2 h-14 border-[1px] border-slate-300 rounded whitespace-nowrap">
       <p className="mx-3">{labelTitle}</p>
       {mobileScreen ? (
         <MobileDatePicker

@@ -8,12 +8,11 @@ export default function TimepickerHolder(props) {
   const { mobileScreen } = useWindowWidth();
 
   return (
-    <div className="w-1/2 border-[1px] border-slate-300 rounded">
+    <div className="w-1/2 border-[1px] border-slate-300 rounded whitespace-nowrap">
       <p className="mx-3">{labelTitle}</p>
       {mobileScreen ? (
         <MobileTimePicker
           format="hh:mm a"
-          disablePast={disablePastPickupTime}
           value={value}
           onChange={handleChange}
           sx={{
@@ -30,7 +29,6 @@ export default function TimepickerHolder(props) {
       ) : (
         <DesktopTimePicker
           format="hh:mm a"
-          disablePast={disablePastPickupTime}
           value={value}
           onChange={handleChange}
           sx={{
