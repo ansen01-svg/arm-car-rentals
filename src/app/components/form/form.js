@@ -9,22 +9,10 @@ import LocationHolder from "./form_components/location_holder";
 import { currentDate, futureDate } from "@/app/utils/constants";
 
 export default function Form() {
-  const [pickupDate, setPickupDate] = useState({
-    date: dayjs(currentDate, "DD/MM/YY"),
-    dateString: dayjs().format("DD/MM/YY").toString(),
-  });
-  const [dropoffDate, setDropoffDate] = useState({
-    date: dayjs(futureDate, "DD/MM/YY"),
-    dateString: dayjs().add(1, "day").format("DD/MM/YY").toString(),
-  });
-  const [pickupTime, setPickupTime] = useState({
-    time: dayjs("2023-02-06T09:38"),
-    timeString: dayjs("2023-02-06T09:38").format("HH:mm a"),
-  });
-  const [dropoffTime, setDropoffTime] = useState({
-    time: dayjs("2023-02-06T09:38"),
-    timeString: dayjs("2023-02-06T09:38").format("HH:mm a"),
-  });
+  const [pickupDate, setPickupDate] = useState(dayjs(currentDate, "DD/MM/YY"));
+  const [dropoffDate, setDropoffDate] = useState(dayjs(futureDate, "DD/MM/YY"));
+  const [pickupTime, setPickupTime] = useState(dayjs("2023-02-06T09:38"));
+  const [dropoffTime, setDropoffTime] = useState(dayjs("2023-02-06T09:38"));
   const [minDate, setMinDate] = useState(null);
   const [disablePastPickupTime, setDisablePastPickupTime] = useState(false);
 
@@ -36,32 +24,26 @@ export default function Form() {
 
   // set minimum date for dropoff date
   useEffect(() => {
-    setMinDate(pickupDate.date.add(1, "day"));
-  }, [pickupDate.date]);
+    setMinDate(pickupDate.add(1, "day"));
+  }, [pickupDate]);
 
   // disable pickup time to be able to be set in the past
   useEffect(() => {
     if (
-      pickupDate.date.format("DD/MM/YY").toString() ==
-      dayjs().format("DD/MM/YY")
+      pickupDate.format("DD/MM/YY").toString() == dayjs().format("DD/MM/YY")
     ) {
       setDisablePastPickupTime(true);
     } else {
       setDisablePastPickupTime(false);
     }
-  }, [pickupDate.date]);
+  }, [pickupDate]);
 
   // handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // check if all values are present
-    if (
-      !pickupDate.dateString ||
-      !dropoffDate.dateString ||
-      !pickupTime.timeString ||
-      !dropoffTime.timeString
-    ) {
+    if (!pickupDate || !dropoffDate || !pickupTime || !dropoffTime) {
       return;
     }
 
@@ -70,33 +52,27 @@ export default function Form() {
     // if (pickupDate.dateString === dayjs().format("DD/MM/YY")) {
     // }
 
-    const link = `/cars?pickupDate=${pickupDate.dateString}&dropoffDate=${dropoffDate.dateString}&pickupTime=${pickupTime.time}&dropoffTime=${dropoffTime.time}`;
+    const link = `/cars?pickupDate=${pickupDate}&dropoffDate=${dropoffDate}&pickupTime=${pickupTime}&dropoffTime=${dropoffTime}`;
     router.push(link);
   };
 
   const handlePickupDateChange = (date) => {
-    setPickupDate({ date, dateString: date.format("DD/MM/YY").toString() });
+    setPickupDate(date);
   };
 
   const handleDropoffDateChange = (date) => {
-    setDropoffDate({ date, dateString: date.format("DD/MM/YY") });
+    setDropoffDate(date);
   };
 
   const handlePickupTimeChange = (time) => {
     if (time && time !== "Invalid Date") {
-      setPickupTime({
-        time,
-        timeString: time.format("HH:mm a").toString(),
-      });
+      setPickupTime(time);
     }
   };
 
   const handleDropoffTimeChange = (time) => {
     if (time && time !== "Invalid Date") {
-      setDropoffTime({
-        time,
-        timeString: time.format("HH:mm a").toString(),
-      });
+      setDropoffTime(time);
     }
   };
 
@@ -107,10 +83,10 @@ export default function Form() {
     >
       <LocationHolder />
       <FieldsHolderWrapper
-        pickupDate={pickupDate.date}
-        dropoffDate={dropoffDate.date}
-        pickupTime={pickupTime.time}
-        dropoffTime={dropoffTime.time}
+        pickupDate={pickupDate}
+        dropoffDate={dropoffDate}
+        pickupTime={pickupTime}
+        dropoffTime={dropoffTime}
         minDate={minDate}
         disablePastPickupTime={disablePastPickupTime}
         handlePickupDateChange={handlePickupDateChange}

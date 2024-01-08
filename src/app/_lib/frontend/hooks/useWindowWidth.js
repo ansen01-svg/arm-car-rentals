@@ -16,7 +16,7 @@ const useWindowWidth = () => {
       setWindowWidth(window.innerWidth);
     }
 
-    if (windowWidth <= "640") {
+    if (windowWidth < "1024") {
       setMobileScreen(true);
       setDesktopScreen(false);
     } else {
