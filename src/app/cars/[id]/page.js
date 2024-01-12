@@ -1,3 +1,3 @@
 export default function SingleCar({ params }) {
-  return <div>Cars id - {params.id}</div>;
+  return <div>Car id - {params.id}</div>;
 }

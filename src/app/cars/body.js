@@ -1,18 +1,53 @@
 import FilterButtonHolder from "./components/filter_button_holder/filter_button_holder";
-import FilterOptionsHolder from "./components/filter_options_holder/filter_options_holder";
-import CarsHolder from "./components/cars_holder/cars_holder";
+import Main from "./components/main/main";
+import FilterModal from "./components/filter_modal/filter_modal";
 import useWindowWidth from "../_lib/frontend/hooks/useWindowWidth";
 
 export default function Body(props) {
-  const { showFilterModal } = props;
+  const {
+    cars,
+    dispatch,
+    showFilterModal,
+    carType,
+    carSpecifications,
+    carPrice,
+    carCapacity,
+    handleCarTypeValueChange,
+    handleSpecificationValueChange,
+    handlePriceValueChange,
+    handleCapacityValueChange,
+  } = props;
 
-  const { desktopScreen } = useWindowWidth();
+  const { mobileScreen } = useWindowWidth();
 
   return (
     <div>
-      <FilterButtonHolder />
-      {(desktopScreen || showFilterModal) && <FilterOptionsHolder />}
-      <CarsHolder />
+      {mobileScreen && <FilterButtonHolder dispatch={dispatch} />}
+      {mobileScreen && showFilterModal && (
+        <FilterModal
+          showFilterModal={showFilterModal}
+          dispatch={dispatch}
+          carType={carType}
+          carSpecifications={carSpecifications}
+          carPrice={carPrice}
+          carCapacity={carCapacity}
+          handleCarTypeValueChange={handleCarTypeValueChange}
+          handleSpecificationValueChange={handleSpecificationValueChange}
+          handlePriceValueChange={handlePriceValueChange}
+          handleCapacityValueChange={handleCapacityValueChange}
+        />
+      )}
+      <Main
+        cars={cars}
+        carType={carType}
+        carSpecifications={carSpecifications}
+        carPrice={carPrice}
+        carCapacity={carCapacity}
+        handleCarTypeValueChange={handleCarTypeValueChange}
+        handleSpecificationValueChange={handleSpecificationValueChange}
+        handlePriceValueChange={handlePriceValueChange}
+        handleCapacityValueChange={handleCapacityValueChange}
+      />
     </div>
   );
 }
