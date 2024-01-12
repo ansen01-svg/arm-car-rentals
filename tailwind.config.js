@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         primary: "#666",
         secondary: "#1f9990",
+        hover: "#1b8b84",
       },
       fontSize: {
         medium: "14px",

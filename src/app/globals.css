@@ -7,8 +7,3 @@
     @apply text-primary text-xs font-medium;
   }
 }
-
-::placeholder {
-  color: red;
-  opacity: 1;
-}

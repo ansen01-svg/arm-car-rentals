@@ -1,18 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import dayjs from "dayjs";
 import SearchOptionsHolder from "./components/search_options_holder/search_options-holder";
 import ErrorMessageHolder from "./components/error_message_holder/error_message_holder";
 import Body from "./body";
+import { initialState, reducer } from "./reducer";
+import { useRouter } from "next/navigation";
 
 export default function CarsPage({ searchParams, cars }) {
-  const [showFilterModal, setShowFilterModal] = useState(false);
-  const [pickupDate, setPickupDate] = useState(null);
-  const [dropoffDate, setDropoffDate] = useState(null);
-  const [pickupTime, setPickupTime] = useState(null);
-  const [dropoffTime, setDropoffTime] = useState(null);
-  const [minDate, setMinDate] = useState(null);
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    availableCars: cars,
+  });
+  const [params, setParams] = useState([]);
+
+  const router = useRouter();
 
   // check if params are ok
   const isInvalidDate = searchParams
@@ -22,50 +25,87 @@ export default function CarsPage({ searchParams, cars }) {
   // set search params to state
   useEffect(() => {
     if (Object.keys(searchParams).length !== 0) {
+      // set the dates
       const { pickupDate, dropoffDate, pickupTime, dropoffTime } = searchParams;
-
-      setPickupDate(dayjs(pickupDate));
-      setDropoffDate(dayjs(dropoffDate));
-      setPickupTime(dayjs(pickupTime));
-      setDropoffTime(dayjs(dropoffTime));
+      dispatch({ type: "SET_PICKUP_DATE", payload: dayjs(pickupDate) });
+      dispatch({ type: "SET_DROPOFF_DATE", payload: dayjs(dropoffDate) });
+      dispatch({ type: "SET_PICKUP_TIME", payload: dayjs(pickupTime) });
+      dispatch({ type: "SET_DROPOFF_TIME", payload: dayjs(dropoffTime) });
     }
   }, [searchParams]);
 
   // set minimum date for dropoff date
   useEffect(() => {
-    if (pickupDate) {
-      setMinDate(pickupDate.add(1, "day"));
+    if (state.pickupDate) {
+      dispatch({
+        type: "SET_MINDATE",
+        payload: state.pickupDate.add(1, "day"),
+      });
     }
-  }, [pickupDate]);
+  }, [state.pickupDate]);
 
+  // date form events
   const handlePickupDateChange = (date) => {
-    setPickupDate(date);
+    dispatch({ type: "SET_PICKUP_DATE", payload: date });
   };
 
   const handleDropoffDateChange = (date) => {
-    setDropoffDate(date);
+    dispatch({ type: "SET_DROPOFF_DATE", payload: date });
   };
 
   const handlePickupTimeChange = (time) => {
     if (time && time !== "Invalid Date") {
-      setPickupTime(time);
+      dispatch({ type: "SET_PICKUP_TIME", payload: time });
     }
   };
 
   const handleDropoffTimeChange = (time) => {
     if (time && time !== "Invalid Date") {
-      setDropoffTime(time);
+      dispatch({ type: "SET_DROPOFF_TIME", payload: time });
     }
+  };
+
+  // filter form events
+  const handleCarTypeValueChange = (e) => {
+    // push the car type to url
+    const newUrl = currentUrl + `&carType=${e.target.name}`;
+    router.push(newUrl);
+    // save the state
+    dispatch({ type: "SET_CAR_TYPE", payload: { type: e.target.name } });
+  };
+
+  const handleSpecificationValueChange = (e) => {
+    const newUrl = currentUrl + `&specifications=${e.target.name}`;
+    router.push(newUrl);
+    dispatch({ type: "SET_SPECIFICATIONS", payload: { specs: e.target.name } });
+  };
+
+  const handlePriceValueChange = (e) => {
+    const newUrl = currentUrl + `&totalPrice=${e.target.name}`;
+    router.push(newUrl);
+    dispatch({
+      type: "SET_PRICE",
+      payload: { price: e.target.name },
+    });
+  };
+
+  const handleCapacityValueChange = (e) => {
+    const newUrl = currentUrl + `&capacity=${e.target.name}`;
+    router.push(newUrl);
+    dispatch({
+      type: "SET_CAPACITY",
+      payload: { load: e.target.name },
+    });
   };
 
   return (
     <div className="w-full">
       <SearchOptionsHolder
-        pickupDate={pickupDate}
-        dropoffDate={dropoffDate}
-        pickupTime={pickupTime}
-        dropoffTime={dropoffTime}
-        minDate={minDate}
+        pickupDate={state.pickupDate}
+        dropoffDate={state.dropoffDate}
+        pickupTime={state.pickupTime}
+        dropoffTime={state.dropoffTime}
+        minDate={state.minDate}
         handlePickupDateChange={handlePickupDateChange}
         handleDropoffDateChange={handleDropoffDateChange}
         handlePickupTimeChange={handlePickupTimeChange}
@@ -74,7 +114,19 @@ export default function CarsPage({ searchParams, cars }) {
       {isInvalidDate ? (
         <ErrorMessageHolder />
       ) : (
-        <Body showFilterModal={showFilterModal} />
+        <Body
+          cars={state.availableCars}
+          showFilterModal={state.showFilterModal}
+          dispatch={dispatch}
+          carType={state.carType}
+          carSpecifications={state.specifications}
+          carPrice={state.price}
+          carCapacity={state.capacity}
+          handleCarTypeValueChange={handleCarTypeValueChange}
+          handleSpecificationValueChange={handleSpecificationValueChange}
+          handlePriceValueChange={handlePriceValueChange}
+          handleCapacityValueChange={handleCapacityValueChange}
+        />
       )}
     </div>
   );

@@ -7,7 +7,7 @@ export default function SearchFieldsHolder(props) {
     props;
 
   return (
-    <div className="w-full px-6 py-3 lg:px-20 flex items-start content-center gap-4">
+    <div className="w-full px-3 py-3 lg:px-20 flex items-start justify-start gap-4">
       <SearchIconHolder setShowForm={setShowForm} />
       <FieldsHolder
         pickupDate={pickupDate}
@@ -23,7 +23,7 @@ function SearchIconHolder({ setShowForm }) {
   return (
     <div>
       <button onClick={() => setShowForm(true)}>
-        <SearchOutlinedIcon sx={{ color: "#666", fontSize: "20px" }} />
+        <SearchOutlinedIcon fontSize="small" sx={{ color: "#666" }} />
       </button>
     </div>
   );
@@ -34,7 +34,9 @@ function FieldsHolder(props) {
 
   return (
     <div className="flex flex-col items-start content-center gap-1">
-      <div className="font-medium text-primary">{address}</div>
+      <div>
+        <p className="font-medium text-primary">{address}</p>
+      </div>
       <div className="flex items-start content-center gap-2">
         {pickupDate && (
           <p className="text-xs text-primary">

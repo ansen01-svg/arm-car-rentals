@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="w-full h-56 px-6 border-t-[1px] border-slate-200 flex flex-col justify-center items-center gap-3">
+    <div className="w-full h-56 px-6 bg-primary flex flex-col justify-center items-center gap-3">
       <div className="flex flex-wrap justify-center items-center gap-3">
         <p className="footerText">Support</p>
         <p className="footerText">Terms Of Use</p>
