@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { useRouter } from "next/navigation";
 import LocationHolder from "./location_holder";
 import FieldsHolder from "./fields_holder";
 import DatePickerHolder from "@/app/components/form/form_components/datepicker_holder";
@@ -18,9 +17,8 @@ export default function FormHolder(props) {
     handleDropoffDateChange,
     handlePickupTimeChange,
     handleDropoffTimeChange,
+    setParams,
   } = props;
-
-  const router = useRouter();
 
   // search cars form submit
   const handleSubmit = (e) => {
@@ -30,9 +28,14 @@ export default function FormHolder(props) {
       return;
     }
 
-    // update the search params
-    const url = `/cars?pickupDate=${pickupDate}&dropoffDate=${dropoffDate}&pickupTime=${pickupTime}&dropoffTime=${dropoffTime}`;
-    router.push(url);
+    // update params array
+    const newParamsArray = [
+      { pickupDate: dayjs(pickupDate) },
+      { dropoffDate: dayjs(dropoffDate) },
+      { pickupTime: dayjs(pickupTime) },
+      { dropoffTime: dayjs(dropoffTime) },
+    ];
+    setParams(newParamsArray);
 
     // close form
     setShowForm(false);

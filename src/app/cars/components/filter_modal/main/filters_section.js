@@ -33,7 +33,12 @@ function CheckboxesHolder(props) {
             <FormControlLabel
               key={id}
               control={
-                <Checkbox size="small" value={value} onChange={handleChange} />
+                <Checkbox
+                  size="small"
+                  checked={value}
+                  value={value}
+                  onChange={handleChange}
+                />
               }
               label={label}
               id={labelFor}

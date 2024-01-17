@@ -14,12 +14,12 @@ export const initialState = {
   },
   specifications: {
     manual: false,
-    luxury: false,
+    automatic: false,
   },
   price: {
-    sevenTo1k: false,
-    oneto2k: false,
-    twokAndAbove: false,
+    twoto5k: false,
+    fiveto10k: false,
+    tenkAndAbove: false,
   },
   capacity: {
     twoToFour: false,
@@ -51,34 +51,34 @@ export const reducer = (state = initialState, { type, payload }) => {
       return { ...state, minDate: payload };
 
     case "SET_CAR_TYPE":
-      const { type } = payload;
+      const { type, value } = payload;
       return {
         ...state,
-        carType: { ...state.carType, [type]: !state.carType[type] },
+        carType: { ...state.carType, [type]: value },
       };
 
     case "SET_SPECIFICATIONS":
-      const { specs } = payload;
+      const { specs, specValue } = payload;
       return {
         ...state,
         specifications: {
           ...state.specifications,
-          [specs]: !state.specifications[specs],
+          [specs]: specValue,
         },
       };
 
     case "SET_PRICE":
-      const { price } = payload;
+      const { price, priceValue } = payload;
       return {
         ...state,
-        price: { ...state.price, [price]: !state.price[price] },
+        price: { ...state.price, [price]: priceValue },
       };
 
     case "SET_CAPACITY":
-      const { load } = payload;
+      const { load, loadValue } = payload;
       return {
         ...state,
-        capacity: { ...state.capacity, [load]: !state.capacity[load] },
+        capacity: { ...state.capacity, [load]: loadValue },
       };
 
     default:

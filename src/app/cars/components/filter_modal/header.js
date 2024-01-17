@@ -4,9 +4,9 @@ export default function Header(props) {
   const { dispatch } = props;
 
   return (
-    <div className="w-full h-12 px-4 bg-white border-b-[1px] border-slate-200 flex flex-row items-center justify-between sticky top-0 left-0 z-50">
+    <div className="w-full h-12 px-4 bg-white border-b-[1px] border-slate-200 flex flex-row items-center justify-start sticky top-0 left-0 z-50">
       <CloseButtonAndTitleHolder dispatch={dispatch} />
-      <ClearButtonHolder />
+      {/* <ClearButtonHolder params={params} setParams={setParams} /> */}
     </div>
   );
 }
@@ -27,10 +27,18 @@ function CloseButtonAndTitleHolder(props) {
   );
 }
 
-function ClearButtonHolder() {
+function ClearButtonHolder(props) {
+  const { params, setParams } = props;
+
+  const clearFilters = () => {
+    setParams(params.slice(0, 4));
+  };
+
   return (
     <div>
-      <button className="font-medium">Clear</button>
+      <button className="font-medium" onClick={clearFilters}>
+        Clear
+      </button>
     </div>
   );
 }

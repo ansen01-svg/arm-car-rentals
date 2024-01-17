@@ -8,6 +8,8 @@ import Main from "./main/main";
 export default function FilterModal(props) {
   const {
     showFilterModal,
+    params,
+    setParams,
     dispatch,
     carType,
     carSpecifications,
@@ -33,17 +35,13 @@ export default function FilterModal(props) {
           padding: 0,
           width: "100%",
           minWidth: "500px",
-          // minHeight: "550px",
-          // maxHeight: "100vh",
-          // overflowY: "hidden",
-          // flex: "0 1 auto",
-          // position: "relative",
         },
       }}
     >
       <DialogContent>
-        <Header dispatch={dispatch} />
+        <Header dispatch={dispatch} params={params} setParams={setParams} />
         <Main
+          dispatch={dispatch}
           carType={carType}
           carSpecifications={carSpecifications}
           carPrice={carPrice}

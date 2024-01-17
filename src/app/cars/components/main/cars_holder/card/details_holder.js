@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import DriveEtaOutlinedIcon from "@mui/icons-material/DriveEtaOutlined";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
@@ -10,7 +11,7 @@ export default function DetailsHolder(props) {
   return (
     <div className="flex-1 h-full flex flex-row items-center justify-center">
       <CarDetails car={car} />
-      {desktopScreen && <ReserveButton />}
+      {desktopScreen && <ReserveButton id={car._id} />}
     </div>
   );
 }
@@ -82,17 +83,26 @@ function CarDetailsHolder(props) {
 
 function ExtraTextsHolder() {
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="w-full flex flex-col items-start justify-center gap-1">
       <p className="text-[14px] text-green-700">Free cancellation</p>
       <p className="text-[14px] text-green-700">Pay at pick-up</p>
     </div>
   );
 }
 
-function ReserveButton(props) {
+function ReserveButton({ id }) {
+  const router = useRouter();
+
+  const handleClick = (id) => {
+    router.push(`/cars/${id}`);
+  };
+
   return (
     <div className="px-3">
-      <button className="w-28 h-10 font-bold rounded bg-secondary text-white hover:bg-hover">
+      <button
+        className="w-28 h-10 font-bold rounded bg-secondary text-white hover:bg-hover"
+        onClick={() => handleClick(id)}
+      >
         Reserve
       </button>
     </div>
