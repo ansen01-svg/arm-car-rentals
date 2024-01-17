@@ -12,6 +12,8 @@ export default function Body(props) {
     carSpecifications,
     carPrice,
     carCapacity,
+    params,
+    setParams,
     handleCarTypeValueChange,
     handleSpecificationValueChange,
     handlePriceValueChange,
@@ -27,6 +29,8 @@ export default function Body(props) {
         <FilterModal
           showFilterModal={showFilterModal}
           dispatch={dispatch}
+          params={params}
+          setParams={setParams}
           carType={carType}
           carSpecifications={carSpecifications}
           carPrice={carPrice}
@@ -43,6 +47,8 @@ export default function Body(props) {
         carSpecifications={carSpecifications}
         carPrice={carPrice}
         carCapacity={carCapacity}
+        params={params}
+        setParams={setParams}
         handleCarTypeValueChange={handleCarTypeValueChange}
         handleSpecificationValueChange={handleSpecificationValueChange}
         handlePriceValueChange={handlePriceValueChange}

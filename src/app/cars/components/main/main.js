@@ -1,6 +1,7 @@
 import DesktopFilterSection from "./desktop_filter_section/desktop_filter_section";
 import FilterOptionsDisplayHolder from "./filter_options_display_holder/filter_options_display_holder";
 import CarsHolder from "./cars_holder/cars_holder";
+import TotalCarsDisplay from "./total_cars_display/total_cars_display";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function Main(props) {
@@ -10,6 +11,8 @@ export default function Main(props) {
     carSpecifications,
     carPrice,
     carCapacity,
+    params,
+    setParams = { setParams },
     handleCarTypeValueChange,
     handleSpecificationValueChange,
     handlePriceValueChange,
@@ -34,7 +37,11 @@ export default function Main(props) {
           />
         </FilterSectionWrapper>
       )}
-      <FiltersAndCarsWrapper cars={cars} />
+      <FiltersAndCarsWrapper
+        cars={cars}
+        params={params}
+        setParams={setParams}
+      />
     </div>
   );
 }
@@ -44,11 +51,14 @@ function FilterSectionWrapper({ children }) {
 }
 
 function FiltersAndCarsWrapper(props) {
-  const { cars } = props;
+  const { cars, params, setParams } = props;
 
   return (
     <div className="flex flex-col items-center justify-center gap-7 flex-1">
-      <FilterOptionsDisplayHolder />
+      {params.length > 4 && (
+        <FilterOptionsDisplayHolder params={params} setParams={setParams} />
+      )}
+      <TotalCarsDisplay cars={cars} />
       <CarsHolder cars={cars} />
     </div>
   );

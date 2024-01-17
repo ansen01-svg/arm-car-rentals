@@ -6,6 +6,7 @@ import Button from "./button";
 export default function Main(props) {
   const {
     carType,
+    dispatch,
     carSpecifications,
     carPrice,
     carCapacity,
@@ -65,21 +66,21 @@ export default function Main(props) {
     return [
       {
         id: 1,
-        label: "700 to 1000",
-        labelFor: "sevenTo1k",
-        value: carPrice.sevenTo1k,
+        label: "2000 to 5000",
+        labelFor: "twoto5k",
+        value: carPrice.twoto5k,
       },
       {
         id: 2,
-        label: "1000 to 2000",
-        labelFor: "oneto2k",
-        value: carPrice.oneto2k,
+        label: "5000 to 10000",
+        labelFor: "fiveto10k",
+        value: carPrice.fiveto10k,
       },
       {
         id: 3,
-        label: "above 2000",
-        labelFor: "twokAndAbove",
-        value: carPrice.twokAndAbove,
+        label: "above 10000",
+        labelFor: "tenkAndAbove",
+        value: carPrice.tenkAndAbove,
       },
     ];
   }, [carPrice]);
@@ -101,11 +102,20 @@ export default function Main(props) {
     ];
   }, [carCapacity]);
 
+  // close filter modal
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: "SHOW_FILTER_MODAL", payload: false });
+  };
+
   return (
     <div className="w-full h-[calc(890px-128px)] px-4 flex flex-col items-center justify-start gap-2 overflow-y-auto">
       <Header />
       <div className="w-full">
-        <form className="w-full flex flex-col items-center justify-center gap-8">
+        <form
+          className="w-full flex flex-col items-center justify-center gap-8"
+          onSubmit={handleSubmit}
+        >
           <FiltersSection
             title="Car Type"
             data={carTypesData}

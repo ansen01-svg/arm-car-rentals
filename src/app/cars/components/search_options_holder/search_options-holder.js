@@ -14,7 +14,7 @@ export default function SearchOptionsHolder(props) {
     pickupTime,
     dropoffTime,
     minDate,
-
+    setParams,
     handlePickupDateChange,
     handleDropoffDateChange,
     handlePickupTimeChange,
@@ -44,6 +44,7 @@ export default function SearchOptionsHolder(props) {
           handleDropoffDateChange={handleDropoffDateChange}
           handlePickupTimeChange={handlePickupTimeChange}
           handleDropoffTimeChange={handleDropoffTimeChange}
+          setParams={setParams}
         />
       )}
     </div>
