@@ -9,6 +9,13 @@ import ErrorMessageHolder from "./components/error_message_holder/error_message_
 import Body from "./body";
 import { initialState, reducer } from "./reducer";
 import getInitialParams from "../_lib/frontend/getInitialParams";
+import changeTitle from "../_lib/frontend/changeFilterTitles";
+import {
+  carTypes,
+  carCapacities,
+  carPrices,
+  carSpecifications,
+} from "../utils/arrays";
 
 export default function CarsPage({ searchParams, cars }) {
   const [state, dispatch] = useReducer(reducer, {
@@ -19,6 +26,8 @@ export default function CarsPage({ searchParams, cars }) {
 
   const router = useRouter();
   const { faultyAccess } = useCheckFaultyAccess(searchParams);
+
+  // console.log(state.availableCars);
 
   // change current url when params array changes
   useEffect(() => {
@@ -47,27 +56,12 @@ export default function CarsPage({ searchParams, cars }) {
     router.push(url.slice(0, -1));
   }, [params, router]);
 
-  // fetch cars according to filter params
-  useEffect(() => {
-    // fetch cars
-  }, [params]);
-
-  // set search params to state
+  // set dates states on searchParams change
   useEffect(() => {
     if (Object.keys(searchParams).length > 0) {
-      const {
-        pickupDate,
-        dropoffDate,
-        pickupTime,
-        dropoffTime,
-        carType,
-        capacity,
-        specifications,
-        price,
-      } = searchParams;
+      const { pickupDate, dropoffDate, pickupTime, dropoffTime } = searchParams;
 
       if (pickupDate && dropoffDate && pickupTime && dropoffTime) {
-        // set states
         dispatch({ type: "SET_PICKUP_DATE", payload: dayjs(pickupDate) });
         dispatch({
           type: "SET_DROPOFF_DATE",
@@ -79,6 +73,78 @@ export default function CarsPage({ searchParams, cars }) {
           payload: dayjs(dropoffTime),
         });
       }
+    }
+  }, [searchParams]);
+
+  // set minimum date for dropoff date
+  useEffect(() => {
+    if (state.pickupDate) {
+      dispatch({
+        type: "SET_MINDATE",
+        payload: state.pickupDate.add(1, "day"),
+      });
+    }
+  }, [state.pickupDate]);
+
+  // set availableCars states on searchParams change
+  useEffect(() => {
+    if (Object.keys(searchParams).length > 0) {
+      const { carType, capacity, specifications, price } = searchParams;
+      let filters = carType ? [] : state.availableCars;
+
+      if (carType) {
+        carType.split(",").forEach((type) => {
+          const cars = state.availableCars.filter(
+            (cars) => cars.carType.toLowerCase() === type
+          );
+          filters = [...filters, ...cars];
+        });
+      }
+      if (price) {
+        price.split(",").forEach((price) => {
+          if (price === "twoto5k") {
+            const cars = filters.filter((car) => car.price <= 5000);
+            filters = [...cars];
+          } else if (price === "fiveto10k") {
+            const cars = filters.filter(
+              (car) => car.price > 5000 && car.price < 10000
+            );
+            filters = [...cars];
+          } else {
+            const cars = filters.filter((car) => car.price > 10000);
+            filters = [...cars];
+          }
+        });
+      }
+      if (capacity) {
+        capacity.split(",").forEach((caps) => {
+          if (caps === "twoToFour") {
+            const cars = filters.filter((car) => (car.capacity = 4));
+            filters = [...cars];
+          } else {
+            const cars = filters.filter(
+              (car) => car.capacity > 4 && car.capacity < 7
+            );
+            filters = [...cars];
+          }
+        });
+      }
+      if (specifications) {
+        specifications.split(",").forEach((spec) => {
+          const cars = filters.filter(
+            (cars) => cars.specification.toLowerCase() === spec
+          );
+          filters = [...cars];
+        });
+      }
+      dispatch({ type: "SET_AVAILABLE_CARS", payload: filters });
+    }
+  }, [searchParams]);
+
+  // set car properties states on searchParams change
+  useEffect(() => {
+    if (Object.keys(searchParams).length > 0) {
+      const { carType, capacity, specifications, price } = searchParams;
 
       if (carType) {
         const types = carType.split(",");
@@ -89,7 +155,7 @@ export default function CarsPage({ searchParams, cars }) {
           });
         });
       } else {
-        ["standard", "luxury", "premium", "van"].forEach((type) => {
+        carTypes.forEach((type) => {
           dispatch({
             type: "SET_CAR_TYPE",
             payload: { type: type, value: false },
@@ -105,7 +171,7 @@ export default function CarsPage({ searchParams, cars }) {
           });
         });
       } else {
-        ["manual", "automatic"].forEach((spec) => {
+        carSpecifications.forEach((spec) => {
           dispatch({
             type: "SET_SPECIFICATIONS",
             payload: { specs: spec, specValue: false },
@@ -121,7 +187,7 @@ export default function CarsPage({ searchParams, cars }) {
           });
         });
       } else {
-        ["twoto5k", "fiveto10k", "tenkAndAbove"].forEach((price) => {
+        carPrices.forEach((price) => {
           dispatch({
             type: "SET_PRICE",
             payload: { price: price, priceValue: false },
@@ -137,7 +203,7 @@ export default function CarsPage({ searchParams, cars }) {
           });
         });
       } else {
-        ["twoToFour", "twoToSix"].forEach((load) => {
+        carCapacities.forEach((load) => {
           dispatch({
             type: "SET_CAPACITY",
             payload: { load: load, loadValue: false },
@@ -146,16 +212,6 @@ export default function CarsPage({ searchParams, cars }) {
       }
     }
   }, [searchParams]);
-
-  // set minimum date for dropoff date
-  useEffect(() => {
-    if (state.pickupDate) {
-      dispatch({
-        type: "SET_MINDATE",
-        payload: state.pickupDate.add(1, "day"),
-      });
-    }
-  }, [state.pickupDate]);
 
   // date form events
   const handlePickupDateChange = (date) => {

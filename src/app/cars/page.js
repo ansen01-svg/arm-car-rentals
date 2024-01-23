@@ -1,20 +1,5 @@
-import sanityClient from "@/sanity/sanity_client";
 import CarsPage from "./cars_page";
-import { cache } from "react";
-
-// fetch cars from sanity CMS
-const fetchCars = cache(async () => {
-  try {
-    const cars = await sanityClient.fetch(`*[_type == "car"]`);
-    if (cars) {
-      return cars;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
+import fetchCars from "../_lib/frontend/fetchCars";
 
 export default async function Wrapper({ searchParams }) {
   const cars = await fetchCars();

@@ -9,7 +9,7 @@ export default function ImgHolder({ url }) {
         fill={true}
         sizes="(max-width:200px), 10vw"
         quality={80}
-        style={{ objectFit: "contain" }}
+        style={{ objectFit: "cover" }}
       />
     </div>
   );
