@@ -94,7 +94,8 @@ function ReserveButton({ id }) {
   const router = useRouter();
 
   const handleClick = (id) => {
-    router.push(`/cars/${id}`);
+    const details = window.location.href.split("?")[1];
+    router.push(`/cars/${id}?${details}`);
   };
 
   return (

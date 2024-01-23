@@ -1,5 +1,6 @@
 import moment from "moment";
 
+// Home page
 // banner form
 export const sectionHeaderTitle = "Cheap Car Rentals";
 export const address = "ARM Beltola, Guwahati";
@@ -16,3 +17,7 @@ export const currentTime = new Date().toLocaleTimeString("en-in", {
   hour: "numeric",
   minute: "numeric",
 });
+
+// car details page
+export const header = "Car rental location";
+export const subHeader = "Pick-up & Drop-off";

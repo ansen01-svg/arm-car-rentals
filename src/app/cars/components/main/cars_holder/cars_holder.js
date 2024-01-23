@@ -5,10 +5,13 @@ export default function CarsHolder(props) {
 
   return (
     <div className="w-full flex flex-col items-center justify-center gap-3">
-      {cars.length > 0 &&
+      {cars.length < 1 ? (
+        <div>No cars to show</div>
+      ) : (
         cars.map((car) => {
           return <Card key={car._id} car={car} />;
-        })}
+        })
+      )}
     </div>
   );
 }
