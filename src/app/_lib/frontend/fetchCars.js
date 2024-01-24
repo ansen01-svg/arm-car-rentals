@@ -10,7 +10,7 @@ const fetchCars = cache(async (id) => {
       );
 
       if (cars) {
-        return cars;
+        return cars[0];
       } else {
         return [];
       }

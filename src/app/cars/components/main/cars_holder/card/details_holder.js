@@ -2,10 +2,10 @@ import { useRouter } from "next/navigation";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import DriveEtaOutlinedIcon from "@mui/icons-material/DriveEtaOutlined";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
+import Label from "@/app/components/label/label";
 
 export default function DetailsHolder(props) {
   const { car } = props;
-
   const { desktopScreen } = useWindowWidth();
 
   return (
@@ -20,7 +20,8 @@ function CarDetails({ car }) {
   const { carName, capacity, carType, price, specification } = car;
 
   return (
-    <div className="flex-1 px-2 py-6 flex flex-col items-start justify-center gap-1 md:px-6 md:py-6">
+    <div className="flex-1 px-2 py-6 flex flex-col items-start justify-center gap-2 md:px-6 md:py-6">
+      {price < 10000 && <Label />}
       <TitleHolder carType={carType} />
       <OtherDetailsholder
         carName={carName}
@@ -81,7 +82,7 @@ function CarDetailsHolder(props) {
   );
 }
 
-function ExtraTextsHolder() {
+export function ExtraTextsHolder() {
   return (
     <div className="w-full flex flex-col items-start justify-center gap-1">
       <p className="text-[14px] text-green-700">Free cancellation</p>
