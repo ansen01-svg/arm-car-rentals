@@ -6,6 +6,20 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
+function samePageLinkNavigation(event) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 || // ignore everything but left-click
+    event.metaKey ||
+    event.ctrlKey ||
+    event.altKey ||
+    event.shiftKey
+  ) {
+    return false;
+  }
+  return true;
+}
+
 const AntTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
     // backgroundColor: "#1890ff",
@@ -17,11 +31,11 @@ function LinkTab(props) {
   return (
     <Tab
       component="a"
-      onClick={(event) => {
-        if (samePageLinkNavigation(event)) {
-          event.preventDefault();
-        }
-      }}
+      // onClick={(event) => {
+      //   if (samePageLinkNavigation(event)) {
+      //     event.preventDefault();
+      //   }
+      // }}
       aria-current={props.selected && "page"}
       {...props}
     />
@@ -64,32 +78,18 @@ const AntTab = styled((props) => <LinkTab disableRipple {...props} />)(
   })
 );
 
-function samePageLinkNavigation(event) {
-  if (
-    event.defaultPrevented ||
-    event.button !== 0 || // ignore everything but left-click
-    event.metaKey ||
-    event.ctrlKey ||
-    event.altKey ||
-    event.shiftKey
-  ) {
-    return false;
-  }
-  return true;
-}
-
 export default function Ul() {
   const [value, setValue] = useState(0);
   const { mobileScreen } = useWindowWidth();
 
   const handleChange = (event, newValue) => {
-    // event.type can be equal to focus with selectionFollowsFocus.
     if (
       event.type !== "click" ||
       (event.type === "click" && samePageLinkNavigation(event))
     ) {
       setValue(newValue);
     }
+    setValue(newValue);
   };
 
   return (

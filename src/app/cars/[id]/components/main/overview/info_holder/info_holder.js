@@ -3,7 +3,7 @@ import Info from "./info";
 
 export default function InfoHolder(props) {
   return (
-    <div className="w-full flex flex-row items-center justify-center gap-5 bg-white rounded">
+    <div className="w-full px-3 py-3 flex flex-row items-center justify-center gap-3 bg-white rounded">
       <ImgHolder />
       <Info />
     </div>
