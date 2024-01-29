@@ -1,7 +1,9 @@
-export default function TotalCarsDisplay({ cars }) {
+export default function TotalCarsDisplay(props) {
+  const { cars, dataReady } = props;
+
   return (
     <div className="w-full text-primary text-[14px] font-bold">
-      <p>{cars.length} cars are available</p>
+      <p>{dataReady && cars.length} cars are available</p>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import CarsPage from "./cars_page";
+import PageContent from "./page_content";
 import fetchCars from "../_lib/frontend/fetchCars";
 
 export default async function Wrapper({ searchParams }) {
@@ -6,7 +6,7 @@ export default async function Wrapper({ searchParams }) {
 
   return (
     <div className="max-w-full bg-primary">
-      <CarsPage searchParams={searchParams} cars={cars} />
+      <PageContent searchParams={searchParams} cars={cars} />
     </div>
   );
 }

@@ -1,8 +1,10 @@
 export default function PriceBreakup(props) {
+  const { price, days, totalCost } = props;
+
   return (
     <div className="w-full flex flex-col items-center justify-center gap-3">
       <Header />
-      <Breakup />
+      <Breakup price={price} days={days} totalCost={totalCost} />
     </div>
   );
 }
@@ -15,15 +17,19 @@ function Header() {
   );
 }
 
-function Breakup() {
+function Breakup(props) {
+  const { price, days, totalCost } = props;
+
   return (
     <div className="w-full text-[14px] text-primary flex flex-col items-center justify-center gap-3">
       <div className="w-full flex flex-row items-start justify-between">
         <p>
-          Car rental fee x 2 days <br />{" "}
-          <span className="text-xs">Rs.3000 per day</span>
+          Car rental fee x {days && <span>{days}</span>} days <br />{" "}
+          <span className="text-xs">
+            {price && <span>Rs.{price}</span>} per day
+          </span>
         </p>
-        <p>Rs.6000</p>
+        {totalCost && <p>Rs.{totalCost}</p>}
       </div>
       <div className="w-full flex flex-row items-start justify-between">
         <p>Taxes and fees</p>

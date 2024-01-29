@@ -18,6 +18,14 @@ export const currentTime = new Date().toLocaleTimeString("en-in", {
   minute: "numeric",
 });
 
+// cars page
+export const errorMsge1 =
+  "Sorry! We're facing some technical problems at our end.";
+export const errorMsge2 = "Please adjust your search and try again.";
+
 // car details page
 export const header = "Car rental location";
 export const subHeader = "Pick-up & Drop-off";
+
+export const errorMsg1 = "Sorry, we are unable to procceed with your booking.";
+export const errorMsg2 = "Retry your booking process again.";

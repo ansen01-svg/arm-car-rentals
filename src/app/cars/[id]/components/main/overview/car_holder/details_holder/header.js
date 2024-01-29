@@ -1,4 +1,6 @@
-export default function Header({ car }) {
+export default function Header(props) {
+  const { car, date } = props;
+
   return (
     <div className="w-full">
       <p className="font-bold text-[20px]">{car.carType}</p>
