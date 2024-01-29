@@ -9,7 +9,7 @@ export default function DetailsHolder(props) {
   const { desktopScreen } = useWindowWidth();
 
   return (
-    <div className="flex-1 h-full flex flex-row items-center justify-center">
+    <div className="flex-1 flex flex-row items-center justify-center">
       <CarDetails car={car} />
       {desktopScreen && <ReserveButton id={car._id} />}
     </div>

@@ -6,6 +6,7 @@ import useWindowWidth from "../_lib/frontend/hooks/useWindowWidth";
 export default function Body(props) {
   const {
     cars,
+    pickupDate,
     dispatch,
     showFilterModal,
     carType,
@@ -22,9 +23,11 @@ export default function Body(props) {
 
   const { mobileScreen } = useWindowWidth();
 
+  const dataReady = pickupDate;
+
   return (
     <div>
-      {mobileScreen && <FilterButtonHolder dispatch={dispatch} />}
+      {dataReady && mobileScreen && <FilterButtonHolder dispatch={dispatch} />}
       {mobileScreen && showFilterModal && (
         <FilterModal
           showFilterModal={showFilterModal}
@@ -43,6 +46,7 @@ export default function Body(props) {
       )}
       <Main
         cars={cars}
+        dataReady={dataReady}
         carType={carType}
         carSpecifications={carSpecifications}
         carPrice={carPrice}

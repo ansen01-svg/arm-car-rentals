@@ -9,7 +9,7 @@ import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 function samePageLinkNavigation(event) {
   if (
     event.defaultPrevented ||
-    event.button !== 0 || // ignore everything but left-click
+    event.button !== 0 ||
     event.metaKey ||
     event.ctrlKey ||
     event.altKey ||
@@ -22,23 +22,13 @@ function samePageLinkNavigation(event) {
 
 const AntTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
-    // backgroundColor: "#1890ff",
     backgroundColor: "#1f9990",
   },
 });
 
 function LinkTab(props) {
   return (
-    <Tab
-      component="a"
-      // onClick={(event) => {
-      //   if (samePageLinkNavigation(event)) {
-      //     event.preventDefault();
-      //   }
-      // }}
-      aria-current={props.selected && "page"}
-      {...props}
-    />
+    <Tab component="a" aria-current={props.selected && "page"} {...props} />
   );
 }
 
@@ -52,18 +42,7 @@ const AntTab = styled((props) => <LinkTab disableRipple {...props} />)(
     fontWeight: theme.typography.fontWeightMedium,
     marginRight: theme.spacing(1),
     color: "#666",
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
+    fontFamily: "__Inter_e66fe9",
     "&:hover": {
       color: "#1f9990",
       opacity: 1,

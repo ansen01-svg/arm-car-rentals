@@ -1,12 +1,11 @@
-import Header from "./components/header/header";
-import Links from "./components/links/links";
-import Main from "./components/main/main";
+import PageContent from "./page_content";
 import fetchCars from "@/app/_lib/frontend/fetchCars";
 
 export const generateMetadata = async ({ params }) => {
   const car = await fetchCars(params.id);
+
   return {
-    title: `Details for ${car.carName}`,
+    title: car ? `Details for ${car.carName}` : "ARM: Error",
   };
 };
 
@@ -15,9 +14,7 @@ export default async function SingleCar({ params, searchParams }) {
 
   return (
     <div className="max-w-full bg-primary">
-      <Header searchParams={searchParams} />
-      <Links />
-      <Main car={car} />
+      <PageContent searchParams={searchParams} car={car} />
     </div>
   );
 }

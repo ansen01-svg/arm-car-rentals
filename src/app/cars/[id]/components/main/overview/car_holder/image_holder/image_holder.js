@@ -1,6 +1,8 @@
 import Image from "next/image";
 
-export default function ImageHolder({ src }) {
+export default function ImageHolder(props) {
+  const { src, date } = props;
+
   return (
     <div className="w-[168px] h-[102px] relative lg:w-[202px]">
       <Image

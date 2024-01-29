@@ -17,7 +17,7 @@ import {
   carSpecifications,
 } from "../utils/arrays";
 
-export default function CarsPage({ searchParams, cars }) {
+export default function PageContent({ searchParams, cars }) {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     availableCars: cars,
@@ -422,37 +422,38 @@ export default function CarsPage({ searchParams, cars }) {
         <ErrorMessageHolder />
       </div>
     );
-  } else {
-    return (
-      <div className="w-full">
-        <SearchOptionsHolder
-          pickupDate={state.pickupDate}
-          dropoffDate={state.dropoffDate}
-          pickupTime={state.pickupTime}
-          dropoffTime={state.dropoffTime}
-          minDate={state.minDate}
-          handlePickupDateChange={handlePickupDateChange}
-          handleDropoffDateChange={handleDropoffDateChange}
-          handlePickupTimeChange={handlePickupTimeChange}
-          handleDropoffTimeChange={handleDropoffTimeChange}
-          setParams={setParams}
-        />
-        <Body
-          cars={state.availableCars}
-          showFilterModal={state.showFilterModal}
-          dispatch={dispatch}
-          carType={state.carType}
-          carSpecifications={state.specifications}
-          carPrice={state.price}
-          carCapacity={state.capacity}
-          params={params}
-          setParams={setParams}
-          handleCarTypeValueChange={handleCarTypeValueChange}
-          handleSpecificationValueChange={handleSpecificationValueChange}
-          handlePriceValueChange={handlePriceValueChange}
-          handleCapacityValueChange={handleCapacityValueChange}
-        />
-      </div>
-    );
   }
+
+  return (
+    <div className="w-full">
+      <SearchOptionsHolder
+        pickupDate={state.pickupDate}
+        dropoffDate={state.dropoffDate}
+        pickupTime={state.pickupTime}
+        dropoffTime={state.dropoffTime}
+        minDate={state.minDate}
+        handlePickupDateChange={handlePickupDateChange}
+        handleDropoffDateChange={handleDropoffDateChange}
+        handlePickupTimeChange={handlePickupTimeChange}
+        handleDropoffTimeChange={handleDropoffTimeChange}
+        setParams={setParams}
+      />
+      <Body
+        cars={state.availableCars}
+        pickupDate={state.pickupDate}
+        showFilterModal={state.showFilterModal}
+        dispatch={dispatch}
+        carType={state.carType}
+        carSpecifications={state.specifications}
+        carPrice={state.price}
+        carCapacity={state.capacity}
+        params={params}
+        setParams={setParams}
+        handleCarTypeValueChange={handleCarTypeValueChange}
+        handleSpecificationValueChange={handleSpecificationValueChange}
+        handlePriceValueChange={handlePriceValueChange}
+        handleCapacityValueChange={handleCapacityValueChange}
+      />
+    </div>
+  );
 }
