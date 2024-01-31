@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchFieldsHolder from "./search_fields_holder";
-import FormHolder from "./form/form";
+import FormHolder from "./form/form_holder";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function SearchOptionsHolder(props) {

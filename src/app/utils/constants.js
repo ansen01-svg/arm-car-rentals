@@ -17,6 +17,8 @@ export const currentTime = new Date().toLocaleTimeString("en-in", {
   hour: "numeric",
   minute: "numeric",
 });
+export const defaultPickupDate = moment().add(1, "days").format("DD/MM/YY");
+export const defaultDropoffDate = moment().add(2, "days").format("DD/MM/YY");
 
 // cars page
 export const errorMsge1 =

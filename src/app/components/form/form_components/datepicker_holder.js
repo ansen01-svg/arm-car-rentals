@@ -1,15 +1,16 @@
+import "../styles/picker_holder.css";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function DatePickerHolder(props) {
-  const { labelTitle, value, handleChange, minDate, size } = props;
+  const { labelTitle, value, handleChange, minDate, dateError } = props;
 
   const { mobileScreen } = useWindowWidth();
 
   return (
-    <div className="w-1/2 h-14 border-[1px] border-slate-300 rounded whitespace-nowrap">
-      <p className="mx-3">{labelTitle}</p>
+    <div className={`picker-holder ${dateError ? "error" : ""}`}>
+      <p className="mx-3 my-1 text-xs">{labelTitle}</p>
       {mobileScreen ? (
         <MobileDatePicker
           disablePast
@@ -19,7 +20,8 @@ export default function DatePickerHolder(props) {
           onChange={handleChange}
           sx={{
             ".MuiInputBase-root": {
-              fontSize: "1rem",
+              fontSize: "15px",
+              fontFamily: "__Inter_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.8em",
@@ -39,6 +41,8 @@ export default function DatePickerHolder(props) {
             width: "100%",
             ".MuiInputBase-root": {
               paddingRight: "12px",
+              fontSize: "15px",
+              fontFamily: "__Inter_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.84em",

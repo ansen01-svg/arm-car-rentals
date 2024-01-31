@@ -1,15 +1,16 @@
+import "../styles/picker_holder.css";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function TimepickerHolder(props) {
-  const { labelTitle, value, handleChange, disablePastPickupTime } = props;
+  const { labelTitle, value, handleChange, timeError } = props;
 
   const { mobileScreen } = useWindowWidth();
 
   return (
-    <div className="w-1/2 border-[1px] border-slate-300 rounded whitespace-nowrap">
-      <p className="mx-3">{labelTitle}</p>
+    <div className={`picker-holder ${timeError ? "error" : ""}`}>
+      <p className="mx-3 my-1 text-xs">{labelTitle}</p>
       {mobileScreen ? (
         <MobileTimePicker
           format="hh:mm a"
@@ -17,7 +18,8 @@ export default function TimepickerHolder(props) {
           onChange={handleChange}
           sx={{
             ".MuiInputBase-root": {
-              fontSize: "1rem",
+              fontSize: "15px",
+              fontFamily: "__Inter_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.8em",
@@ -35,6 +37,8 @@ export default function TimepickerHolder(props) {
             width: "100%",
             ".MuiInputBase-root": {
               paddingRight: "12px",
+              fontSize: "15px",
+              fontFamily: "__Inter_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.84em",

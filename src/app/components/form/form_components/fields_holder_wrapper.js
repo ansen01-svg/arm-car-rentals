@@ -4,12 +4,13 @@ import TimepickerHolder from "./timepicker_holder";
 
 export default function FieldsHolderWrapper(props) {
   const {
+    dateError,
+    timeError,
     pickupDate,
     dropoffDate,
     pickupTime,
     dropoffTime,
     minDate,
-    disablePastPickupTime,
     handlePickupDateChange,
     handleDropoffDateChange,
     handlePickupTimeChange,
@@ -24,6 +25,7 @@ export default function FieldsHolderWrapper(props) {
           name="pickUpDate"
           value={pickupDate}
           handleChange={handlePickupDateChange}
+          dateError={dateError}
         />
         <DatePickerHolder
           labelTitle="Drop-off date"
@@ -38,7 +40,7 @@ export default function FieldsHolderWrapper(props) {
           labelTitle="Pick-up time"
           value={pickupTime}
           handleChange={handlePickupTimeChange}
-          disablePastPickupTime={disablePastPickupTime}
+          timeError={timeError}
         />
         <TimepickerHolder
           labelTitle="Drop-off time"
