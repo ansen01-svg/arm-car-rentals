@@ -1,0 +1,11 @@
+.picker-holder {
+  width: 50%;
+  height: 3.5rem;
+  border: 1px solid rgb(203 213 225);
+  border-radius: 0.25rem;
+  white-space: nowrap;
+}
+
+.picker-holder.error {
+  border: 1px solid #ee4b2b;
+}

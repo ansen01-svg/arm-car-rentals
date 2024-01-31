@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import DateContextProvider from "./components/date_context_provider/date_context_provider";
+import DateLocalizationProvider from "./components/date_localization_provider/date_localization_provider";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Header />
         <div role="main">
-          <DateContextProvider>{children}</DateContextProvider>
+          <DateLocalizationProvider>{children}</DateLocalizationProvider>
         </div>
         <Footer />
       </body>
