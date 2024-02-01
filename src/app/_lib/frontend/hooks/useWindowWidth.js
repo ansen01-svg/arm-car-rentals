@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState(0);
-  const [mobileScreen, setMobileScreen] = useState(true);
+  const [mobileScreen, setMobileScreen] = useState(false);
   const [desktopScreen, setDesktopScreen] = useState(false);
 
   useEffect(() => {

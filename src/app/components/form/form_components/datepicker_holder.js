@@ -10,7 +10,7 @@ export default function DatePickerHolder(props) {
 
   return (
     <div className={`picker-holder ${dateError ? "error" : ""}`}>
-      <p className="mx-3 my-1 text-xs">{labelTitle}</p>
+      <p className="text-xs px-3">{labelTitle}</p>
       {mobileScreen ? (
         <MobileDatePicker
           disablePast
@@ -19,6 +19,7 @@ export default function DatePickerHolder(props) {
           value={value}
           onChange={handleChange}
           sx={{
+            width: "100%",
             ".MuiInputBase-root": {
               fontSize: "15px",
               fontFamily: "__Inter_e66fe9",
@@ -50,6 +51,9 @@ export default function DatePickerHolder(props) {
             },
             ".MuiOutlinedInput-notchedOutline": {
               border: "none",
+            },
+            ".MuiSvgIcon-root": {
+              fontSize: "1.25rem",
             },
           }}
         />
