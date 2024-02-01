@@ -1,7 +1,7 @@
+import { useMediaQuery } from "@mui/material";
 import FilterButtonHolder from "./components/filter_button_holder/filter_button_holder";
 import Main from "./components/main/main";
 import FilterModal from "./components/filter_modal/filter_modal";
-import useWindowWidth from "../_lib/frontend/hooks/useWindowWidth";
 
 export default function Body(props) {
   const {
@@ -21,8 +21,7 @@ export default function Body(props) {
     handleCapacityValueChange,
   } = props;
 
-  const { mobileScreen } = useWindowWidth();
-
+  const mobileScreen = useMediaQuery("(max-width:1024px)");
   const dataReady = pickupDate;
 
   return (

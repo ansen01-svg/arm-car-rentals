@@ -10,7 +10,7 @@ export default function TimepickerHolder(props) {
 
   return (
     <div className={`picker-holder ${timeError ? "error" : ""}`}>
-      <p className="mx-3 my-1 text-xs">{labelTitle}</p>
+      <p className="text-xs px-3">{labelTitle}</p>
       {mobileScreen ? (
         <MobileTimePicker
           format="hh:mm a"
@@ -46,6 +46,9 @@ export default function TimepickerHolder(props) {
             },
             ".MuiOutlinedInput-notchedOutline": {
               border: "none",
+            },
+            ".MuiSvgIcon-root": {
+              fontSize: "1.25rem",
             },
           }}
         />

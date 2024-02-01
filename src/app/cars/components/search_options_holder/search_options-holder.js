@@ -1,13 +1,9 @@
 import { useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import SearchFieldsHolder from "./search_fields_holder";
 import FormHolder from "./form/form_holder";
-import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function SearchOptionsHolder(props) {
-  const [showForm, setShowForm] = useState(false);
-
-  const { desktopScreen } = useWindowWidth();
-
   const {
     pickupDate,
     dropoffDate,
@@ -21,9 +17,14 @@ export default function SearchOptionsHolder(props) {
     handleDropoffTimeChange,
   } = props;
 
+  const [showForm, setShowForm] = useState(false);
+
+  const mobileScreen = useMediaQuery("(max-width:1024px)");
+  const desktopScreen = useMediaQuery("(min-width:1024px)");
+
   return (
     <div className="w-full bg-white">
-      {!desktopScreen && !showForm && (
+      {mobileScreen && !showForm && (
         <SearchFieldsHolder
           pickupDate={pickupDate}
           dropoffDate={dropoffDate}
