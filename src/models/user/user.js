@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import { bookingDetailsSchema } from "../booking_details/booking_details";
-import { tripsSchema } from "../trips/trips";
 
 const userSchema = new mongoose.Schema(
   {
@@ -29,9 +27,7 @@ const userSchema = new mongoose.Schema(
     verificationTokenExpiry: Date,
     passwordResetToken: String,
     passwordResetTokenExpiry: Date,
-    bookingId: String,
-    bookingDetails: [bookingDetailsSchema],
-    trips: [tripsSchema],
+    myTrips: [{ tripId: String }],
   },
   {
     timestamps: true,

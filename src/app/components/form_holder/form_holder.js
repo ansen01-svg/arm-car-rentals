@@ -1,25 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import dayjs from "dayjs";
 import Form from "../form/form";
 import ErrorMsgHolder from "../error_msg/error_msg_holder";
 import FormHeader from "../form_header/form_header";
-import { defaultPickupDate, defaultDropoffDate } from "@/app/utils/constants";
 import getDate from "@/app/_lib/frontend/getDate";
 import getMilliseconds from "@/app/_lib/frontend/getMilliseconds";
+import { initialFormState, reducer } from "../form/form_reducer";
 
 export default function FormHoler() {
-  const [pickupDate, setPickupDate] = useState(
-    dayjs(defaultPickupDate, "DD/MM/YY")
-  );
-  const [dropoffDate, setDropoffDate] = useState(
-    dayjs(defaultDropoffDate, "DD/MM/YY")
-  );
-  const [pickupTime, setPickupTime] = useState(dayjs("2023-02-06T09:38"));
-  const [dropoffTime, setDropoffTime] = useState(dayjs("2023-02-06T09:38"));
-  const [minDate, setMinDate] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialFormState);
 
   const [fieldsError, setFieldsError] = useState(false);
   const [dateError, setDateError] = useState(false);
@@ -27,17 +19,43 @@ export default function FormHoler() {
 
   const router = useRouter();
 
-  // set minimum date for dropoff date
+  // set min date
   useEffect(() => {
-    setMinDate(pickupDate.add(1, "day"));
-  }, [pickupDate]);
+    if (state.pickupDate) {
+      dispatch({
+        type: "SET_MINDATE",
+        payload: state.pickupDate.add(1, "day"),
+      });
+    }
+  }, [state.pickupDate]);
+
+  // date form events
+  const handlePickupDateChange = (date) => {
+    dispatch({ type: "SET_PICKUP_DATE", payload: date });
+  };
+
+  const handleDropoffDateChange = (date) => {
+    dispatch({ type: "SET_DROPOFF_DATE", payload: date });
+  };
+
+  const handlePickupTimeChange = (time) => {
+    if (time && time !== "Invalid Date") {
+      dispatch({ type: "SET_PICKUP_TIME", payload: time });
+    }
+  };
+
+  const handleDropoffTimeChange = (time) => {
+    if (time && time !== "Invalid Date") {
+      dispatch({ type: "SET_DROPOFF_TIME", payload: time });
+    }
+  };
 
   // handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const pickupDay = getDate(pickupDate.format("DD/MM/YY"));
-    const dropoffDay = getDate(dropoffDate.format("DD/MM/YY"));
+    const pickupDay = getDate(state.pickupDate.format("DD/MM/YY"));
+    const dropoffDay = getDate(state.dropoffDate.format("DD/MM/YY"));
 
     // if dropoff date is later than pickup date
     if (new Date(dropoffDay).getTime() < new Date(pickupDay).getTime()) {
@@ -47,10 +65,10 @@ export default function FormHoler() {
       return;
     }
 
-    if (pickupDate.format("DD/MM/YY") === dayjs().format("DD/MM/YY")) {
+    if (state.pickupDate.format("DD/MM/YY") === dayjs().format("DD/MM/YY")) {
       // check if pick up date is today but pick time is set in the past
       const todaysPickupTime = getMilliseconds(
-        pickupTime.format("HH:mm a"),
+        state.pickupTime.format("HH:mm a"),
         pickupDay
       );
       const currentTime = new Date(Date.now()).getTime();
@@ -70,28 +88,8 @@ export default function FormHoler() {
     setDateError(false);
     setTimeError(false);
 
-    const link = `/cars?pickupDate=${pickupDate}&dropoffDate=${dropoffDate}&pickupTime=${pickupTime}&dropoffTime=${dropoffTime}`;
+    const link = `/cars?pickupDate=${state.pickupDate}&dropoffDate=${state.dropoffDate}&pickupTime=${state.pickupTime}&dropoffTime=${state.dropoffTime}`;
     router.push(link);
-  };
-
-  const handlePickupDateChange = (date) => {
-    setPickupDate(date);
-  };
-
-  const handleDropoffDateChange = (date) => {
-    setDropoffDate(date);
-  };
-
-  const handlePickupTimeChange = (time) => {
-    if (time && time !== "Invalid Date") {
-      setPickupTime(time);
-    }
-  };
-
-  const handleDropoffTimeChange = (time) => {
-    if (time && time !== "Invalid Date") {
-      setDropoffTime(time);
-    }
   };
 
   return (
@@ -102,11 +100,11 @@ export default function FormHoler() {
         setFieldsError={setFieldsError}
         dateError={dateError}
         timeError={timeError}
-        pickupDate={pickupDate}
-        dropoffDate={dropoffDate}
-        pickupTime={pickupTime}
-        dropoffTime={dropoffTime}
-        minDate={minDate}
+        pickupDate={state.pickupDate}
+        dropoffDate={state.dropoffDate}
+        pickupTime={state.pickupTime}
+        dropoffTime={state.dropoffTime}
+        minDate={state.minDate}
         handlePickupDateChange={handlePickupDateChange}
         handleDropoffDateChange={handleDropoffDateChange}
         handlePickupTimeChange={handlePickupTimeChange}

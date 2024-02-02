@@ -61,7 +61,7 @@ function FiltersAndCarsWrapper(props) {
 
   return (
     <div className="flex flex-col items-center justify-center gap-7 flex-1">
-      {params.length > 4 && (
+      {dataReady && params.length > 4 && (
         <FilterOptionsDisplayHolder params={params} setParams={setParams} />
       )}
       <TotalCarsDisplay cars={cars} dataReady={dataReady} />

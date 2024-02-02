@@ -6,7 +6,7 @@ import Button from "./button";
 export default function Main(props) {
   const {
     carType,
-    dispatch,
+    setShowFilterModal,
     carSpecifications,
     carPrice,
     carCapacity,
@@ -105,7 +105,7 @@ export default function Main(props) {
   // close filter modal
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: "SHOW_FILTER_MODAL", payload: false });
+    setShowFilterModal(false);
   };
 
   return (
