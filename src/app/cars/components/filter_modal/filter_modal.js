@@ -8,9 +8,9 @@ import Main from "./main/main";
 export default function FilterModal(props) {
   const {
     showFilterModal,
+    setShowFilterModal,
     params,
     setParams,
-    dispatch,
     carType,
     carSpecifications,
     carPrice,
@@ -28,7 +28,7 @@ export default function FilterModal(props) {
     <Dialog
       fullScreen={fullScreen}
       open={showFilterModal}
-      onClose={() => dispatch({ type: "SHOW_FILTER_MODAL", payload: false })}
+      onClose={() => setShowFilterModal(false)}
       aria-labelledby="responsive-dialog-title"
       sx={{
         ".MuiDialogContent-root": {
@@ -39,9 +39,13 @@ export default function FilterModal(props) {
       }}
     >
       <DialogContent>
-        <Header dispatch={dispatch} params={params} setParams={setParams} />
+        <Header
+          params={params}
+          setParams={setParams}
+          setShowFilterModal={setShowFilterModal}
+        />
         <Main
-          dispatch={dispatch}
+          setShowFilterModal={setShowFilterModal}
           carType={carType}
           carSpecifications={carSpecifications}
           carPrice={carPrice}
