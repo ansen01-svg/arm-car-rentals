@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import DateLocalizationProvider from "./components/date_localization_provider/date_localization_provider";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +20,6 @@ export default function RootLayout({ children }) {
         <div role="main">
           <DateLocalizationProvider>{children}</DateLocalizationProvider>
         </div>
-        <Footer />
       </body>
     </html>
   );
