@@ -5,7 +5,7 @@ import CarCardContentSkeleton from "@/app/(rest)/cars/skeletons/car_card_content
 import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function Card(props) {
-  const { car, dataReady } = props;
+  const { car, dataReady, disableBtnId, setDisableBtnId } = props;
   const { mobileScreen } = useWindowWidth();
 
   const [details, setDetails] = useState("");
@@ -17,7 +17,15 @@ export default function Card(props) {
 
   return (
     <div className="w-full px-1 py-1 bg-white rounded shadow relative md:h-56">
-      {dataReady ? <CardContent car={car} /> : <CarCardContentSkeleton />}
+      {dataReady ? (
+        <CardContent
+          car={car}
+          disableBtnId={disableBtnId}
+          setDisableBtnId={setDisableBtnId}
+        />
+      ) : (
+        <CarCardContentSkeleton />
+      )}
       {dataReady && mobileScreen && (
         <Link
           href={`/cars/${car._id}?${details}`}

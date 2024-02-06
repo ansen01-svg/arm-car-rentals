@@ -20,20 +20,24 @@ const tripsSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["booked", "upcoming", "in progress", "cancelled", "completed"],
-      default: "booked",
+      enum: [
+        "in booking process",
+        "booked",
+        "in progress",
+        "cancelled",
+        "completed",
+      ],
+      default: "in booking process",
     },
     tripOwner: {
-      username: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        required: true,
-      },
+      username: String,
+      id: String,
     },
     vehicle: {
+      type: {
+        type: String,
+        required: true,
+      },
       name: {
         type: String,
         required: true,
@@ -62,6 +66,7 @@ const tripsSchema = new mongoose.Schema(
         required: true,
       },
       tax: Number,
+      fees: Number,
       total: Number,
     },
   },

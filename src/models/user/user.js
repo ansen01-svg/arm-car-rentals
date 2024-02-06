@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a username"],
       minLength: [3, "Username should not be less than 3 characters"],
-      maxLength: [3, "Username should not be greater than 20 characters"],
+      maxLength: [30, "Username should not be greater than 30 characters"],
     },
     email: {
       type: String,
@@ -16,8 +16,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Please provide a password"],
-      minLength: [3, "Password should not be less than 3 characters"],
-      maxLength: [3, "Password should not be greater than 20 characters"],
     },
     isVarified: {
       type: Boolean,
