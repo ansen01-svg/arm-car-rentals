@@ -2,7 +2,7 @@ import connectDb from "../../../../mongo_config/mongo_config";
 import User from "@/models/user/user";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import sendEmail from "@/app/_lib/backend/send_email";
+// import sendEmail from "@/app/_lib/backend/send_email";
 
 connectDb();
 
@@ -10,8 +10,6 @@ export async function POST(request) {
   try {
     const requestBody = await request.json();
     const { username, email, password } = requestBody;
-
-    console.log(requestBody);
 
     // check if all the credentials are provided
     if (!username || !email || !password) {
@@ -27,7 +25,7 @@ export async function POST(request) {
     // if user already exist-
     if (user) {
       return NextResponse.json(
-        { error: "User already exists" },
+        { error: "Account already exists" },
         { status: 400 }
       );
     }
@@ -52,11 +50,7 @@ export async function POST(request) {
     await newUser.save();
 
     // send mail
-    await sendEmail({
-      email,
-      emailType: "VERIFY-EMAIL",
-      hashedToken,
-    });
+    // await sendEmail(email, "VERIFY-EMAIL", hashedToken);
 
     return NextResponse.json({
       message: "User created successfully",

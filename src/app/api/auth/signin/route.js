@@ -1,6 +1,7 @@
+import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 import connectDb from "@/mongo_config/mongo_config";
 import User from "@/models/user/user";
-import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import generateJwtToken from "@/app/_lib/backend/generate_jwt_token";
 
@@ -25,7 +26,7 @@ export async function POST(request) {
     // if user does not exist
     if (!user) {
       return NextResponse.json(
-        { error: "User does not exist" },
+        { error: "Account does not exist. Please sign up" },
         { status: 400 }
       );
     }
@@ -34,7 +35,10 @@ export async function POST(request) {
     const passwordMatches = await bcryptjs.compare(password, user.password);
 
     if (!passwordMatches) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Incorrect password" },
+        { status: 400 }
+      );
     }
 
     //create token
@@ -49,6 +53,8 @@ export async function POST(request) {
 
     response.cookies.set("token", token, {
       httpOnly: true,
+      sameSite: "none",
+      secure: true
     });
 
     return response;

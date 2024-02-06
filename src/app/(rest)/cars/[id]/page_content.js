@@ -11,7 +11,7 @@ import Checkout from "./components/checkout/checkout";
 import useCheckFaultyAccess from "@/app/_lib/frontend/hooks/useCheckFaultyAccess";
 
 export default function PageContent(props) {
-  const { searchParams, car } = props;
+  const { searchParams, token, car } = props;
 
   const [dates, setDates] = useState({ pickupDate: "", dropoffDate: "" });
   const [time, setTime] = useState({ pickupTime: "", dropoffTime: "" });
@@ -72,9 +72,9 @@ export default function PageContent(props) {
     <div className="w-full relative">
       <Header searchParams={searchParams} />
       {dataReady && <Links />}
-      <Main car={car} dates={dates} time={time} />
+      <Main token={token} car={car} dates={dates} time={time} />
       {mobileScreen && dataReady && (
-        <Checkout car={car} dates={dates} time={time} />
+        <Checkout token={token} car={car} dates={dates} time={time} />
       )}
     </div>
   );

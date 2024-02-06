@@ -3,11 +3,16 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   const path = request.nextUrl.pathname;
   const token = request.cookies.get("token")?.value || "";
-  console.log(token);
 
   const isAuthPath =
-    path === "/signin" || "/signup" || "/emailVerification" || "/resetPassword";
-  const isPrivatePath = path === "/checkout" || "/bookingConfirmation";
+    path.includes("/signin") ||
+    path.includes("/signup") ||
+    path.includes("/resetPassword");
+
+  const isPrivatePath =
+    path.includes("/checkout") ||
+    path.includes("/bookingConfirmation") ||
+    path.includes("/emailVerification");
 
   if (isAuthPath && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
@@ -19,5 +24,12 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/checkout", "/bookingConfirmation"],
+  matcher: [
+    "/signin",
+    "/signup",
+    "/emailVerification",
+    "/resetPassword",
+    "/checkout",
+    "/bookingConfirmation",
+  ],
 };

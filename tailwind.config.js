@@ -14,6 +14,7 @@ module.exports = {
         primary: "#666",
         secondary: "#1f9990",
         hover: "#1b8b84",
+        disabled: "#6db4b0",
       },
       fontSize: {
         medium: "14px",

@@ -46,11 +46,15 @@
   padding: 10px 40px;
   border-radius: 4px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   background-color: #1f9990;
   color: white;
 }
 
 .button:hover {
   background-color: #1b8b84;
+}
+
+.button:disabled {
+  background-color: #6db4b0;
 }

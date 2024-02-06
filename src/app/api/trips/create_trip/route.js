@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import User from "@/models/user/user";
 import Trips from "@/models/trips/trips";
 import connectDb from "../../../../mongo_config/mongo_config";
-import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
 
 connectDb();
 
@@ -10,31 +8,37 @@ export async function POST(request) {
   try {
     const requestBody = await request.json();
     const {
-      pickupDate,
-      dropoffDate,
+      tripStartDate,
+      tripEndDate,
       pickupTime,
       dropoffTime,
-      carName,
+      type,
+      name,
       capacity,
       specification,
       price,
-      totalDays,
+      days,
       tax,
+      fees,
     } = requestBody;
 
+    const fieldsArray = [
+      tripStartDate,
+      tripEndDate,
+      pickupTime,
+      dropoffTime,
+      type,
+      name,
+      capacity,
+      specification,
+      price,
+      days,
+      tax,
+      fees,
+    ];
+
     // check if all details are provided
-    if (
-      !pickupDate ||
-      !dropoffDate ||
-      !pickupTime ||
-      !dropoffTime ||
-      !carName ||
-      !capacity ||
-      !specification ||
-      !price ||
-      !totalDays ||
-      !tax
-    ) {
+    if (fieldsArray.length < 12) {
       return NextResponse.json(
         {
           message: "Please provide all the details",
@@ -43,22 +47,16 @@ export async function POST(request) {
       );
     }
 
-    // get current user
-    const userId = await getDataFromToken(request);
-    const user = await User.findOne({ _id: userId });
-
     // create a new trip
     const trip = {
-      pickupDate,
-      dropoffDate,
+      tripStartDate,
+      tripEndDate,
       pickupTime,
       dropoffTime,
-      tripOwner: {
-        username: user.username,
-        id: user._id,
-      },
+      status: "in booking process",
       vehicle: {
-        name: carName,
+        type,
+        name,
         capacity,
         specification,
         price,
@@ -66,16 +64,13 @@ export async function POST(request) {
       totalCost: {
         price,
         tax,
-        days: totalDays,
-        total: price * totalDays + tax,
+        fees,
+        days,
+        total: price * days + tax + fees,
       },
     };
 
     const newTrip = await Trips.create(trip);
-
-    // attach trip id to current user/trip owner
-    user.myTrips.push({ tripId: newTrip._id });
-    await user.save();
 
     return NextResponse.json(
       {

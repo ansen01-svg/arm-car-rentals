@@ -5,13 +5,19 @@ import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 import Label from "@/app/components/label/label";
 
 export default function DetailsHolder(props) {
-  const { car } = props;
+  const { car, disableBtnId, setDisableBtnId } = props;
   const { desktopScreen } = useWindowWidth();
 
   return (
     <div className="flex-1 flex flex-row items-center justify-center">
       <CarDetails car={car} />
-      {desktopScreen && <ReserveButton id={car._id} />}
+      {desktopScreen && (
+        <ReserveButton
+          id={car._id}
+          disableBtnId={disableBtnId}
+          setDisableBtnId={setDisableBtnId}
+        />
+      )}
     </div>
   );
 }
@@ -91,10 +97,13 @@ export function ExtraTextsHolder() {
   );
 }
 
-function ReserveButton({ id }) {
+function ReserveButton(props) {
+  const { id, disableBtnId, setDisableBtnId } = props;
+
   const router = useRouter();
 
   const handleClick = (id) => {
+    setDisableBtnId(id);
     const details = window.location.href.split("?")[1];
     router.push(`/cars/${id}?${details}`);
   };
@@ -102,7 +111,8 @@ function ReserveButton({ id }) {
   return (
     <div className="px-3">
       <button
-        className="w-28 h-10 font-bold rounded bg-secondary text-white hover:bg-hover"
+        className="w-28 h-10 font-semibold rounded bg-secondary text-white hover:bg-hover disabled:bg-disabled"
+        disabled={id === disableBtnId}
         onClick={() => handleClick(id)}
       >
         Reserve

@@ -11,14 +11,12 @@ export const generateMetadata = async ({ params }) => {
 };
 
 export default async function SingleCar({ params, searchParams }) {
-  const cookie = cookies().getAll();
+  const token = cookies().get("token")?.value || "";
   const car = await fetchCars(params.id);
-
-  // console.log(cookie);
 
   return (
     <div className="max-w-full bg-primary">
-      <PageContent searchParams={searchParams} car={car} />
+      <PageContent searchParams={searchParams} token={token} car={car} />
     </div>
   );
 }
