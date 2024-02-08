@@ -7,7 +7,7 @@ export default function PolicyHolder() {
       <div className="w-full font-bold">
         <p>Rental Policies</p>
       </div>
-      <div className="w-full px-4 text-primary text-[14px]">
+      <div className="w-full px-4 text-primary text-[12px]">
         <ul className="list-disc">
           <li>
             You will not be charged anything for the rental since the booking

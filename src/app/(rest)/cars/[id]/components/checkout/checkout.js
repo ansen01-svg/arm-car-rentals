@@ -5,18 +5,21 @@ import getDate from "@/app/_lib/frontend/getDate";
 import calculateDaysBetweenDates from "@/app/_lib/frontend/getDays";
 
 export default function Checkout(props) {
-  const { token, car, dates, time } = props;
+  const { token, car, dates, time, disableBtn, setDisableBtn } = props;
 
   const [isVisible, setIsVisible] = useState(true);
-  const [disableBtn, setDisableBtn] = useState(false);
 
   const router = useRouter();
 
-  const date1 = dates.pickupDate && getDate(dates.pickupDate);
+  const date1 = getDate(dates.pickupDate);
   const date2 = getDate(dates.dropoffDate);
   const days = calculateDaysBetweenDates(date2, date1);
   const tax = 0;
   const fees = 0;
+
+  console.log(date1);
+  console.log(date2);
+  console.log(days);
 
   const totalCost = parseInt(car.price) * parseInt(days) + tax + fees;
 
