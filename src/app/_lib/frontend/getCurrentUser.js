@@ -1,7 +1,7 @@
 const getCurrentUser = async () => {
   try {
     const response = await fetch(
-      `${process.env.DOMAIN}/api/user/getCurrentUser`,
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/getCurrentUser`,
       {
         method: "GET",
         credentials: "same-origin",

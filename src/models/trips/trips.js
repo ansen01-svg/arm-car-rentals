@@ -32,6 +32,9 @@ const tripsSchema = new mongoose.Schema(
     tripOwner: {
       username: String,
       id: String,
+      phoneNumber: Number,
+      contactEmail: String,
+      driver: String,
     },
     vehicle: {
       type: {
@@ -69,6 +72,7 @@ const tripsSchema = new mongoose.Schema(
       fees: Number,
       total: Number,
     },
+    itineraryNumber: Number,
   },
   {
     timestamps: true,

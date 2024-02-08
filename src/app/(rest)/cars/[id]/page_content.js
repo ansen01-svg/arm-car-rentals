@@ -15,6 +15,7 @@ export default function PageContent(props) {
 
   const [dates, setDates] = useState({ pickupDate: "", dropoffDate: "" });
   const [time, setTime] = useState({ pickupTime: "", dropoffTime: "" });
+  const [disableBtn, setDisableBtn] = useState(false);
 
   const mobileScreen = useMediaQuery("(max-width:1024px)");
   const { faultyAccess } = useCheckFaultyAccess(searchParams);
@@ -72,9 +73,23 @@ export default function PageContent(props) {
     <div className="w-full relative">
       <Header searchParams={searchParams} />
       {dataReady && <Links />}
-      <Main token={token} car={car} dates={dates} time={time} />
+      <Main
+        token={token}
+        car={car}
+        dates={dates}
+        time={time}
+        disableBtn={disableBtn}
+        setDisableBtn={setDisableBtn}
+      />
       {mobileScreen && dataReady && (
-        <Checkout token={token} car={car} dates={dates} time={time} />
+        <Checkout
+          token={token}
+          car={car}
+          dates={dates}
+          time={time}
+          disableBtn={disableBtn}
+          setDisableBtn={setDisableBtn}
+        />
       )}
     </div>
   );

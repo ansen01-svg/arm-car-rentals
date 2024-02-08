@@ -15,12 +15,18 @@ export default function HeaderContent(props) {
 
   useEffect(() => {
     if (token) {
-      fetch(`http://localhost:3000/api/user/getCurrentUser`, {
+      fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/user/getCurrentUser`, {
         method: "GET",
         credentials: "same-origin",
       })
         .then((response) => response.json())
-        .then((data) => setUser(data.data))
+        .then((data) => {
+          if (data.data) {
+            setUser(data.data);
+          } else {
+            setUser(null);
+          }
+        })
         .catch((error) => console.log(error));
     }
   }, [token]);

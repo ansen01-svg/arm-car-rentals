@@ -6,13 +6,14 @@ connectDb();
 
 export async function POST(request) {
   try {
-    const { tripId, tripStatus } = request.params;
+    const requestBody = await request.json();
+    const { tripId, tripStatus } = requestBody;
 
     // check if the trip id is provided
-    if (!tripId) {
+    if (!tripId || !tripStatus) {
       return NextResponse.json(
         {
-          message: "Please provide the trip id",
+          message: "Please provide the trip id and status",
         },
         { status: 400 }
       );
@@ -35,7 +36,7 @@ export async function POST(request) {
 
     return NextResponse.json(
       {
-        message: `Your trip with id ${tripId} has been cancelled`,
+        message: `Your trip status with id ${tripId} has been changed`,
       },
       { status: 201 }
     );

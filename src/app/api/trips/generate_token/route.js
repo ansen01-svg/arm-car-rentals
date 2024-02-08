@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import User from "@/models/user/user";
 import Trips from "@/models/trips/trips";
-import connectDb from "../../../../mongo_config/mongo_config";
+import connectDb from "@/mongo_config/mongo_config";
+import generateItineraryNumber from "@/app/_lib/backend/generateItineraryNumber";
 import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
 
 connectDb();
@@ -9,13 +10,13 @@ connectDb();
 export async function POST(request) {
   try {
     const requestBody = await request.json();
-    const { tripId, phoneNumber, driver, contactEmail } = requestBody;
+    const { tripId } = requestBody;
 
     // check if all details are provided
-    if (!tripId || !phoneNumber || !driver || !contactEmail) {
+    if (!tripId) {
       return NextResponse.json(
         {
-          message: "Please provide all the fields",
+          message: "Please provide trip id",
         },
         { status: 400 }
       );
@@ -33,26 +34,26 @@ export async function POST(request) {
       );
     }
 
+    // change trip status
+    trip.status = "booked";
+    trip.itineraryNumber = generateItineraryNumber();
+    await trip.save();
+
     // get current user
     const userId = await getDataFromToken(request);
     const user = await User.findOne({ _id: userId });
 
-    // change trip status
-    trip.tripOwner.username = user.username;
-    trip.tripOwner.id = user._id;
-    trip.tripOwner.phoneNumber = phoneNumber;
-    trip.tripOwner.contactEmail = contactEmail;
-    trip.tripOwner.driver = driver;
-    await trip.save();
-
-    // attach trip id to current user/trip owner
-    user.phoneNumber = phoneNumber;
+    // attach trip to user
+    user.myTrips.push({ tripId: trip._id });
     await user.save();
 
     return NextResponse.json(
       {
-        message: `Your trip with trip id ${trip._id} has been updated`,
-        data: trip._id,
+        message: `Your trip has been booked successfully`,
+        data: {
+          email: trip.tripOwner.contactEmail,
+          itineraryNumber: trip.itineraryNumber,
+        },
       },
       { status: 200 }
     );

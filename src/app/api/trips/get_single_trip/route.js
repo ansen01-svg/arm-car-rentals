@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import Trips from "@/models/trips/trips";
-import connectDb from "../../../../mongo_config/mongo_config";
+import connectDb from "@/mongo_config/mongo_config";
 
 connectDb();
 
 export async function POST(request) {
   try {
-    const { tripId } = request.params;
+    const requestBody = await request.json();
+    const { tripId } = requestBody;
 
     // check if the trip id is provided
     if (!tripId) {

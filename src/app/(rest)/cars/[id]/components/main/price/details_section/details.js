@@ -8,9 +8,8 @@ import calculateDaysBetweenDates from "@/app/_lib/frontend/getDays";
 import getDate from "@/app/_lib/frontend/getDate";
 
 export default function PriceDetails(props) {
-  const { token, car, dates, time } = props;
+  const { token, car, dates, time, disableBtn, setDisableBtn } = props;
 
-  const [disableBtn, setDisableBtn] = useState(false);
   const router = useRouter();
 
   const date1 = getDate(dates.pickupDate);

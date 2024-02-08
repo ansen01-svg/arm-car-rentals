@@ -4,18 +4,14 @@ import PriceDisplaySkeleton from "../../../skeletons/price/price_display_skeleto
 import PriceSectionSkeleton from "../../../skeletons/price/details_section_skeleton";
 
 export default function PriceSection(props) {
-  const { token, car, dates, time } = props;
+  const { car, dates } = props;
 
   const dataReady = dates.pickupDate;
 
   return (
     <div className="w-full flex flex-col items-center justify-center gap-3 lg:w-[calc(100%-65%-32px)]">
       {dataReady ? <PriceDisplay car={car} /> : <PriceDisplaySkeleton />}
-      {dataReady ? (
-        <PriceDetails token={token} car={car} dates={dates} time={time} />
-      ) : (
-        <PriceSectionSkeleton />
-      )}
+      {dataReady ? <PriceDetails {...props} /> : <PriceSectionSkeleton />}
     </div>
   );
 }
