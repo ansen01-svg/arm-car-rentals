@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "mediaim.expedia.com",
       },
+      {
+        protocol: "https",
+        hostname: "external-content.duckduckgo.com",
+      },
     ],
   },
 };

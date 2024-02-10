@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 export default function AuthenticatedContent(props) {
@@ -27,6 +28,8 @@ function UserDetailsHolder({ user }) {
 }
 
 function SignOutBtnHolder({ handleClose }) {
+  const router = useRouter();
+
   // sign out
   const signOut = async () => {
     try {
@@ -37,6 +40,7 @@ function SignOutBtnHolder({ handleClose }) {
       if (response.status === 200) {
         handleClose();
         window.location.reload();
+        router.push("/");
       } else {
         const data = await response.json();
         console.log(data);

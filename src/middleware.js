@@ -10,6 +10,7 @@ export function middleware(request) {
     path.includes("/resetPassword");
 
   const isPrivatePath =
+    path.includes("/trips") ||
     path.includes("/checkout") ||
     path.includes("/bookingConfirmation") ||
     path.includes("/emailVerification");
@@ -29,6 +30,7 @@ export const config = {
     "/signup",
     "/emailVerification",
     "/resetPassword",
+    "/trips",
     "/checkout",
     "/bookingConfirmation",
   ],

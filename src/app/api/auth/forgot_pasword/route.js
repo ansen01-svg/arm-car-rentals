@@ -2,7 +2,7 @@ import connectDb from "../../../../mongo_config/mongo_config";
 import User from "@/models/user/user";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import sendEmail from "@/app/_lib/backend/send_email";
+import sendEmail from "@/app/services/send_email";
 
 connectDb();
 

@@ -4,6 +4,7 @@ import Trips from "@/models/trips/trips";
 import connectDb from "@/mongo_config/mongo_config";
 import generateItineraryNumber from "@/app/_lib/backend/generateItineraryNumber";
 import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
+import sendConfirmationEmail from "@/app/services/booking_confirmation_email";
 
 connectDb();
 
@@ -46,6 +47,15 @@ export async function POST(request) {
     // attach trip to user
     user.myTrips.push({ tripId: trip._id });
     await user.save();
+
+    // send confirmation email
+    await sendConfirmationEmail(
+      user.email,
+      user.username,
+      trip.itineraryNumber,
+      trip.tripStartDate,
+      trip.pickupTime
+    );
 
     return NextResponse.json(
       {

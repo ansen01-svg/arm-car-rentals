@@ -44,7 +44,7 @@ export default function DetailsHolder({ tripId }) {
       </div>
       <div className="w-full flex flex-row items-center justify-start">
         <Link
-          href={`/trips/${tripId}`}
+          href={`/trips#${tripId}`}
           className="px-4 py-2 bg-secondary rounded text-white font-medium"
         >
           View my booking
