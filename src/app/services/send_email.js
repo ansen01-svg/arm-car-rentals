@@ -14,20 +14,25 @@ const sendEmail = async (email, emailType, token) => {
     }?token=${token}">Click here.</a> </p>`;
 
     const mailOptions = {
-      from: "rentalcars@gmail.com",
+      from: process.env.GMAIL_EMAIL,
       to: email,
       subject: emailPurpose,
       html: emailHtml,
     };
 
-    const info = await transporter.sendMail(mailOptions);
-
-    console.log("Message sent: %s", info.messageId);
+    await new Promise((resolve, reject) => {
+      // send mail
+      transporter.sendMail(mailOptions, (err, response) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(response);
+        }
+      });
+    });
   } catch (error) {
     throw new Error(error.message);
   }
 };
-
-sendEmail().catch(console.error);
 
 export default sendEmail;

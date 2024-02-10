@@ -2,7 +2,7 @@ import connectDb from "../../../../mongo_config/mongo_config";
 import User from "@/models/user/user";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-// import sendEmail from "@/app/_lib/backend/send_email";
+import sendEmail from "@/app/services/send_email";
 
 connectDb();
 
@@ -50,7 +50,7 @@ export async function POST(request) {
     await newUser.save();
 
     // send mail
-    // await sendEmail(email, "VERIFY-EMAIL", hashedToken);
+    await sendEmail(email, "VERIFY-EMAIL", hashedToken);
 
     return NextResponse.json({
       message: "User created successfully",
