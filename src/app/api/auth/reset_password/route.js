@@ -2,7 +2,7 @@ import connectDb from "../../../../mongo_config/mongo_config";
 import User from "@/models/user/user";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import sendEmail from "@/app/services/send_email";
+import sendVerificationEmail from "@/app/services/mailgun/password_reset_email";
 
 connectDb();
 
@@ -23,8 +23,13 @@ export async function POST(request) {
     // create token
     const hashedToken = await bcrypt.hash(user._id.toString(), 10);
 
+    // attach token to user
+    user.passwordResetToken = hashedToken;
+    user.passwordResetTokenExpiry = Date.now() + 3600000;
+    await user.save();
+
     // send password reset email
-    await sendEmail(email, "RESET-PASSWORD", hashedToken);
+    await sendVerificationEmail(email, "RESET-PASSWORD", hashedToken);
 
     return NextResponse.json(
       { message: "Reset password email has been sent" },

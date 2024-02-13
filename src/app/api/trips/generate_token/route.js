@@ -4,7 +4,8 @@ import Trips from "@/models/trips/trips";
 import connectDb from "@/mongo_config/mongo_config";
 import generateItineraryNumber from "@/app/_lib/backend/generateItineraryNumber";
 import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
-import sendConfirmationEmail from "@/app/services/booking_confirmation_email";
+import sendConfirmationEmail from "@/app/services/mailgun/confirmationEmail";
+// import { sendEmail } from "@/app/services/elastic_email/config";
 
 connectDb();
 
@@ -49,13 +50,16 @@ export async function POST(request) {
     await user.save();
 
     // send confirmation email
-    await sendConfirmationEmail(
-      user.email,
-      user.username,
-      trip.itineraryNumber,
-      trip.tripStartDate,
-      trip.pickupTime
-    );
+    const emailOptions = {
+      email: user.email,
+      username: user.username,
+      itineraryNumber: trip.itineraryNumber,
+      tripStartDate: trip.tripStartDate,
+      pickupTime: trip.pickupTime,
+    };
+
+    await sendConfirmationEmail(emailOptions);
+    // await sendEmail();
 
     return NextResponse.json(
       {

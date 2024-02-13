@@ -18,7 +18,7 @@ const sendConfirmationEmail = async (
     The ARM team</p>`;
 
     const mailOptions = {
-      from: process.env.GMAIL_EMAIL,
+      from: process.env.MAILGUN_DOMAIN,
       to: email,
       subject: subject,
       html: emailHtml,

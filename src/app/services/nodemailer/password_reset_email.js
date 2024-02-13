@@ -14,7 +14,7 @@ const sendEmail = async (email, emailType, token) => {
     }?token=${token}">Click here.</a> </p>`;
 
     const mailOptions = {
-      from: process.env.GMAIL_EMAIL,
+      from: process.env.MAILGUN_DOMAIN,
       to: email,
       subject: emailPurpose,
       html: emailHtml,
