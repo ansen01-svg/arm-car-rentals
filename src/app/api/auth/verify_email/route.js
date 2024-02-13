@@ -8,7 +8,6 @@ export async function POST(request) {
   try {
     const requestBody = await request.json();
     const { token } = requestBody;
-    console.log(token);
 
     // check if user with the token exist
     const user = await User.findOne({

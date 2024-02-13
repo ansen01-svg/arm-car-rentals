@@ -1,26 +1,29 @@
 import connectDb from "../../../../mongo_config/mongo_config";
 import User from "@/models/user/user";
-import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextResponse } from "next/server";
 
 connectDb();
 
 export async function POST(request) {
   try {
     const requestBody = await request.json();
-    const { password } = requestBody;
-
-    // extract user token
-    const token = NextRequest.cookies.get("token").value;
-
-    // extract user details
-    const tokenUser = jwt.verify(token, process.env.JWT_SECRET);
+    const { password, token } = requestBody;
 
     // get user from database
-    const user = await User.findOne({ _id: tokenUser.id });
+    const user = await User.findOne({
+      passwordResetToken: token,
+      passwordResetTokenExpiry: { $gt: Date.now() },
+    });
+
+    // if user does not exist
+    if (!user) {
+      return NextResponse.json({ error: "Invalid token" }, { status: 400 });
+    }
 
     // update user password and save
     user.password = password;
+    user.passwordResetToken = "";
+    user.passwordResetTokenExpiry = "";
     await user.save();
 
     return NextResponse.json(

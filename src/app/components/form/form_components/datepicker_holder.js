@@ -22,7 +22,7 @@ export default function DatePickerHolder(props) {
             width: "100%",
             ".MuiInputBase-root": {
               fontSize: "15px",
-              fontFamily: "__Inter_e66fe9",
+              fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.8em",
@@ -43,7 +43,7 @@ export default function DatePickerHolder(props) {
             ".MuiInputBase-root": {
               paddingRight: "12px",
               fontSize: "15px",
-              fontFamily: "__Inter_e66fe9",
+              fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.84em",

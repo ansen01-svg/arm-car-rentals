@@ -90,6 +90,7 @@ export default function Content() {
         error={error}
         setError={setError}
         disableBtn={disableBtn}
+        btnTitle="Sign in"
       />
       <LinkHolder />
     </div>

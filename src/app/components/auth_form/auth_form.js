@@ -16,6 +16,7 @@ export default function AuthForm(props) {
     error,
     setError,
     disableBtn,
+    btnTitle,
   } = props;
 
   return (
@@ -34,10 +35,7 @@ export default function AuthForm(props) {
         handlePasswordChange={handlePasswordChange}
         handleConfirmPasswordChange={handleConfirmPasswordChange}
       />
-      <Button
-        disableBtn={disableBtn}
-        title={username === undefined ? "Sign in" : "Sign up"}
-      />
+      <Button disableBtn={disableBtn} title={btnTitle} />
     </form>
   );
 }
@@ -53,6 +51,20 @@ function FieldsHolder(props) {
     handlePasswordChange,
     handleConfirmPasswordChange,
   } = props;
+
+  if (password == undefined) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center gap-2">
+        <Field
+          label="Email"
+          type="email"
+          name="email"
+          value={email}
+          handleChange={handleEmailChange}
+        />
+      </div>
+    );
+  }
 
   if (username == undefined) {
     return (
