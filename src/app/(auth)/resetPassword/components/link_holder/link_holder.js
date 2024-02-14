@@ -5,10 +5,7 @@ export default function LinkHolder() {
     <div className="w-full flex flex-col items-center justify-center gap-2">
       <p className="text-[13px]">
         or&nbsp;
-        <Link
-          href="/signin"
-          style={{ color: "#1f9990", textDecoration: "underline" }}
-        >
+        <Link href="/signin" className="text-blue underline">
           Signin
         </Link>
       </p>

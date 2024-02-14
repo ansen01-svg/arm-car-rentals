@@ -7,7 +7,7 @@ export default function CarHolder(props) {
   return (
     <div
       id="overview"
-      className="w-full px-3 py-3 flex flex-row items-center justify-center gap-5 bg-white rounded"
+      className="w-full px-3 py-3 flex flex-row items-center justify-center gap-5 bg-white rounded shadow"
     >
       <DetailsHolder car={car} />
       <ImageHolder src={car.img} />

@@ -1,5 +1,6 @@
 "use client";
 
+import { revalidatePath } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "./components/header/header";
@@ -61,9 +62,10 @@ export default function Content() {
           router.push(callbackUrl);
           router.refresh();
         } else {
+          window.location.reload();
           router.push("/");
-          router.refresh();
         }
+
         setError("");
         setEmail("");
         setPassword("");

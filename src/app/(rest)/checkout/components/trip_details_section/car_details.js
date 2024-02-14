@@ -3,6 +3,7 @@ import AcUnitIcon from "@mui/icons-material/AcUnit";
 import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutlined";
 import DriveEtaOutlinedIcon from "@mui/icons-material/DriveEtaOutlined";
 import { Header } from "../info_form_section/form_holder/form/user_info";
+import { address } from "@/app/utils/constants";
 
 const headerTitle = "Your booking";
 
@@ -12,12 +13,10 @@ export default function CarDetails({ trip }) {
   return (
     <div className="w-full flex flex-col items-start justify-center gap-4">
       <Header headerTitle={headerTitle} />
-      <div>
-        <p className="text-[15px] font-semibold">{vehicle.type}</p>
-        <p className="text-[14px] text-primary font-medium">
-          ARM Beltola, Guwahati
-        </p>
-        <div className="text-[12px] text-primary flex flex-row items-center justify-center gap-2 md:text-[14px]">
+      <div className="text-primary">
+        <p className="text-[14px] font-semibold">{vehicle.type}</p>
+        <p className="text-[14px] font-medium">{address}</p>
+        <div className="text-[12px] flex flex-row items-center justify-center gap-2 md:text-[14px]">
           <p>
             {tripStartDate}, {pickupTime}
           </p>
@@ -27,7 +26,7 @@ export default function CarDetails({ trip }) {
           </p>
         </div>
       </div>
-      <div className="text-[12px] text-primary flex flex-row items-start justify-center gap-5 md:text-[13px]">
+      <div className="text-[12px] text-gray1 flex flex-row items-start justify-center gap-5 md:text-[13px]">
         <div className="flex flex-col items-start justify-center gap-2">
           <div className="flex flex-row items-start justify-center gap-2">
             <PersonOutlineOutlinedIcon fontSize="small" />

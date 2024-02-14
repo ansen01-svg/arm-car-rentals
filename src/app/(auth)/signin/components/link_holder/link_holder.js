@@ -7,19 +7,13 @@ export default function LinkHolder() {
     <div className="w-full flex flex-col items-center justify-center gap-2">
       <p className="text-[13px]">
         or&nbsp;
-        <Link
-          href="/resetPassword"
-          style={{ color: "#1f9990", textDecoration: "underline" }}
-        >
+        <Link href="/resetPassword" className="text-blue underline">
           Forgot Password?
         </Link>
       </p>
       <p className="text-[13px]">
         {linkText}&nbsp;
-        <Link
-          href="/signup"
-          style={{ color: "#1f9990", textDecoration: "underline" }}
-        >
+        <Link href="/signup" className="text-blue underline">
           Sign up
         </Link>
       </p>

@@ -7,7 +7,7 @@ export default function LocationHolder(props) {
   return (
     <div
       id="location"
-      className="w-full px-3 py-3 bg-white flex flex-col items-center justify-center gap-4 rounded"
+      className="w-full px-3 py-3 bg-white flex flex-col items-center justify-center gap-4 rounded shadow"
     >
       <Header />
       <Content dates={dates} time={time} />

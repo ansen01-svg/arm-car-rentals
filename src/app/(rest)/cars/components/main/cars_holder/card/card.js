@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useMediaQuery } from "@mui/material";
 import CardContent from "./card_content";
 import CarCardContentSkeleton from "@/app/(rest)/cars/skeletons/car_card_content_skeleton";
-import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function Card(props) {
   const { car, dataReady, disableBtnId, setDisableBtnId } = props;
-  const { mobileScreen } = useWindowWidth();
 
   const [details, setDetails] = useState("");
+
+  const mobileScreen = useMediaQuery("(max-width:1024px)");
 
   useEffect(() => {
     const details = window.location.href.split("?")[1];
@@ -29,6 +30,7 @@ export default function Card(props) {
       {dataReady && mobileScreen && (
         <Link
           href={`/cars/${car._id}?${details}`}
+          target="_blank"
           className="w-full h-full top-0 left-0 absolute z-50"
         ></Link>
       )}

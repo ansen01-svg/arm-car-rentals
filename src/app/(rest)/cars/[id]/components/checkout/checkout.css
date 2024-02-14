@@ -10,7 +10,7 @@
   justify-content: center;
   background: white;
   opacity: 0;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   z-index: 50;
@@ -46,15 +46,15 @@
   padding: 10px 40px;
   border-radius: 4px;
   font-size: 15px;
-  font-weight: 600;
-  background-color: #1f9990;
+  font-weight: 500;
+  background-color: #f75d34;
   color: white;
 }
 
 .button:hover {
-  background-color: #1b8b84;
+  background-color: #f7724e;
 }
 
 .button:disabled {
-  background-color: #6db4b0;
+  background-color: #f7724e;
 }

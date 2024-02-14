@@ -1,11 +1,8 @@
 "use client";
 
 import "./styles.css";
-import { useEffect, useState } from "react";
-import { revalidatePath } from "next/cache";
-import { useRouter } from "next/navigation";
-import { useMediaQuery } from "@mui/material";
-import EmptyTrips from "./components/empty_trips/empty_trips";
+import { useState } from "react";
+import Error from "./components/error/error";
 import Header from "./components/header/header";
 import TripsHolder from "./components/trips_holder/trips_holder";
 import Dialog from "@mui/material/Dialog";
@@ -16,12 +13,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 const btnTitle1 = `Yes, cancel now`;
 const btnTitle2 = `No, don't cancel`;
 
-export default function Trips() {
-  const [trips, setTrips] = useState(null);
+export default function Trips({ trips }) {
   const [open, setOpen] = useState(false);
   const [cancelId, setCancelId] = useState(null);
-
-  const router = useRouter();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,18 +24,6 @@ export default function Trips() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // fetch trips
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/get_all_trips`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.data) {
-          setTrips(data.data);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   // cancel booking
   const cancelBooking = async () => {
@@ -56,7 +38,6 @@ export default function Trips() {
       );
 
       if (response.status === 201) {
-        // revalidatePath("/trips");
         window.location.reload();
       }
     } catch (error) {
@@ -70,15 +51,13 @@ export default function Trips() {
     handleClose();
   };
 
-  const mobileScreen = useMediaQuery("(max-width:1024px)");
-
-  if (trips !== null && trips.length < 1) {
-    return <EmptyTrips />;
+  if (!trips) {
+    return <Error />;
   }
 
   return (
-    <div className="w-full min-h-[355px] flex flex-col items-center justify-start md:py-12">
-      {!mobileScreen && <Header />}
+    <div className="w-full min-h-[355px] flex flex-col items-center justify-center md:py-12">
+      <Header />
       <TripsHolder
         trips={trips}
         setCancelId={setCancelId}

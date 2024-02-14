@@ -12,7 +12,7 @@ export default function TripCard(props) {
   return (
     <div
       id={trip._id}
-      className="w-full px-3 py-4 flex flex-col items-center justify-center gap-3 bg-white relative"
+      className="w-full px-3 py-4 text-primary flex flex-col items-center justify-center gap-3 bg-white relative"
     >
       <CardHeader status={trip.status} cancelBooking={cancelBooking} />
       <Main trip={trip} />

@@ -21,7 +21,7 @@ function Breakup(props) {
   const { price, days, totalCost } = props;
 
   return (
-    <div className="w-full text-[14px] text-primary flex flex-col items-center justify-center gap-3">
+    <div className="w-full text-[14px] text-gray1 flex flex-col items-center justify-center gap-3">
       <div className="w-full flex flex-row items-start justify-between">
         <p>
           Car rental fee x {days && <span>{days}</span>} days <br />{" "}

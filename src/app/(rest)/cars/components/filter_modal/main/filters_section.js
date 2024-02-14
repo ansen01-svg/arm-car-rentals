@@ -16,7 +16,7 @@ export default function FiltersSection(props) {
 function TitleHolder({ title }) {
   return (
     <div className="w-full flex flex-row items-center justify-start">
-      <p className="font-bold text-sm">{title}</p>
+      <p className="font-bold text-sm text-primary">{title}</p>
     </div>
   );
 }
@@ -44,7 +44,10 @@ function CheckboxesHolder(props) {
               id={labelFor}
               name={labelFor}
               sx={{
-                ".MuiTypography-root": { fontSize: "14px", color: "#666" },
+                ".MuiTypography-root": {
+                  fontSize: "14px",
+                  color: "rgba(36,39,44,.7)",
+                },
               }}
             />
           );

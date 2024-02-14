@@ -1,3 +1,5 @@
+import EmptyTrips from "../empty_trips/empty_trips";
+
 import TripCard from "../trip_card/trip_card";
 
 export default function TripsHolder(props) {
@@ -6,7 +8,9 @@ export default function TripsHolder(props) {
   return (
     <div className="w-full md:w-[60vw] md:px-3 md:py-5 lg:w-[40vw]">
       <div className="w-full px-3 py-5 flex flex-col items-center justify-center gap-3 bg-primary">
-        {trips &&
+        {trips.length < 1 ? (
+          <EmptyTrips />
+        ) : (
           trips.map((trip) => {
             return (
               <TripCard
@@ -16,7 +20,8 @@ export default function TripsHolder(props) {
                 handleClickOpen={handleClickOpen}
               />
             );
-          })}
+          })
+        )}
       </div>
     </div>
   );

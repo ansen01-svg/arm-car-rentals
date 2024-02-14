@@ -21,9 +21,9 @@ export default function SearchFieldsHolder(props) {
 
 function SearchIconHolder({ setShowForm }) {
   return (
-    <div>
+    <div className="text-primary">
       <button onClick={() => setShowForm(true)}>
-        <SearchOutlinedIcon fontSize="small" sx={{ color: "#666" }} />
+        <SearchOutlinedIcon fontSize="small" />
       </button>
     </div>
   );
@@ -33,32 +33,16 @@ function FieldsHolder(props) {
   const { pickupDate, dropoffDate, pickupTime, dropoffTime } = props;
 
   return (
-    <div className="flex flex-col items-start content-center gap-1">
+    <div className="text-primary flex flex-col items-start content-center gap-1">
       <div>
-        <p className="font-medium text-primary">{address}</p>
+        <p className="font-medium">{address}</p>
       </div>
-      <div className="flex items-start content-center gap-2">
-        {pickupDate && (
-          <p className="text-xs text-primary">
-            {dayjs(pickupDate).format("DD/MM/YY")},
-          </p>
-        )}
-        {pickupTime && (
-          <p className="text-xs text-primary">
-            {dayjs(pickupTime).format("HH:mm a")}
-          </p>
-        )}
+      <div className="text-xs text-primary flex items-start content-center gap-2">
+        {pickupDate && <p>{dayjs(pickupDate).format("DD/MM/YY")},</p>}
+        {pickupTime && <p>{dayjs(pickupTime).format("HH:mm a")}</p>}
         {pickupDate && <p className="text-xs text-primary">-</p>}
-        {dropoffDate && (
-          <p className="text-xs text-primary">
-            {dayjs(dropoffDate).format("DD/MM/YY")},
-          </p>
-        )}
-        {dropoffTime && (
-          <p className="text-xs text-primary">
-            {dayjs(dropoffTime).format("HH:mm a")}
-          </p>
-        )}
+        {dropoffDate && <p>{dayjs(dropoffDate).format("DD/MM/YY")},</p>}
+        {dropoffTime && <p>{dayjs(dropoffTime).format("HH:mm a")}</p>}
       </div>
     </div>
   );

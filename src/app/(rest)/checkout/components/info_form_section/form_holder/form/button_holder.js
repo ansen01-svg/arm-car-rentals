@@ -2,13 +2,13 @@ const text = `By clicking on the button below, I acknowledge that I have reviewe
 
 export default function ButtonHolder({ disableBtn }) {
   return (
-    <div className="w-full px-3 py-5 bg-white rounded flex flex-col items-center justify-center gap-4">
-      <div className="w-full text-primary text-[12px]">
+    <div className="w-full px-3 py-5 bg-white rounded flex flex-col items-center justify-center gap-4 shadow">
+      <div className="w-full text-gray1 text-[12px]">
         <p>{text}</p>
       </div>
       <div className="w-full flex justify-center items-center">
         <button
-          className="w-full py-3 bg-secondary text-[white] text-medium font-semibold rounded hover:bg-hover disabled:bg-disabled md:w-[25%]"
+          className="w-full py-3 bg-secondary text-[white] font-medium rounded hover:bg-secondaryLight disabled:bg-secondaryLight md:w-[25%]"
           type="submit"
           disabled={disableBtn}
         >

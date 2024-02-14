@@ -72,7 +72,7 @@ export default function PriceDetails(props) {
   };
 
   return (
-    <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-5 bg-white rounded lg:px-6 lg:py-6">
+    <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-5 bg-white rounded shadow lg:px-6 lg:py-6">
       <Header />
       <PriceBreakup price={car.price} days={days} totalCost={totalCost} />
       <div className="w-full h-[1px] bg-slate-200"></div>

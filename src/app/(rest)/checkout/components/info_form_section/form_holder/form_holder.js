@@ -1,3 +1,6 @@
+"use client";
+
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Form from "./form/form";
@@ -39,7 +42,7 @@ export default function FormHolder({ tripId }) {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/confirm_trip_booking`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/update_trip`,
         {
           method: "POST",
           headers: { "Content-Type": "application-json" },

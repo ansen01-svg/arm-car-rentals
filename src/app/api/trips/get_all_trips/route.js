@@ -1,26 +1,22 @@
 import { NextResponse } from "next/server";
-import User from "@/models/user/user";
+import jwt from "jsonwebtoken";
 import Trips from "@/models/trips/trips";
 import connectDb from "../../../../mongo_config/mongo_config";
-import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
 
 connectDb();
 
 export async function GET(request) {
   try {
-    const userId = await getDataFromToken(request);
-    const trips = await User.findOne({ _id: userId }).select("myTrips");
+    const token = request.nextUrl.searchParams.get("token");
+    const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-    const completeTrips = await Promise.all(
-      trips.myTrips.map(async (trip) => {
-        const fullTrip = await Trips.findOne({ _id: trip.tripId });
-        return fullTrip;
-      })
-    );
+    const trips = await Trips.find({
+      "tripOwner.id": verifiedToken.id,
+    }).sort({ status: 1 });
 
     return NextResponse.json(
       {
-        data: completeTrips,
+        data: trips,
       },
       { status: 200 }
     );
