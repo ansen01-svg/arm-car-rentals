@@ -16,7 +16,7 @@ export default function Total({ totalCost }) {
 
 function Wrapper({ title1, title2 }) {
   return (
-    <div className="w-full text-[14px] text-primary flex flex-row items-center justify-between">
+    <div className="w-full text-[14px] text-gray1 flex flex-row items-center justify-between">
       <p>{title1}</p>
       <p>{title2}</p>
     </div>

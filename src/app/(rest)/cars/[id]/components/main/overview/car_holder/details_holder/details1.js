@@ -20,7 +20,7 @@ export default function Details1({ car }) {
 
 function Field({ icon, title }) {
   return (
-    <div className="text-primary text-[12px] flex flex-row items-center justify-center gap-2 md:text-[14px]">
+    <div className="text-[12px] flex flex-row items-center justify-center gap-2 md:text-[14px]">
       {icon}
       <p>{title}</p>
     </div>

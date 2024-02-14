@@ -4,20 +4,9 @@ import connectDb from "@/mongo_config/mongo_config";
 
 connectDb();
 
-export async function POST(request) {
+export async function GET(request) {
   try {
-    const requestBody = await request.json();
-    const { tripId } = requestBody;
-
-    // check if the trip id is provided
-    if (!tripId) {
-      return NextResponse.json(
-        {
-          message: "Please provide the trip id",
-        },
-        { status: 400 }
-      );
-    }
+    const tripId = request.nextUrl.searchParams.get("tripId");
 
     // get trip with given id
     const trip = await Trips.findOne({ _id: tripId });

@@ -6,7 +6,7 @@ export default function UserInfo(props) {
   const headerTitle = `Who's driving?`;
 
   return (
-    <div className="w-full px-3 py-5 bg-white rounded flex flex-col items-center justify-center gap-5">
+    <div className="w-full px-3 py-5 bg-white rounded flex flex-col items-center justify-center gap-5 shadow">
       <Header headerTitle={headerTitle} />
       <div className="w-full flex flex-col items-start justify-center gap-4">
         <FieldHolder
@@ -32,7 +32,7 @@ export default function UserInfo(props) {
 
 export function Header({ headerTitle }) {
   return (
-    <div className="w-full text-left text-[20px] font-semibold">
+    <div className="w-full text-left text-[20px] text-primary font-semibold">
       {headerTitle}
     </div>
   );

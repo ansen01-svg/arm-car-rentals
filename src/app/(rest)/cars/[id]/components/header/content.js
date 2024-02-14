@@ -13,7 +13,7 @@ export default function Content() {
 
   return (
     <Link href={`/cars?${link}`}>
-      <div className="flex flex-row items-center justify-start gap-3 text-primary text-[15px] font-medium">
+      <div className="flex flex-row items-center justify-start gap-3 text-gray1 text-[15px] font-medium">
         <span>
           <ArrowBackOutlinedIcon />
         </span>

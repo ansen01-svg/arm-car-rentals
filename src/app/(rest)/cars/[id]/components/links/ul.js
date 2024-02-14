@@ -22,7 +22,7 @@ function samePageLinkNavigation(event) {
 
 const AntTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
-    backgroundColor: "#1f9990",
+    backgroundColor: "#2176ae",
   },
 });
 
@@ -41,18 +41,18 @@ const AntTab = styled((props) => <LinkTab disableRipple {...props} />)(
     },
     fontWeight: theme.typography.fontWeightMedium,
     marginRight: theme.spacing(1),
-    color: "#666",
+    color: "rgba(36,39,44,.7)",
     fontFamily: "__Inter_e66fe9",
     "&:hover": {
-      color: "#1f9990",
+      color: "#2176ae",
       opacity: 1,
     },
     "&.Mui-selected": {
-      color: "#1f9990",
+      color: "#2176ae",
       fontWeight: theme.typography.fontWeightMedium,
     },
     "&.Mui-focusVisible": {
-      backgroundColor: "#1f9990",
+      backgroundColor: "#2176ae",
     },
   })
 );

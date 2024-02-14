@@ -74,7 +74,13 @@ export default function Content() {
         setDisableBtn(false);
       } else {
         const data = await response.json();
-        setError(data.error);
+
+        if (data.error.includes("user validation")) {
+          const errMsg = data.error.split("username: ")[1];
+          setError(errMsg);
+        } else {
+          setError(data.error);
+        }
         setDisableBtn(false);
       }
     } catch (error) {

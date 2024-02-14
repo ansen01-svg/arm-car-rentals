@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 import User from "@/models/user/user";
 import Trips from "@/models/trips/trips";
 import connectDb from "@/mongo_config/mongo_config";
-import generateItineraryNumber from "@/app/_lib/backend/generateItineraryNumber";
 import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
 import sendConfirmationEmail from "@/app/services/mailgun/confirmationEmail";
-// import { sendEmail } from "@/app/services/elastic_email/config";
 
 connectDb();
 
@@ -36,9 +34,18 @@ export async function POST(request) {
       );
     }
 
+    // check if trip is already booked
+    if (trip.status === "booked") {
+      return NextResponse.json(
+        {
+          message: `Your trip has already been confirmed`,
+        },
+        { status: 400 }
+      );
+    }
+
     // change trip status
     trip.status = "booked";
-    trip.itineraryNumber = generateItineraryNumber();
     await trip.save();
 
     // get current user
@@ -58,16 +65,12 @@ export async function POST(request) {
       pickupTime: trip.pickupTime,
     };
 
+    // send confirmation email
     await sendConfirmationEmail(emailOptions);
-    // await sendEmail();
 
     return NextResponse.json(
       {
         message: `Your trip has been booked successfully`,
-        data: {
-          email: trip.tripOwner.contactEmail,
-          itineraryNumber: trip.itineraryNumber,
-        },
       },
       { status: 200 }
     );

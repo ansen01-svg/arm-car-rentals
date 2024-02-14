@@ -4,7 +4,7 @@ const headerTitle = "Important information";
 
 export default function ImportantInfo() {
   return (
-    <div className="w-full px-3 py-5 bg-white rounded relative">
+    <div className="w-full px-3 py-5 bg-white rounded relative shadow">
       <div className="w-full flex flex-col items-center justify-center gap-5">
         <Header headerTitle={headerTitle} />
         <Ul />
@@ -15,11 +15,11 @@ export default function ImportantInfo() {
 
 function Ul() {
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-3">
+    <div className="w-full text-primary flex flex-col items-center justify-center gap-3">
       <div className="w-full text-[14px] font-medium">
         <p>Rental Policies</p>
       </div>
-      <div className="w-full px-4 text-primary text-[12px]">
+      <div className="w-full px-4 text-[12px]">
         <ul className="list-disc">
           <li>
             The following rules and restrictions are provided by the car rental

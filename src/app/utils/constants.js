@@ -3,7 +3,7 @@ import moment from "moment";
 // Home page
 // banner form
 export const sectionHeaderTitle = "Cheap Car Rentals";
-export const address = "ARM Beltola, Guwahati";
+export const address = "ARM Seuji Path Beltola, Guwahati";
 
 // about component
 export const aboutText1 = "A trusted platform";

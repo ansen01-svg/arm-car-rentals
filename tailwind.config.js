@@ -8,16 +8,18 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        // primary: "#eff3f5",
-        primary: "#f5f5f5",
+        primary: "#f7f7f7",
       },
       colors: {
-        primary: "#666",
-        secondary: "#1f9990",
-        // secondary: "#14cda8",
-        hover: "#1b8b84",
-        disabled: "#6db4b0",
+        primary: "#24272c",
+        secondary: "#f75d34",
+        secondaryLight: "#f7724e",
+        gray1: "rgba(36,39,44,.7)",
+        gray2: "rgba(36,39,44,.5)",
         red: "#ee4b2b",
+        blue: "#2176ae",
+        green: "#6bad23",
+        // shadow: 0 8px 8px 0 rgba(247, 93, 52, .2);
       },
       fontSize: {
         medium: "14px",

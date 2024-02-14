@@ -13,6 +13,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // const response = await fetch(
+  //   `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/getCurrentUser`
+  // );
+  // const data = await response.json();
+  // console.log(data);
+
   return (
     <html lang="en">
       <body className={inter.className}>

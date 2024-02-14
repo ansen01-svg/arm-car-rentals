@@ -3,6 +3,7 @@ import User from "@/models/user/user";
 import Trips from "@/models/trips/trips";
 import connectDb from "../../../../mongo_config/mongo_config";
 import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
+import generateItineraryNumber from "@/app/_lib/backend/generateItineraryNumber";
 
 connectDb();
 
@@ -43,6 +44,7 @@ export async function POST(request) {
     trip.tripOwner.phoneNumber = phoneNumber;
     trip.tripOwner.contactEmail = contactEmail;
     trip.tripOwner.driver = driver;
+    trip.itineraryNumber = generateItineraryNumber();
     await trip.save();
 
     // attach trip id to current user/trip owner

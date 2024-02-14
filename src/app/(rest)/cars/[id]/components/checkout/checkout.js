@@ -17,10 +17,6 @@ export default function Checkout(props) {
   const tax = 0;
   const fees = 0;
 
-  console.log(date1);
-  console.log(date2);
-  console.log(days);
-
   const totalCost = parseInt(car.price) * parseInt(days) + tax + fees;
 
   // reserve car
@@ -110,20 +106,26 @@ function DetailsHolder(props) {
   return (
     <div className="details-holder">
       {price && (
-        <p style={{ fontSize: "12px", color: "#666" }}>Rs.{price} per day</p>
+        <p style={{ fontSize: "12px", color: "rgba(36,39,44,.7)" }}>
+          Rs.{price} per day
+        </p>
       )}
       {totalCost && (
         <p style={{ fontSize: "18px", fontWeight: "bold" }}>
           Rs.{totalCost}&nbsp;
           <span
-            style={{ fontSize: "12px", color: "#666", fontWeight: "normal" }}
+            style={{
+              fontSize: "12px",
+              color: "rgba(36,39,44,.7)",
+              fontWeight: "normal",
+            }}
           >
             total
           </span>
         </p>
       )}
       {days && (
-        <p style={{ fontSize: "12px", color: "#666" }}>
+        <p style={{ fontSize: "12px", color: "rgba(36,39,44,.7)" }}>
           Car rental fee x {days} days
         </p>
       )}

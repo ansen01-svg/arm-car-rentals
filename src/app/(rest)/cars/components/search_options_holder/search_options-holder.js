@@ -23,7 +23,7 @@ export default function SearchOptionsHolder(props) {
   const desktopScreen = useMediaQuery("(min-width:1024px)");
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white shadow-md">
       {mobileScreen && !showForm && (
         <SearchFieldsHolder
           pickupDate={pickupDate}

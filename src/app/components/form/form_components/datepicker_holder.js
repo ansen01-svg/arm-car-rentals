@@ -48,6 +48,7 @@ export default function DatePickerHolder(props) {
             ".MuiInputBase-input": {
               height: "0.84em",
               padding: "8.5px 12px",
+              fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             },
             ".MuiOutlinedInput-notchedOutline": {
               border: "none",

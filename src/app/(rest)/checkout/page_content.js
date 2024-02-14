@@ -1,5 +1,3 @@
-"use client";
-
 import Error from "./components/error/error";
 import InfoFormSection from "./components/info_form_section/info_form_section";
 import TripDetailsSection from "./components/trip_details_section/trip_details_section";

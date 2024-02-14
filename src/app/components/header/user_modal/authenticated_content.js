@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 export default function AuthenticatedContent(props) {
@@ -20,7 +19,7 @@ function UserDetailsHolder({ user }) {
         <AccountCircleOutlinedIcon fontSize="large" />
       </div>
       <div className="flex-1  flex flex-col items-start justify-center gap-2">
-        {user && <p className="text-[15px] font-semibold">{user.username}</p>}
+        {user && <p className="text-[14px] font-semibold">{user.username}</p>}
         {user && <p className="text-[12px]">{user.email}</p>}
       </div>
     </div>
@@ -28,8 +27,6 @@ function UserDetailsHolder({ user }) {
 }
 
 function SignOutBtnHolder({ handleClose }) {
-  const router = useRouter();
-
   // sign out
   const signOut = async () => {
     try {
@@ -40,7 +37,6 @@ function SignOutBtnHolder({ handleClose }) {
       if (response.status === 200) {
         handleClose();
         window.location.reload();
-        router.push("/");
       } else {
         const data = await response.json();
         console.log(data);
@@ -55,9 +51,7 @@ function SignOutBtnHolder({ handleClose }) {
 
   return (
     <div className="w-full px-5 text-[14px]">
-      <button className="hover:text-secondary" onClick={signOut}>
-        Sign out
-      </button>
+      <button onClick={signOut}>Sign out</button>
     </div>
   );
 }

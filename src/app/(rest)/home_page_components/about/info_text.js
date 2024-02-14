@@ -1,8 +1,8 @@
 export default function InfoText({ title, serialNumber }) {
   return (
-    <div className="flex gap-3">
-      <h1 className="text-xl font-bold md:text-4xl">{serialNumber}</h1>
-      <h1 className="text-xl font-bold md:text-4xl">{title}</h1>
+    <div className="text-xl font-bold md:text-4xl text-primary flex gap-3">
+      <h1>{serialNumber}</h1>
+      <h1>{title}</h1>
     </div>
   );
 }
