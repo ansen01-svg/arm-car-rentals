@@ -17,6 +17,7 @@ export default function Banner() {
           left: 0,
         }}
       />
+      <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.4)]"></div>
       <FormHolder />
     </div>
   );

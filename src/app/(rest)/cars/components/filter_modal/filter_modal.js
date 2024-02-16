@@ -6,20 +6,8 @@ import Header from "./header";
 import Main from "./main/main";
 
 export default function FilterModal(props) {
-  const {
-    showFilterModal,
-    setShowFilterModal,
-    params,
-    setParams,
-    carType,
-    carSpecifications,
-    carPrice,
-    carCapacity,
-    handleCarTypeValueChange,
-    handleSpecificationValueChange,
-    handlePriceValueChange,
-    handleCapacityValueChange,
-  } = props;
+  const { filters, showFilterModal, setShowFilterModal, handleFilterChange } =
+    props;
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -39,21 +27,11 @@ export default function FilterModal(props) {
       }}
     >
       <DialogContent>
-        <Header
-          params={params}
-          setParams={setParams}
-          setShowFilterModal={setShowFilterModal}
-        />
+        <Header setShowFilterModal={setShowFilterModal} />
         <Main
+          filters={filters}
           setShowFilterModal={setShowFilterModal}
-          carType={carType}
-          carSpecifications={carSpecifications}
-          carPrice={carPrice}
-          carCapacity={carCapacity}
-          handleCarTypeValueChange={handleCarTypeValueChange}
-          handleSpecificationValueChange={handleSpecificationValueChange}
-          handlePriceValueChange={handlePriceValueChange}
-          handleCapacityValueChange={handleCapacityValueChange}
+          handleFilterChange={handleFilterChange}
         />
       </DialogContent>
     </Dialog>

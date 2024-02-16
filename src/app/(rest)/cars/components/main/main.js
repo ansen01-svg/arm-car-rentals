@@ -6,37 +6,18 @@ import TotalCarsDisplay from "./total_cars_display/total_cars_display";
 import DesktopFilterSectionSkeleton from "../../skeletons/desktop_filter_section_skeleton";
 
 export default function Main(props) {
-  const {
-    cars,
-    dataReady,
-    carType,
-    carSpecifications,
-    carPrice,
-    carCapacity,
-    params,
-    setParams,
-    handleCarTypeValueChange,
-    handleSpecificationValueChange,
-    handlePriceValueChange,
-    handleCapacityValueChange,
-  } = props;
+  const { cars, filters, setFilters, handleFilterChange } = props;
 
   const desktopScreen = useMediaQuery("(min-width:1024px)");
 
   return (
     <div className="w-full px-3 flex flex-row items-start justify-center gap-6 lg:px-20 md:py-4">
       {desktopScreen &&
-        (dataReady ? (
+        (cars ? (
           <FilterSectionWrapper>
             <DesktopFilterSection
-              carType={carType}
-              carSpecifications={carSpecifications}
-              carPrice={carPrice}
-              carCapacity={carCapacity}
-              handleCarTypeValueChange={handleCarTypeValueChange}
-              handleSpecificationValueChange={handleSpecificationValueChange}
-              handlePriceValueChange={handlePriceValueChange}
-              handleCapacityValueChange={handleCapacityValueChange}
+              filters={filters}
+              handleFilterChange={handleFilterChange}
             />
           </FilterSectionWrapper>
         ) : (
@@ -44,9 +25,8 @@ export default function Main(props) {
         ))}
       <FiltersAndCarsWrapper
         cars={cars}
-        dataReady={dataReady}
-        params={params}
-        setParams={setParams}
+        filters={filters}
+        setFilters={setFilters}
       />
     </div>
   );
@@ -57,15 +37,22 @@ function FilterSectionWrapper({ children }) {
 }
 
 function FiltersAndCarsWrapper(props) {
-  const { cars, dataReady, params, setParams } = props;
+  const { cars, filters, setFilters } = props;
+
+  const filtersArr = [
+    ...Object.values(filters)[0],
+    ...Object.values(filters)[1],
+    ...Object.values(filters)[2],
+    ...Object.values(filters)[3],
+  ];
 
   return (
     <div className="flex flex-col items-center justify-center gap-7 flex-1">
-      {dataReady && params.length > 4 && (
-        <FilterOptionsDisplayHolder params={params} setParams={setParams} />
+      {cars && filtersArr.length > 0 && (
+        <FilterOptionsDisplayHolder filters={filters} setFilters={setFilters} />
       )}
-      <TotalCarsDisplay cars={cars} dataReady={dataReady} />
-      <CarsHolder cars={cars} dataReady={dataReady} />
+      {cars.length > 0 && <TotalCarsDisplay cars={cars} />}
+      <CarsHolder cars={cars} />
     </div>
   );
 }

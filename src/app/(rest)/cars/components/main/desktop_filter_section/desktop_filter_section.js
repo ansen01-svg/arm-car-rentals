@@ -3,16 +3,7 @@ import Header from "../../filter_modal/main/header";
 import FiltersSection from "../../filter_modal/main/filters_section";
 
 export default function DesktopFilterSection(props) {
-  const {
-    carType,
-    carSpecifications,
-    carPrice,
-    carCapacity,
-    handleCarTypeValueChange,
-    handleSpecificationValueChange,
-    handlePriceValueChange,
-    handleCapacityValueChange,
-  } = props;
+  const { filters, handleFilterChange } = props;
 
   const carTypesData = useMemo(() => {
     return [
@@ -20,28 +11,32 @@ export default function DesktopFilterSection(props) {
         id: 1,
         label: "Standard",
         labelFor: "standard",
-        value: carType.standard,
+        name: "type",
+        value: ["Standard"],
       },
       {
         id: 2,
         label: "Premium",
         labelFor: "premium",
-        value: carType.premium,
+        name: "type",
+        value: ["Premium"],
       },
       {
         id: 3,
         label: "Luxury",
         labelFor: "luxury",
-        value: carType.luxury,
+        name: "type",
+        value: ["Luxury"],
       },
       {
         id: 4,
         label: "Van",
         labelFor: "van",
-        value: carType.van,
+        name: "type",
+        value: ["Van"],
       },
     ];
-  }, [carType]);
+  }, []);
 
   const carSpecificationsData = useMemo(() => {
     return [
@@ -49,16 +44,18 @@ export default function DesktopFilterSection(props) {
         id: 1,
         label: "Manual",
         labelFor: "manual",
-        value: carSpecifications.manual,
+        name: "specification",
+        value: ["Manual"],
       },
       {
         id: 2,
         label: "Automatic",
         labelFor: "automatic",
-        value: carSpecifications.automatic,
+        name: "specification",
+        value: ["Automatic"],
       },
     ];
-  }, [carSpecifications]);
+  }, []);
 
   const carPricesData = useMemo(() => {
     return [
@@ -66,22 +63,25 @@ export default function DesktopFilterSection(props) {
         id: 1,
         label: "2000 to 5000",
         labelFor: "twoto5k",
-        value: carPrice.twoto5k,
+        name: "price",
+        value: ["2000-5000"],
       },
       {
         id: 2,
         label: "5000 to 10000",
         labelFor: "fiveto10k",
-        value: carPrice.fiveto10k,
+        name: "price",
+        value: ["5000-10000"],
       },
       {
         id: 3,
         label: "above 10000",
         labelFor: "tenkAndAbove",
-        value: carPrice.tenkAndAbove,
+        name: "price",
+        value: ["10000-50000"],
       },
     ];
-  }, [carPrice]);
+  }, []);
 
   const carCapacityData = useMemo(() => {
     return [
@@ -89,16 +89,18 @@ export default function DesktopFilterSection(props) {
         id: 1,
         label: "2-4 passangers",
         labelFor: "twoToFour",
-        value: carCapacity.twoToFour,
+        name: "capacity",
+        value: ["2-4"],
       },
       {
         id: 2,
-        label: "2-6 passangers",
+        label: "5-6 passangers",
         labelFor: "twoToSix",
-        value: carCapacity.twoToSix,
+        name: "capacity",
+        value: ["5-6"],
       },
     ];
-  }, [carCapacity]);
+  }, []);
 
   return (
     <div className="w-full flex flex-col items-center justify-center gap-2">
@@ -106,24 +108,28 @@ export default function DesktopFilterSection(props) {
       <div className="w-full">
         <form className="w-full flex flex-col items-center justify-center gap-8">
           <FiltersSection
+            filters={filters}
             title="Car Type"
             data={carTypesData}
-            handleChange={handleCarTypeValueChange}
+            handleFilterChange={handleFilterChange}
           />
           <FiltersSection
+            filters={filters}
             title="Total price"
             data={carPricesData}
-            handleChange={handlePriceValueChange}
+            handleFilterChange={handleFilterChange}
           />
           <FiltersSection
+            filters={filters}
             title="Capacity"
             data={carCapacityData}
-            handleChange={handleCapacityValueChange}
+            handleFilterChange={handleFilterChange}
           />
           <FiltersSection
+            filters={filters}
             title="Specifications"
             data={carSpecificationsData}
-            handleChange={handleSpecificationValueChange}
+            handleFilterChange={handleFilterChange}
           />
         </form>
       </div>

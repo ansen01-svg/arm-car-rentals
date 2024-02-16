@@ -5,7 +5,7 @@ import CardContent from "./card_content";
 import CarCardContentSkeleton from "@/app/(rest)/cars/skeletons/car_card_content_skeleton";
 
 export default function Card(props) {
-  const { car, dataReady, disableBtnId, setDisableBtnId } = props;
+  const { car, disableBtnId, setDisableBtnId } = props;
 
   const [details, setDetails] = useState("");
 
@@ -18,7 +18,7 @@ export default function Card(props) {
 
   return (
     <div className="w-full px-1 py-1 bg-white rounded shadow relative md:h-56">
-      {dataReady ? (
+      {car ? (
         <CardContent
           car={car}
           disableBtnId={disableBtnId}
@@ -27,7 +27,7 @@ export default function Card(props) {
       ) : (
         <CarCardContentSkeleton />
       )}
-      {dataReady && mobileScreen && (
+      {car && mobileScreen && (
         <Link
           href={`/cars/${car._id}?${details}`}
           target="_blank"
