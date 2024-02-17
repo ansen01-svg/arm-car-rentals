@@ -1,5 +1,4 @@
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Button from "./button";
 import Header from "./header";
 import PriceBreakup from "./price_breakup";
@@ -11,6 +10,8 @@ export default function PriceDetails(props) {
   const { token, car, dates, time, disableBtn, setDisableBtn } = props;
 
   const router = useRouter();
+  const path = usePathname();
+  const searchParams = useSearchParams();
 
   const date1 = getDate(dates.pickupDate);
   const date2 = getDate(dates.dropoffDate);
@@ -24,8 +25,8 @@ export default function PriceDetails(props) {
     setDisableBtn(true);
 
     if (!token) {
-      const currentUrl = window.location.href.split("3000")[1];
-      const redirectUrl = `/signin?callbackUrl=${currentUrl}`;
+      const params = new URLSearchParams(searchParams).toString();
+      const redirectUrl = `/signin?callbackUrl=${path}?${params}`;
 
       router.push(redirectUrl);
       setDisableBtn(false);

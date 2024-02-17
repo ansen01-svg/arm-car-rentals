@@ -42,7 +42,7 @@ const AntTab = styled((props) => <LinkTab disableRipple {...props} />)(
     fontWeight: theme.typography.fontWeightMedium,
     marginRight: theme.spacing(1),
     color: "rgba(36,39,44,.7)",
-    fontFamily: "__Inter_e66fe9",
+    // fontFamily: "__Inter_e66fe9",
     "&:hover": {
       color: "#2176ae",
       opacity: 1,
