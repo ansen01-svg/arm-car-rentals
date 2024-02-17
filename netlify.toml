@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  functions = "out/api"
+
+[build.environment]
+  NODE_VERSION = "14"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
