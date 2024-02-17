@@ -24,7 +24,8 @@ function Breakup(props) {
     <div className="w-full text-[14px] text-gray1 flex flex-col items-center justify-center gap-3">
       <div className="w-full flex flex-row items-start justify-between">
         <p>
-          Car rental fee x {days && <span>{days}</span>} days <br />{" "}
+          Car rental fee x {days && <span>{days}</span>}{" "}
+          {+days > 1 ? "days" : "day"} <br />
           <span className="text-xs">
             {price && <span>Rs.{price}</span>} per day
           </span>

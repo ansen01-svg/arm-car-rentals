@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-on-netlify"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -22,6 +23,7 @@
     "moment": "^2.30.1",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
+    "next-on-netlify": "^3.0.1",
     "next-sanity": "^7.0.5",
     "nodemailer": "^6.9.7",
     "react": "^18",

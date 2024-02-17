@@ -77,6 +77,12 @@ export default function Ul() {
       onChange={handleChange}
       aria-label="nav tabs"
       role="navigation"
+      // sx={{
+      //   ".MuiTabs-flexContainer": {
+      //     overflowX: "auto",
+      //     scrollbarColor: "transparent transparent",
+      //   },
+      // }}
     >
       <AntTab label="Overview" href="#overview" />
       <AntTab label="Location" href="#location" />

@@ -126,9 +126,13 @@ function DetailsHolder(props) {
           </span>
         </p>
       )}
-      {days && (
+      {days && +days > 1 ? (
         <p style={{ fontSize: "12px", color: "rgba(36,39,44,.7)" }}>
           Car rental fee x {days} days
+        </p>
+      ) : (
+        <p style={{ fontSize: "12px", color: "rgba(36,39,44,.7)" }}>
+          Car rental fee x {days} day
         </p>
       )}
     </div>

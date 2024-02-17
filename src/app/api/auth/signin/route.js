@@ -53,8 +53,7 @@ export async function POST(request) {
 
     response.cookies.set("token", token, {
       httpOnly: true,
-      sameSite: "none",
-      secure: true
+      secure: true,
     });
 
     return response;
