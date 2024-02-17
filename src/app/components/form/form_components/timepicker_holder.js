@@ -19,7 +19,7 @@ export default function TimepickerHolder(props) {
           sx={{
             ".MuiInputBase-root": {
               fontSize: "15px",
-              fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
+              // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.8em",
@@ -38,7 +38,7 @@ export default function TimepickerHolder(props) {
             ".MuiInputBase-root": {
               paddingRight: "12px",
               fontSize: "15px",
-              fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
+              // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             },
             ".MuiInputBase-input": {
               height: "0.84em",

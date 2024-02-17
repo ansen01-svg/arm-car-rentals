@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import "./checkout.css";
 import getDate from "@/app/_lib/frontend/getDate";
@@ -10,6 +10,8 @@ export default function Checkout(props) {
   const [isVisible, setIsVisible] = useState(true);
 
   const router = useRouter();
+  const path = usePathname();
+  const searchParams = useSearchParams();
 
   const date1 = getDate(dates.pickupDate);
   const date2 = getDate(dates.dropoffDate);
@@ -24,8 +26,8 @@ export default function Checkout(props) {
     setDisableBtn(true);
 
     if (!token) {
-      const currentUrl = window.location.href.split("3000")[1];
-      const redirectUrl = `/signin?callbackUrl=${currentUrl}`;
+      const params = new URLSearchParams(searchParams).toString();
+      const redirectUrl = `/signin?callbackUrl=${path}?${params}`;
 
       router.push(redirectUrl);
       setDisableBtn(false);

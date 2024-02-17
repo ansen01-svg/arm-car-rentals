@@ -6,6 +6,7 @@ export default function FieldsHolderWrapper(props) {
   const {
     dateError,
     timeError,
+    time1Error,
     pickupDate,
     dropoffDate,
     pickupTime,
@@ -46,6 +47,7 @@ export default function FieldsHolderWrapper(props) {
           labelTitle="Drop-off time"
           value={dropoffTime}
           handleChange={handleDropoffTimeChange}
+          timeError={time1Error}
         />
       </FieldsHolder>
     </div>

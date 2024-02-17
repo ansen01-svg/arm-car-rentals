@@ -6,6 +6,7 @@ export default function Form(props) {
   const {
     dateError,
     timeError,
+    time1Error,
     pickupDate,
     dropoffDate,
     pickupTime,
@@ -27,6 +28,7 @@ export default function Form(props) {
       <FieldsHolderWrapper
         dateError={dateError}
         timeError={timeError}
+        time1Error={time1Error}
         pickupDate={pickupDate}
         dropoffDate={dropoffDate}
         pickupTime={pickupTime}
