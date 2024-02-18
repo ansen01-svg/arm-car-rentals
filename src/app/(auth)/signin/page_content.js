@@ -77,6 +77,7 @@ export default function Content() {
       }
     } catch (error) {
       console.log(error);
+      throw new Error(error)
     }
   };
 
