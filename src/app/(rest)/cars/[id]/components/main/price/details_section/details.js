@@ -50,7 +50,7 @@ export default function PriceDetails(props) {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/trips/create_trip",
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/create_trip`,
         {
           method: "POST",
           headers: { "Content-Type": "application-json" },
