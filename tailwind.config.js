@@ -19,7 +19,6 @@ module.exports = {
         red: "#ee4b2b",
         blue: "#2176ae",
         green: "#6bad23",
-        // shadow: 0 8px 8px 0 rgba(247, 93, 52, .2);
       },
       fontSize: {
         medium: "14px",

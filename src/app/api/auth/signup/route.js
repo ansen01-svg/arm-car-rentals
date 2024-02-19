@@ -50,7 +50,7 @@ export async function POST(request) {
     await newUser.save();
 
     // send mail
-    await sendVerificationEmail(email, "VERIFY-EMAIL", hashedToken);
+    // await sendVerificationEmail(email, "VERIFY-EMAIL", hashedToken);
 
     return NextResponse.json({
       message: "User created successfully",

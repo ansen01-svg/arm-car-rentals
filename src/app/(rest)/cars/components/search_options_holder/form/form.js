@@ -9,6 +9,7 @@ export default function Form(props) {
   const {
     dateError,
     timeError,
+    time1Error,
     pickupDate,
     dropoffDate,
     pickupTime,
@@ -20,7 +21,6 @@ export default function Form(props) {
     handleDropoffTimeChange,
     handleSubmit,
   } = props;
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -52,6 +52,7 @@ export default function Form(props) {
           labelTitle={"Drop-off Time"}
           value={dayjs(dropoffTime)}
           handleChange={handleDropoffTimeChange}
+          timeError={time1Error}
         />
       </FieldsHolder>
       <Button />

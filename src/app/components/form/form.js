@@ -5,6 +5,7 @@ import LocationHolder from "./form_components/location_holder";
 export default function Form(props) {
   const {
     dateError,
+    date1Error,
     timeError,
     time1Error,
     pickupDate,
@@ -27,6 +28,7 @@ export default function Form(props) {
       <LocationHolder />
       <FieldsHolderWrapper
         dateError={dateError}
+        date1Error={date1Error}
         timeError={timeError}
         time1Error={time1Error}
         pickupDate={pickupDate}

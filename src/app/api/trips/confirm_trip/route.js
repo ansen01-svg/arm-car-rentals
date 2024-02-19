@@ -66,7 +66,7 @@ export async function POST(request) {
     };
 
     // send confirmation email
-    await sendConfirmationEmail(emailOptions);
+    // await sendConfirmationEmail(emailOptions);
 
     return NextResponse.json(
       {

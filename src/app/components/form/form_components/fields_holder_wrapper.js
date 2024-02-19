@@ -5,6 +5,7 @@ import TimepickerHolder from "./timepicker_holder";
 export default function FieldsHolderWrapper(props) {
   const {
     dateError,
+    date1Error,
     timeError,
     time1Error,
     pickupDate,
@@ -34,6 +35,7 @@ export default function FieldsHolderWrapper(props) {
           value={dropoffDate}
           handleChange={handleDropoffDateChange}
           minDate={minDate}
+          date1Error={date1Error}
         />
       </FieldsHolder>
       <FieldsHolder>
