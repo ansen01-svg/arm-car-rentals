@@ -31,7 +31,8 @@ function SignOutBtnHolder({ handleClose }) {
   const signOut = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/signout`
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/signout`,
+        { cache: "no-store" }
       );
 
       if (response.status === 200) {
