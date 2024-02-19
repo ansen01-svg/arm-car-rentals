@@ -37,6 +37,7 @@ function SignOutBtnHolder({ handleClose }) {
 
       if (response.status === 200) {
         handleClose();
+        sessionStorage.clear();
         window.location.reload();
       } else {
         const data = await response.json();

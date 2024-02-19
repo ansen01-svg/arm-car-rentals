@@ -4,7 +4,7 @@ const compareTimes = (time1, time2) => {
   const minutesSinceMidnight2 = calculateTimeSinceMidnight(time2);
 
   // Check if the first time is earlier than the second time
-  return minutesSinceMidnight1 < minutesSinceMidnight2;
+  return minutesSinceMidnight1 <= minutesSinceMidnight2;
 };
 
 const convertToMinutesSinceMidnight = (time) => {

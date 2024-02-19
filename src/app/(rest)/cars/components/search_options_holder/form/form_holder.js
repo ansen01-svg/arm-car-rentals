@@ -5,6 +5,7 @@ import ErrorMsgHolder from "@/app/components/error_msg/error_msg_holder";
 import Form from "./form";
 import getMilliseconds from "@/app/_lib/frontend/getMilliseconds";
 import getDate from "@/app/_lib/frontend/getDate";
+import compareTimes from "@/app/_lib/frontend/compareTimes";
 
 export default function FormHolder(props) {
   const {
@@ -17,9 +18,10 @@ export default function FormHolder(props) {
     dispatch,
   } = props;
 
-  const [fieldsError, setFieldsError] = useState(false);
+  const [fieldsError, setFieldsError] = useState("");
   const [dateError, setDateError] = useState(false);
   const [timeError, setTimeError] = useState(false);
+  const [time1Error, setTime1Error] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -53,13 +55,24 @@ export default function FormHolder(props) {
 
     // if dropoff date is later than pickup date
     if (new Date(dropoffDay).getTime() < new Date(pickupDay).getTime()) {
-      setFieldsError(true);
+      setFieldsError("Please enter the correct date and time.");
       setTimeError(false);
+      setTime1Error(false);
       setDateError(true);
       return;
     }
 
-    // if pickupdate and dropoffdate are same but pickuptime is earlier then dropoff time
+    // check if both dates are same but pickup time is later than dropoff time
+    if (
+      pickupDate.format("DD/MM/YY") === dropoffDate.format("DD/MM/YY") &&
+      compareTimes(dropoffTime.format("HH:mm a"), pickupTime.format("HH:mm a"))
+    ) {
+      setFieldsError("Please enter the correct date and time.");
+      setTimeError(false);
+      setDateError(false);
+      setTime1Error(true);
+      return;
+    }
 
     // check if pick up date is today but pick time is set in the past
     if (pickupDate.format("DD/MM/YY") === dayjs().format("DD/MM/YY")) {
@@ -70,8 +83,9 @@ export default function FormHolder(props) {
       const currentTime = new Date(Date.now()).getTime();
 
       if (todaysPickupTime < currentTime) {
-        setFieldsError(true);
+        setFieldsError("Please enter the correct date and time.");
         setDateError(false);
+        setTime1Error(false);
         setTimeError(true);
         return;
       } else {
@@ -80,9 +94,10 @@ export default function FormHolder(props) {
       }
     }
 
-    setFieldsError(false);
+    setFieldsError("");
     setDateError(false);
     setTimeError(false);
+    setTime1Error(false);
 
     // update url with fresh params
     const paramsObj = new URLSearchParams();
@@ -99,10 +114,11 @@ export default function FormHolder(props) {
 
   return (
     <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-3 lg:px-20 lg:py-3">
-      {fieldsError && <ErrorMsgHolder />}
+      {fieldsError && <ErrorMsgHolder fieldsError={fieldsError} />}
       <Form
         dateError={dateError}
         timeError={timeError}
+        time1Error={time1Error}
         pickupDate={pickupDate}
         dropoffDate={dropoffDate}
         pickupTime={pickupTime}

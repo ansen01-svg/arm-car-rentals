@@ -16,6 +16,7 @@ export default function FormHoler() {
 
   const [fieldsError, setFieldsError] = useState("");
   const [dateError, setDateError] = useState(false);
+  const [date1Error, setDate1Error] = useState(false);
   const [timeError, setTimeError] = useState(false);
   const [time1Error, setTime1Error] = useState(false);
 
@@ -67,6 +68,8 @@ export default function FormHoler() {
       state.dropoffTime.format("HH:mm a") === "Invalid Date"
     ) {
       setFieldsError("Please select dates and time");
+      setDateError(true);
+      setDate1Error(true);
       return;
     }
 
@@ -75,6 +78,7 @@ export default function FormHoler() {
       setFieldsError("Please enter the correct date and time.");
       setTimeError(false);
       setTime1Error(false);
+      setDate1Error(false);
       setDateError(true);
       return;
     }
@@ -92,6 +96,7 @@ export default function FormHoler() {
       setTime1Error(true);
       setTimeError(false);
       setDateError(false);
+      setDate1Error(false);
       return;
     }
 
@@ -106,6 +111,7 @@ export default function FormHoler() {
       if (todaysPickupTime < currentTime) {
         setFieldsError("Please enter the correct date and time.");
         setDateError(false);
+        setDate1Error(false);
         setTime1Error(false);
         setTimeError(true);
         return;
@@ -117,6 +123,7 @@ export default function FormHoler() {
 
     setFieldsError("");
     setDateError(false);
+    setDate1Error(false);
     setTimeError(false);
     setTime1Error(false);
 
@@ -131,6 +138,7 @@ export default function FormHoler() {
       <Form
         setFieldsError={setFieldsError}
         dateError={dateError}
+        date1Error={date1Error}
         timeError={timeError}
         time1Error={time1Error}
         pickupDate={state.pickupDate}
