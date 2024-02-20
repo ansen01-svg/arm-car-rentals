@@ -35,7 +35,7 @@ export default function FieldsHolderWrapper(props) {
           value={dropoffDate}
           handleChange={handleDropoffDateChange}
           minDate={minDate}
-          date1Error={date1Error}
+          dateError={date1Error}
         />
       </FieldsHolder>
       <FieldsHolder>
