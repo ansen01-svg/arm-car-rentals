@@ -11,7 +11,7 @@ export default function Main(props) {
   const desktopScreen = useMediaQuery("(min-width:1024px)");
 
   return (
-    <div className="w-full px-3 flex flex-row items-start justify-center gap-6 lg:px-20 md:py-4">
+    <div className="w-full px-3 flex flex-row items-start justify-center gap-12 lg:px-20 md:py-7">
       {desktopScreen &&
         (cars ? (
           <FilterSectionWrapper>
@@ -33,7 +33,7 @@ export default function Main(props) {
 }
 
 function FilterSectionWrapper({ children }) {
-  return <div className="w-[20vw]">{children}</div>;
+  return <div className="w-[18.2vw]">{children}</div>;
 }
 
 function FiltersAndCarsWrapper(props) {
