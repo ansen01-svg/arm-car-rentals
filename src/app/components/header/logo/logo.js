@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <div>
       <Link href={"/"}>
-        <Image src={logo} alt="logo" width={174} height={42} />
+        <Image src={logo} alt="logo" width={168} height={35} />
       </Link>
     </div>
   );
