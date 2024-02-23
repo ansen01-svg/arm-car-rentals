@@ -34,7 +34,7 @@ export default function FilterOptionsDisplayHolder(props) {
   };
 
   return (
-    <div className="w-full py-3 flex flex-row items-center justify-start gap-2 flex-wrap">
+    <div className="w-full flex flex-row items-center justify-start gap-2 flex-wrap">
       {Object.values(filters).map((arr) =>
         arr.map((filter) => {
           return (

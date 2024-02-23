@@ -12,7 +12,7 @@ export default function Details1({ car }) {
       <Field icon={<AcUnitIcon fontSize="small" />} title="Air Conditioning" />
       <Field
         icon={<LocalGasStationOutlinedIcon fontSize="small" />}
-        title="Fuel: full to full"
+        title="Fuel: fill to full"
       />
     </div>
   );
