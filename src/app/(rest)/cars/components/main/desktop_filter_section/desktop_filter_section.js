@@ -103,7 +103,7 @@ export default function DesktopFilterSection(props) {
   }, []);
 
   return (
-    <div className="w-full px-5 flex flex-col items-center justify-center gap-2 border-[1px] border-slate-300 rounded">
+    <div className="w-full px-5 flex flex-col items-center justify-center gap-2 rounded">
       <Header />
       {/* <div className="w-full h-[1px] bg-slate-300"></div> */}
       <div className="w-full">
