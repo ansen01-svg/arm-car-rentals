@@ -2,7 +2,7 @@ import sanityClient from "@/sanity/sanity_client";
 import { cache } from "react";
 
 // fetch cars from sanity CMS
-const fetchCars = cache(async (id) => {
+const fetchCars = async (id) => {
   if (id) {
     try {
       const cars = await sanityClient.fetch(
@@ -32,6 +32,6 @@ const fetchCars = cache(async (id) => {
   } catch (error) {
     console.log(error);
   }
-});
+};
 
 export default fetchCars;

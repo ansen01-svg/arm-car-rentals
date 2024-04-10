@@ -51,7 +51,7 @@ function FiltersAndCarsWrapper(props) {
       {cars && filtersArr.length > 0 && (
         <FilterOptionsDisplayHolder filters={filters} setFilters={setFilters} />
       )}
-      {cars.length > 0 && <TotalCarsDisplay cars={cars} />}
+      {cars && cars.length > 0 && <TotalCarsDisplay cars={cars} />}
       <CarsHolder cars={cars} />
     </div>
   );
