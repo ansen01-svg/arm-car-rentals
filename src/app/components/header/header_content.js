@@ -23,7 +23,7 @@ export default function HeaderContent(props) {
           setUser(null);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("fetch error-", error));
   }, [token]);
 
   const handleClick = (event) => {

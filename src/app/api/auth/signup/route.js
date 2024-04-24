@@ -35,11 +35,23 @@ export async function POST(request) {
     const hashedPassword = await bcryptjs.hash(password, salt);
 
     // create user
-    let newUser = await User.create({
-      email,
-      username,
-      password: hashedPassword,
-    });
+    const userCount = await User.countDocuments();
+    let newUser;
+
+    if (userCount === 0) {
+      newUser = await User.create({
+        email,
+        username,
+        password: hashedPassword,
+        role: "Admin",
+      });
+    } else {
+      newUser = await User.create({
+        email,
+        username,
+        password: hashedPassword,
+      });
+    }
 
     // create token
     const hashedToken = await bcryptjs.hash(newUser._id.toString(), 10);

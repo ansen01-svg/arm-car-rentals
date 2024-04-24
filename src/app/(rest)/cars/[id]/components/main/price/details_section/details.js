@@ -38,10 +38,7 @@ export default function PriceDetails(props) {
       tripEndDate: dates.dropoffDate,
       pickupTime: time.pickupTime,
       dropoffTime: time.dropoffTime,
-      type: car.carType,
-      name: car.carName,
-      capacity: car.capacity,
-      specification: car.specification.toLowerCase(),
+      carId: car._id,
       price: car.price,
       days,
       tax,
@@ -50,7 +47,7 @@ export default function PriceDetails(props) {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/create_trip`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/createBooking`,
         {
           method: "POST",
           headers: { "Content-Type": "application-json" },

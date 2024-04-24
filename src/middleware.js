@@ -1,27 +1,41 @@
 import { NextResponse } from "next/server";
+import verifySession from "./app/_lib/global/data_access_layer";
 
-export function middleware(request) {
+const publicPath = ["/signin", "/signup", "/resetPassword"];
+const privatePath = [
+  "/trips",
+  "/checkout",
+  "/bookingConfirmation",
+  "/emailVerification",
+];
+const adminPath = ["/fleet", "/users", "/bookings"];
+
+export async function middleware(request) {
   const path = request.nextUrl.pathname;
   const token = request.cookies.get("token")?.value || "";
+  const session = await verifySession();
 
-  const isAuthPath =
-    path.includes("/signin") ||
-    path.includes("/signup") ||
-    path.includes("/resetPassword");
+  const isPublicPath = publicPath.includes(path);
+  const isPrivatePath = privatePath.includes(path);
+  const isAdminPath = adminPath.includes(path);
 
-  const isPrivatePath =
-    path.includes("/trips") ||
-    path.includes("/checkout") ||
-    path.includes("/bookingConfirmation") ||
-    path.includes("/emailVerification");
+  if (!session.username && !isPublicPath) {
+    return NextResponse.redirect(new URL("/signin", request.nextUrl));
+  }
 
-  if (isAuthPath && token) {
+  if (isPublicPath && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
   if (isPrivatePath && !token) {
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
   }
+
+  if (isAdminPath && session?.role !== "Admin") {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
@@ -33,5 +47,8 @@ export const config = {
     "/trips",
     "/checkout",
     "/bookingConfirmation",
+    "/fleet",
+    "/users",
+    "/bookings",
   ],
 };

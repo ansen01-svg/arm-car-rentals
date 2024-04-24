@@ -1,7 +1,7 @@
 const fetchAllTrips = async (token) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/get_all_trips?token=${token}`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/getUserBookings?token=${token}`
     );
 
     if (response.status === 200) {

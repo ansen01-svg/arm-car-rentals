@@ -1,7 +1,7 @@
 const fetchTrip = async (id) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/get_single_trip?tripId=${id}`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/getSingleBooking?bookingId=${id}`
     );
 
     if (response.status === 200) {
