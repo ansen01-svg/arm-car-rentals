@@ -28,13 +28,13 @@ function ImgHolder() {
 }
 
 function DetailsHolder({ trip }) {
-  const { vehicle, tripStartDate, itineraryNumber, pickupTime, dropoffTime } =
+  const { carId, tripStartDate, itineraryNumber, pickupTime, dropoffTime } =
     trip;
 
   return (
     <div className="flex-1 text-[12px] flex flex-col items-start justify-start gap-1">
       <p className="font-semibold">
-        {vehicle.type}, {vehicle.name}
+        {carId.type}, {carId.model}
       </p>
       <p>
         Pick up on {tripStartDate}, {pickupTime}

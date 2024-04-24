@@ -18,7 +18,12 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please provide a password"],
     },
     phoneNumber: Number,
-    isVarified: {
+    role: {
+      type: String,
+      enum: ["User", "Admin"],
+      default: "User",
+    },
+    isVerified: {
       type: Boolean,
       default: false,
     },

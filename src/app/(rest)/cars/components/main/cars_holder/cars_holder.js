@@ -3,7 +3,7 @@ import Card from "./card/card";
 
 export default function CarsHolder(props) {
   const { cars } = props;
-  console.log(cars);
+
   const [disableBtnId, setDisableBtnId] = useState(null);
 
   return (

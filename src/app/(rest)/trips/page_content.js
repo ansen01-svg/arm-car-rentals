@@ -29,7 +29,7 @@ export default function Trips({ trips }) {
   const cancelBooking = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/cancel_trip`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/updateStatus`,
         {
           method: "POST",
           headers: { "Content-Type": "application-json" },

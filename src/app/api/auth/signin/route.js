@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import connectDb from "@/mongo_config/mongo_config";
 import User from "@/models/user/user";
 import bcryptjs from "bcryptjs";
-import generateJwtToken from "@/app/_lib/backend/generate_jwt_token";
+import createJwt from "@/app/_lib/backend/jose_signJwt";
 
 connectDb();
 
@@ -42,7 +41,12 @@ export async function POST(request) {
     }
 
     //create token
-    const token = generateJwtToken(user._id, user.username, user.email);
+    const session = await createJwt(
+      user._id,
+      user.username,
+      user.email,
+      user.role
+    );
 
     const response = NextResponse.json(
       {
@@ -51,7 +55,7 @@ export async function POST(request) {
       { status: 200 }
     );
 
-    response.cookies.set("token", token, {
+    response.cookies.set("token", session, {
       httpOnly: true,
       secure: true,
     });
