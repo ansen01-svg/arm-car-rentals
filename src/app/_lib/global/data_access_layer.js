@@ -10,7 +10,6 @@ const verifySession = async () => {
 
     return payload;
   } catch (error) {
-    console.log(error);
     return {};
   }
 };
