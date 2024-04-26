@@ -1,12 +1,16 @@
+import { useRouter } from "next/navigation";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 export default function AuthenticatedContent(props) {
-  const { user, handleClose } = props;
+  const { user, sessionData, handleClose } = props;
 
   return (
     <div className="w-[300px] py-7 flex flex-col items-center justify-center gap-4">
       <UserDetailsHolder user={user} />
       <div className="w-full h-[1px] bg-slate-200"></div>
+      {sessionData.role && sessionData.role === "Admin" && (
+        <FleetManagement sessionData={sessionData} />
+      )}
       <SignOutBtnHolder handleClose={handleClose} />
     </div>
   );
@@ -26,9 +30,21 @@ function UserDetailsHolder({ user }) {
   );
 }
 
-function SignOutBtnHolder({ handleClose }) {
+export function FleetManagement() {
+  const router = useRouter();
+
+  return (
+    <div className="w-full px-5 text-[14px]">
+      <button onClick={() => router.push("/fleet")}>Administration</button>
+    </div>
+  );
+}
+
+export function SignOutBtnHolder({ handleClose }) {
   // sign out
   const signOut = async () => {
+    handleClose();
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/signout`,
@@ -36,18 +52,18 @@ function SignOutBtnHolder({ handleClose }) {
       );
 
       if (response.status === 200) {
-        handleClose();
+        // handleClose();
         sessionStorage.clear();
         window.location.reload();
       } else {
         const data = await response.json();
         console.log(data);
-        handleClose();
+        // handleClose();
         return;
       }
     } catch (error) {
       console.log(error);
-      handleClose();
+      // handleClose();
     }
   };
 

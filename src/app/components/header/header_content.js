@@ -7,7 +7,7 @@ import AuthenticatedContent from "./user_modal/authenticated_content";
 import UnauthenticatedContent from "./user_modal/unauthenticated_content";
 
 export default function HeaderContent(props) {
-  const { token } = props;
+  const { token, sessionData } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [user, setUser] = useState(null);
@@ -55,7 +55,11 @@ export default function HeaderContent(props) {
         }}
       >
         {user ? (
-          <AuthenticatedContent handleClose={handleClose} user={user} />
+          <AuthenticatedContent
+            handleClose={handleClose}
+            user={user}
+            sessionData={sessionData}
+          />
         ) : (
           <UnauthenticatedContent handleClose={handleClose} />
         )}
