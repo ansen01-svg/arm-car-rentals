@@ -6,6 +6,7 @@ import AdminHeader from "./components/admin_header/admin_header";
 import DesktopAside from "./components/desktop_aside/desktop_aside";
 import useMediaQuery from "../_lib/frontend/hooks/useMediaQuery";
 import { drawerNavItems } from "../utils/arrays";
+import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -13,6 +14,16 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { MaterialDesignContent, SnackbarProvider } from "notistack";
+
+const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
+  "&.notistack-MuiContent-success": {
+    backgroundColor: "#2D7708",
+  },
+  "&.notistack-MuiContent-error": {
+    backgroundColor: "#970C0C",
+  },
+}));
 
 export default function Layout({ children }) {
   const [open, setOpen] = useState(false);
@@ -73,20 +84,28 @@ export default function Layout({ children }) {
 
   if (mobileScreen) {
     return (
-      <div className="max-w-full flex flex-col">
+      <div className="max-w-full flex flex-col items-center justify-center">
         <AdminHeader toggleDrawer={toggleDrawer} user={user} />
+        <SnackbarProvider
+          autoHideDuration={3000}
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
+        />
         <Drawer open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>
-        {children}
+        <div className="w-full">{children}</div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-full max-h-screen flex flex-row">
+    <div className="max-w-full flex flex-row">
+      <SnackbarProvider
+        autoHideDuration={3000}
+        anchorOrigin={{ horizontal: "center", vertical: "top" }}
+      />
       <DesktopAside user={user} />
-      {children}
+      <div className="flex-grow">{children}</div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ const carSchema = new mongoose.Schema(
     model: {
       type: String,
       required: true,
+      trim: true,
     },
     type: {
       type: String,
@@ -15,25 +16,27 @@ const carSchema = new mongoose.Schema(
       type: String,
       enum: ["Manual", "Automatic"],
       default: "Manual",
-      required: true,
     },
     numberPlate: {
       type: String,
       required: true,
       unique: [true, "A car with this number plate is already in the fleet"],
+      trim: true,
     },
     color: {
       type: String,
       required: true,
+      trim: true,
     },
     fuelType: {
       type: String,
       enum: ["Diesel", "Petrol", "Electric"],
       required: true,
     },
-    seats: {
+    capacity: {
       type: Number,
-      default: 5,
+      required: true,
+      trim: true,
     },
     doors: {
       type: Number,
@@ -48,10 +51,12 @@ const carSchema = new mongoose.Schema(
       type: Number,
       min: [2000, "Rate cannot be less than 2000"],
       required: true,
+      trim: true,
     },
     image: {
       type: String,
       required: true,
+      trim: true,
     },
     availabilityStatus: {
       type: String,

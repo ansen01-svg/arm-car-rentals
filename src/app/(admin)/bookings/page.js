@@ -1,6 +1,6 @@
 export default function Fleet() {
   return (
-    <div>
+    <div className="w-full h-screen bg-slate-400 overflow-y-scroll">
       <p>bookings page</p>
     </div>
   );

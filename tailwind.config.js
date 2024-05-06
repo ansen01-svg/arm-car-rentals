@@ -23,6 +23,10 @@ module.exports = {
       fontSize: {
         medium: "14px",
       },
+      // screens: {
+      //   tall: { raw: "(min-height: 1024px)" },
+      //   // => @media (min-height: 800px) { ... }
+      // },
     },
   },
   plugins: [],

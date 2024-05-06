@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import User from "@/models/user/user";
 import verifyToken from "@/app/_lib/backend/jose_verifyJwt";
 
-const authCheck = async () => {
+const authCheck = async (request) => {
   const session = await verifyToken(request);
-  const user = await User.findOne({ _id: session.id });
+  const user = await User.findOne({ _id: session });
 
   if (user.role !== "Admin") {
     return NextResponse.json(

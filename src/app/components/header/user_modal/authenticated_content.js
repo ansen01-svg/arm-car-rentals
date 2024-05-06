@@ -9,7 +9,7 @@ export default function AuthenticatedContent(props) {
       <UserDetailsHolder user={user} />
       <div className="w-full h-[1px] bg-slate-200"></div>
       {sessionData.role && sessionData.role === "Admin" && (
-        <FleetManagement sessionData={sessionData} />
+        <FleetManagement sessionData={sessionData} handleClose={handleClose} />
       )}
       <SignOutBtnHolder handleClose={handleClose} />
     </div>
@@ -30,12 +30,17 @@ function UserDetailsHolder({ user }) {
   );
 }
 
-export function FleetManagement() {
+export function FleetManagement({ handleClose }) {
   const router = useRouter();
+
+  const handleClick = () => {
+    handleClose();
+    router.push("/fleet");
+  };
 
   return (
     <div className="w-full px-5 text-[14px]">
-      <button onClick={() => router.push("/fleet")}>Administration</button>
+      <button onClick={handleClick}>Administration</button>
     </div>
   );
 }
