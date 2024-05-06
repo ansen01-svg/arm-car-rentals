@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import connectDb from "@/mongo_config/mongo_config";
 import Car from "@/models/car/car";
 import authCheck from "@/app/_lib/backend/authorizationMiddleware";
+import capitalizeFirstLetter from "@/app/_lib/global/uppercase_converter";
 
 connectDb();
 
@@ -14,8 +15,8 @@ export async function POST(request) {
       type,
       specification,
       color,
-      fueType,
-      seats,
+      fuelType,
+      capacity,
       rate,
       image,
     } = requestBody;
@@ -29,8 +30,9 @@ export async function POST(request) {
       !model ||
       !type ||
       !color ||
-      !fueType ||
+      !fuelType ||
       !rate ||
+      !capacity ||
       !image
     ) {
       return NextResponse.json(
@@ -55,14 +57,14 @@ export async function POST(request) {
     // add car to the database
     const newCar = {
       numberPlate,
-      model,
+      model: capitalizeFirstLetter(model),
       type,
-      color,
-      fueType,
-      rate,
+      color: capitalizeFirstLetter(color),
+      fuelType,
+      rate: parseInt(rate),
       image,
+      capacity: parseInt(capacity),
       specification: specification || "Manual",
-      seats: seats || 5,
     };
 
     await Car.create(newCar);

@@ -1,0 +1,20 @@
+/* CSS for smaller scrollbar and transparent track */
+#custom-scrollbar::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+#custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+  height: 20px;
+}
+
+#custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent; /* Transparent background for scroll track */
+}
+
+/* For Firefox and Edge */
+#custom-scrollbar {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #ccc transparent; /* Color of the scrollbar thumb and track */
+}

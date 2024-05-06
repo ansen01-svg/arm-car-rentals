@@ -50,3 +50,21 @@ export const drawerNavItems = [
     icon: <InsertInvitationOutlinedIcon fontSize="medium" />,
   },
 ];
+
+export const typeValues = [
+  { id: 0, value: "Standard" },
+  { id: 1, value: "Van" },
+  { id: 2, value: "Luxury" },
+  { id: 3, value: "Premium" },
+];
+
+export const specsValues = [
+  { id: 0, value: "Manual" },
+  { id: 1, value: "Automatic" },
+];
+
+export const fuelTypeValues = [
+  { id: 0, value: "Petrol" },
+  { id: 1, value: "Diesel" },
+  { id: 2, value: "Electric" },
+];

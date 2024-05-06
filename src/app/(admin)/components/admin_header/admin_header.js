@@ -9,7 +9,7 @@ export default function AdminHeader(props) {
   const { toggleDrawer, user } = props;
 
   return (
-    <div className="max-w-full h-14 px-6 flex items-center justify-between sticky top-0 left-0 border-b-[1px] border-slate-200 z-50 md:h-16">
+    <div className="w-full h-14 px-6 bg-white flex items-center justify-between sticky top-0 left-0 border-b-[1px] border-slate-200 z-50 md:h-16">
       <MenuButton toggleDrawer={toggleDrawer} />
       <Logo />
       <UserIcon user={user} />

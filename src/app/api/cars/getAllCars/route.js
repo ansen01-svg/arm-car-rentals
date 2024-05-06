@@ -4,7 +4,7 @@ import Car from "@/models/car/car";
 
 connectDb();
 
-export async function POST(request) {
+export async function GET(request) {
   try {
     const cars = await Car.find({});
 

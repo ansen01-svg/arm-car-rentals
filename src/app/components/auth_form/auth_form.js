@@ -19,12 +19,18 @@ export default function AuthForm(props) {
     btnTitle,
   } = props;
 
+  const handleErrorBtnClick = () => {
+    setError("");
+  };
+
   return (
     <form
       className="w-full flex flex-col items-center justify-center gap-4"
       onSubmit={handleSubmit}
     >
-      {error && <AuthErrorMsg error={error} setError={setError} />}
+      {error && (
+        <AuthErrorMsg error={error} handleClick={handleErrorBtnClick} />
+      )}
       <FieldsHolder
         username={username}
         email={email}
