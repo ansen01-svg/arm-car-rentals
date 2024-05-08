@@ -1,21 +1,21 @@
 import TextField from "@mui/material/TextField";
 
 export default function SearchHolder(props) {
-  const { searchTerm, placeholder, handleSubmit } = props;
+  const { labelFor, placeholder, value, handleChange, handleSubmit } = props;
 
   return (
     <div className="w-[130px] lg:w-[200px]">
-      <form className="w-full">
+      <form className="w-full" onSubmit={handleSubmit}>
+        <label htmlFor={labelFor} hidden></label>
         <TextField
           size="small"
           fullWidth
-          required
-          // type={type}
-          // id={labelFor}
-          // name={labelFor}
-          // value={value}
+          // required
+          id={labelFor}
+          name={labelFor}
+          value={value}
           placeholder={placeholder}
-          // onChange={(e) => handleChange(e.target.value)}
+          onChange={handleChange}
           label=""
           InputProps={{
             style: {
@@ -31,7 +31,6 @@ export default function SearchHolder(props) {
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
                 border: "1px solid #666",
-                // border: "1px solid #f75d34",
               },
             },
           }}

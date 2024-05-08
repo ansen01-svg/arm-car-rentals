@@ -40,7 +40,7 @@ export function FleetManagement({ handleClose }) {
 
   return (
     <div className="w-full px-5 text-[14px]">
-      <button onClick={handleClick}>Administration</button>
+      <button onClick={handleClick}>Admin panel</button>
     </div>
   );
 }

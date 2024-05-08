@@ -68,3 +68,32 @@ export const fuelTypeValues = [
   { id: 1, value: "Diesel" },
   { id: 2, value: "Electric" },
 ];
+
+export const tableHeadValues = [
+  { id: 0, value: "ID" },
+  { id: 1, value: "MODEL" },
+  { id: 2, value: "TYPE" },
+  { id: 3, value: "SPECIFICATION" },
+  { id: 4, value: "NUMBER PLATE" },
+  { id: 5, value: "COLOR" },
+  { id: 6, value: "FUEL TYPE" },
+  { id: 7, value: "CAPACITY" },
+  { id: 8, value: "RATE" },
+  { id: 9, value: "AVAILABILITY STATUS" },
+  { id: 10, value: "STATUS" },
+];
+
+export const filterFields = [
+  "Luxury",
+  "Standard",
+  "Van",
+  "Premium",
+  "Manual",
+  "Automatic",
+  "Petrol",
+  "Diesel",
+  "Available",
+  "Not available",
+  "Checked in",
+  "Checked out",
+];
