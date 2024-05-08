@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { revalidatePath } from "next/cache";
 import FieldHolder from "./field_holder";
 import SelectInputHolder from "./select_input_holder";
 import SaveButtonHolder from "./save_button_holder";
@@ -65,6 +66,7 @@ export default function FormHolder() {
         rate: "",
         image: "",
       });
+      revalidatePath("/fleet");
     } catch (error) {
       console.log(error);
     }

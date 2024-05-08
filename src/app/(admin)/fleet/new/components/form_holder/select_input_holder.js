@@ -36,7 +36,7 @@ export default function SelectInputHolder(props) {
 
   return (
     <div className="w-full flex items-center justify-between">
-      <label className="text-[14px] text-primary" htmlFor={labelFor}>
+      <label className="text-[13px] text-primary" htmlFor={labelFor}>
         {label}
       </label>
       <div className="w-[75%]">
@@ -60,7 +60,7 @@ export default function SelectInputHolder(props) {
             sx={{
               height: "32.39px",
               color: "#24272c",
-              fontSize: "14px",
+              fontSize: "13px",
               ".MuiSelect-select": { padding: "4.7px 14px" },
             }}
           >
@@ -69,7 +69,7 @@ export default function SelectInputHolder(props) {
                 <MenuItem
                   key={val.id}
                   value={val.value}
-                  sx={{ fontSize: "14px" }}
+                  sx={{ fontSize: "13px" }}
                 >
                   {val.value}
                 </MenuItem>

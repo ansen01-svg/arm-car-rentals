@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ad {
+  color: #f75d34;
+}
+
+.ad {
+  color: #dd370a;
+}

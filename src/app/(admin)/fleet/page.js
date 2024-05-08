@@ -1,7 +1,7 @@
 import "../styles/scrollbar.css";
 import Header from "./components/header/header";
 import Main from "./components/main/main";
-import fetchCars from "@/app/_lib/global/fetch_cars";
+import fetchCars from "@/app/_lib/frontend/fetch_admin_cars";
 
 export const metadata = {
   title: "Fleet",

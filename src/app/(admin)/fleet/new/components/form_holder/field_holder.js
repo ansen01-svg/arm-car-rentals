@@ -5,7 +5,7 @@ export default function FieldHolder(props) {
 
   return (
     <div className="w-full flex items-center justify-between">
-      <label className="text-[14px] text-primary" htmlFor={labelFor}>
+      <label className="text-[13px] text-primary" htmlFor={labelFor}>
         {label}
       </label>
       <div className="w-[75%]">
@@ -20,7 +20,7 @@ export default function FieldHolder(props) {
           InputProps={{
             style: {
               color: "#24272c",
-              fontSize: "14px",
+              fontSize: "13px",
               // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             },
           }}

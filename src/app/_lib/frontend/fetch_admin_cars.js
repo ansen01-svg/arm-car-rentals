@@ -1,7 +1,7 @@
 const fetchCars = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAllCars`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAdminCars`
     );
 
     if (response.status !== 200) {
