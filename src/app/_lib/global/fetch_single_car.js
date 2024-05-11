@@ -1,4 +1,4 @@
-const fetchCars = async (id) => {
+const fetchSingleCar = async (id) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getSingleCar?carId=${id}`
@@ -7,7 +7,7 @@ const fetchCars = async (id) => {
     if (response.status !== 200) {
       const data = await response.json();
       console.log(data.error);
-      return;
+      return [];
     }
 
     const data = await response.json();
@@ -17,4 +17,4 @@ const fetchCars = async (id) => {
   }
 };
 
-export default fetchCars;
+export default fetchSingleCar;

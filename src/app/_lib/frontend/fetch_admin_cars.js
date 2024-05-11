@@ -7,13 +7,14 @@ const fetchCars = async () => {
     if (response.status !== 200) {
       const data = await response.json();
       console.log(data.error);
-      return;
+      return [];
     }
 
     const data = await response.json();
     return data.data;
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 

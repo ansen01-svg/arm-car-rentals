@@ -1,8 +1,15 @@
 import TextField from "@mui/material/TextField";
 
 export default function FieldHolder(props) {
-  const { value, type, placeholder, handleChange, labelTitle, labelFor } =
-    props;
+  const {
+    value,
+    type,
+    placeholder,
+    disabled,
+    handleChange,
+    labelTitle,
+    labelFor,
+  } = props;
 
   return (
     <div className="w-full flex flex-col items-start justify-center gap-2 md:w-[50%]">
@@ -23,6 +30,7 @@ export default function FieldHolder(props) {
         placeholder={placeholder}
         onChange={(e) => handleChange(e.target.value)}
         label=""
+        disabled={disabled}
         InputProps={{
           style: {
             color: "#24272c",
