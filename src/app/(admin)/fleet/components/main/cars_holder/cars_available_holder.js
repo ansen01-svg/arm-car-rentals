@@ -16,7 +16,7 @@ export default function CarsAvailable({ filteredCars }) {
             cursor: "pointer",
           }}
         >
-          {Object.values(obj).map((field, index) => {
+          {Object.entries(obj).map((field, index) => {
             return (
               <TableCell
                 key={index}
@@ -28,9 +28,7 @@ export default function CarsAvailable({ filteredCars }) {
                   // whiteSpace: "nowrap",
                 }}
               >
-                {field.toString().includes("6638")
-                  ? `${field.toString().slice(0, 8)}...`
-                  : field}
+                {field[0] === "_id" ? `${field[1].slice(0, 8)}...` : field[1]}
               </TableCell>
             );
           })}

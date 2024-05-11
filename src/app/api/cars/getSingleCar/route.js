@@ -4,12 +4,12 @@ import Car from "@/models/car/car";
 
 connectDb();
 
-export async function POST(request) {
+export async function GET(request) {
   try {
     const carId = request.nextUrl.searchParams.get("carId");
 
     // get car with given id
-    const car = await Car.findOne({ _id: carId });
+    const car = await Car.find({ _id: carId });
 
     if (!car) {
       return NextResponse.json(

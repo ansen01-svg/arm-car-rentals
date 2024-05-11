@@ -1,12 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { revalidatePath } from "next/cache";
 import FieldHolder from "./field_holder";
 import SelectInputHolder from "./select_input_holder";
 import SaveButtonHolder from "./save_button_holder";
 import { typeValues, specsValues, fuelTypeValues } from "@/app/utils/arrays";
 import { enqueueSnackbar } from "notistack";
+import revalidateAction from "@/app/actions/revalidate";
 
 // initial car state
 const initialCarState = {
@@ -23,6 +24,9 @@ const initialCarState = {
 
 export default function FormHolder() {
   const [car, setCar] = useState(initialCarState);
+  const [disableBtn, setDisableBtn] = useState(false);
+
+  const router = useRouter();
 
   // handle car input values change
   const handleChange = (e) => {
@@ -32,6 +36,7 @@ export default function FormHolder() {
   // add new car
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisableBtn(true);
 
     if (Object.values(car).length !== 9) {
       return;
@@ -50,6 +55,7 @@ export default function FormHolder() {
       if (response.status !== 201) {
         const data = await response.json();
         enqueueSnackbar(data.error, { variant: "error" });
+        setDisableBtn(false);
         return;
       }
 
@@ -66,9 +72,13 @@ export default function FormHolder() {
         rate: "",
         image: "",
       });
-      revalidatePath("/fleet");
+      setDisableBtn(false);
+      router.push("/fleet");
+      revalidateAction("/fleet");
+      revalidateAction("/cars");
     } catch (error) {
       console.log(error);
+      setDisableBtn(false);
     }
   };
 
@@ -135,7 +145,7 @@ export default function FormHolder() {
           value={car.image}
           handleChange={handleChange}
         />
-        <SaveButtonHolder />
+        <SaveButtonHolder disabled={disableBtn} />
       </form>
     </div>
   );

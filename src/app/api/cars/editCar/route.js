@@ -15,13 +15,13 @@ export async function POST(request) {
 
     const car = await Car.findOne({ _id: carId });
 
-    // edit rate
-    if (rate) {
-      car.rate = rate;
-    }
-
-    // edit car status
-    if (status) {
+    // edit car
+    if (rate && status) {
+      car.rate = parseInt(rate);
+      car.status = status;
+    } else if (rate) {
+      car.rate = parseInt(rate);
+    } else if (status) {
       car.status = status;
     }
 
@@ -31,7 +31,7 @@ export async function POST(request) {
       {
         message: `Car with id ${carId} has been edited successfully`,
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
