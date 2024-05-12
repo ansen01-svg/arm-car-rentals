@@ -18,7 +18,7 @@ export default async function Fleet({ params }) {
       className="w-full h-[calc(100vh-56px)] flex flex-col items-center justify-start overflow-y-scroll md:h-[calc(100vh-64px)] lg:h-screen lg:py-6"
     >
       <div className="w-full lg:w-[55%]">
-        <Header title={params.id} />
+        <Header title={params.id} link={"/fleet"} linkTitle={"Fleet"} />
         <Main id={params.id} />
       </div>
     </div>

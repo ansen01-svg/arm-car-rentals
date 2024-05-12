@@ -14,7 +14,7 @@ export default function New() {
       className="w-full h-[calc(100vh-56px)] flex flex-col items-center justify-start overflow-y-scroll md:h-[calc(100vh-64px)] lg:h-screen lg:py-6"
     >
       <div className="w-full lg:w-[55%]">
-        <Header title={"New"} />
+        <Header title={"New"} link={"/fleet"} linkTitle={"Fleet"} />
         <SubHeader title={"New Row"} />
         <FormHolder />
       </div>
