@@ -6,16 +6,16 @@ import SearchAndFilterHolder from "@/app/(admin)/components/search_and_filter_ho
 import FilterButton from "@/app/(admin)/components/search_and_filter_holder/filter_holder";
 import TableHolder from "@/app/(admin)/components/table_holder/table_holder";
 import DialogBox from "@/app/(admin)/components/dialog/dialog";
-import { tableHeadValues } from "@/app/utils/arrays";
+import { usersTableHeadValues } from "@/app/utils/arrays";
 import applyFilters from "@/app/_lib/frontend/applyFilters";
-import { filterFields } from "@/app/utils/arrays";
+import { usersFilterFields } from "@/app/utils/arrays";
 
-export default function Main({ cars }) {
-  const [filteredCars, setFilteredCars] = useState(cars);
+export default function Main({ users }) {
+  const [filteredUsers, setFilteredUsers] = useState(users);
   const [filters, setFilters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
-  const [availableFilters, setAvailableFilters] = useState(filterFields);
+  const [availableFilters, setAvailableFilters] = useState(usersFilterFields);
 
   const router = useRouter();
 
@@ -39,31 +39,29 @@ export default function Main({ cars }) {
     e.preventDefault();
 
     if (!searchTerm) {
-      setFilteredCars(cars);
+      setFilteredUsers(users);
       return;
     }
 
-    const searchedCar = cars.find(
-      (car) => car.numberPlate === searchTerm.toUpperCase()
-    );
+    const searchedUser = users.find((user) => user.username === searchTerm);
 
-    if (searchedCar) {
-      setFilteredCars([searchedCar]);
+    if (searchedUser) {
+      setFilteredUsers([searchedUser]);
     } else {
-      setFilteredCars([]);
+      setFilteredUsers([]);
     }
-  };
-
-  // handle table row click
-  const handleTableRowClick = (id) => {
-    router.push(`/fleet/${id}`);
   };
 
   // set filters
   const confirmFilters = () => {
-    const myFilteredCars = applyFilters(cars, filters);
-    setFilteredCars(myFilteredCars);
+    const myFilteredUsers = applyFilters(users, filters);
+    setFilteredUsers(myFilteredUsers);
     handleClose();
+  };
+
+  // handle table row click
+  const handleTableRowClick = (id) => {
+    router.push(`/users/${id}`);
   };
 
   // handle available filters button click
@@ -88,15 +86,15 @@ export default function Main({ cars }) {
 
   // handle cancel button click
   const handleCancelBtnClick = () => {
-    setAvailableFilters(filterFields);
+    setAvailableFilters(usersFilterFields);
     setFilters([]);
-    setFilteredCars(cars);
+    setFilteredUsers(users);
     handleClose();
   };
 
   // clear filters
   const clearFilters = () => {
-    setAvailableFilters(filterFields);
+    setAvailableFilters(usersFilterFields);
     setFilters([]);
   };
 
@@ -104,7 +102,7 @@ export default function Main({ cars }) {
     <div className="w-full">
       <SearchAndFilterHolder
         labelFor={"searchTerm"}
-        placeholder={"Number plate"}
+        placeholder={"Username"}
         value={searchTerm}
         handleChange={handleChange}
         handleSubmit={handleSearchFormSubmit}
@@ -112,8 +110,8 @@ export default function Main({ cars }) {
         <FilterButton handleClickOpen={handleClickOpen} />
       </SearchAndFilterHolder>
       <TableHolder
-        filteredValues={filteredCars}
-        tableHeadValues={tableHeadValues}
+        filteredValues={filteredUsers}
+        tableHeadValues={usersTableHeadValues}
         handleTableRowClick={handleTableRowClick}
       />
       <DialogBox

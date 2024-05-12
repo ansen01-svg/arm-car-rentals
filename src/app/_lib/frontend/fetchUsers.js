@@ -1,7 +1,7 @@
-const fetchCars = async () => {
+const fetchUsers = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAdminCars`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/user/getAllUsers`
     );
 
     if (response.status !== 200) {
@@ -18,4 +18,4 @@ const fetchCars = async () => {
   }
 };
 
-export default fetchCars;
+export default fetchUsers;
