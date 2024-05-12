@@ -97,3 +97,14 @@ export const filterFields = [
   "Checked in",
   "Checked out",
 ];
+
+export const usersTableHeadValues = [
+  { id: 0, value: "ID" },
+  { id: 1, value: "USERNAME" },
+  { id: 2, value: "EMAIL" },
+  { id: 3, value: "ROLE" },
+  { id: 4, value: "IS VERIFIED" },
+  { id: 5, value: "TRIPS" },
+];
+
+export const usersFilterFields = ["Admin", "User"];

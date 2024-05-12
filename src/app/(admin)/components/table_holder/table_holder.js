@@ -5,12 +5,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
-import CarsAvailable from "./cars_available_holder";
+import CarsAvailable from "./rows_available_holder";
 import NotFound from "./not_found_holder";
-import { tableHeadValues } from "@/app/utils/arrays";
 
-export default function CarsHolder(props) {
-  const { filteredCars } = props;
+export default function TableHolder(props) {
+  const { filteredValues, tableHeadValues, handleTableRowClick } = props;
 
   return (
     <div className="w-full px-6 py-4 lg:px-0">
@@ -43,10 +42,13 @@ export default function CarsHolder(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredCars.length < 1 ? (
+            {filteredValues.length < 1 ? (
               <NotFound />
             ) : (
-              <CarsAvailable filteredCars={filteredCars} />
+              <CarsAvailable
+                filteredValues={filteredValues}
+                handleClick={handleTableRowClick}
+              />
             )}
           </TableBody>
         </Table>

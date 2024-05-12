@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -7,7 +6,6 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AdminButton from "@/app/(admin)/components/button/button";
-import { filterFields } from "@/app/utils/arrays";
 import UnappliedFilters from "./unapplied_filters";
 import AppliedFilters from "./applied_filters";
 
@@ -25,52 +23,24 @@ export default function DialogBox(props) {
     open,
     handleClose,
     filters,
-    setFilters,
     confirmFilters,
-    setInitialCarsArray,
+    availableFilters,
+    handleAppliedFiltersBtnClick,
+    handleCancelBtnClick,
+    handleAvailableFiltersBtnClick,
+    clearFilters,
   } = props;
-
-  const [availableFilters, setAvailableFilters] = useState(filterFields);
-
-  // handle available filters button click
-  const handleAvailableFiltersBtnClick = (title) => {
-    const newAvailableFilters = availableFilters.filter(
-      (filter) => filter !== title
-    );
-    setAvailableFilters(newAvailableFilters);
-
-    const newFilters = [...filters, title];
-    setFilters(newFilters);
-  };
-
-  // handle appplied filters button click
-  const handleAppliedFiltersBtnClick = (title) => {
-    const newFilters = filters.filter((filter) => filter !== title);
-    setFilters(newFilters);
-
-    const newAvailableFilters = [...availableFilters, title];
-    setAvailableFilters(newAvailableFilters);
-  };
-
-  // handle cancel button click
-  const handleCancelBtnClick = () => {
-    setAvailableFilters(filterFields);
-    setFilters([]);
-    setInitialCarsArray();
-    handleClose();
-  };
-
-  // clear filters
-  const clearFilters = () => {
-    setAvailableFilters(filterFields);
-    setFilters([]);
-  };
 
   return (
     <BootstrapDialog
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
+      sx={{
+        ".MuiPaper-root": {
+          minWidth: "435px",
+        },
+      }}
     >
       <DialogTitle
         sx={{ m: 0, p: 2, fontSize: "16px", color: "#24272c", fontWeight: 600 }}
