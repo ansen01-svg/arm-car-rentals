@@ -4,13 +4,12 @@ import User from "@/models/user/user";
 
 connectDb();
 
-export async function POST(request) {
+export async function GET(request) {
   try {
-    const requestBody = await request.json();
-    const { userId } = requestBody;
+    const userId = request.nextUrl.searchParams.get("userId");
 
     // get userId
-    const user = await User.findOne({ _id: userId });
+    const user = await User.find({ _id: userId });
 
     return NextResponse.json(
       {

@@ -8,7 +8,7 @@ connectDb();
 export async function POST(request) {
   try {
     const requestBody = await request.json();
-    const { userId, role, phoneNumber } = requestBody;
+    const { userId, role } = requestBody;
 
     // check is user is authorized(is admin)
     await authCheck(request);
@@ -20,16 +20,11 @@ export async function POST(request) {
       user.role = role;
     }
 
-    // update number
-    if (phoneNumber) {
-      user.phoneNumber = phoneNumber;
-    }
-
     await user.save();
 
     return NextResponse.json(
       { message: `User with id ${userId} has been successfully updated.` },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
