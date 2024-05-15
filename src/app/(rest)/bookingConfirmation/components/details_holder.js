@@ -1,21 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect } from "react";
 
 const liText1 = `You'll receive a confirmation email shortly at`;
 const liText2 = "You can cancel your booking anytime.";
 
 export default function DetailsHolder({ trip }) {
-  // update trip
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/confirm_trip`, {
-      method: "POST",
-      headers: { "Content-Type": "application-json" },
-      body: JSON.stringify({ tripId: trip._id }),
-    }).catch((error) => console.log(error));
-  }, [trip._id]);
-
   return (
     <div className="w-full px-4 py-5 text-primary bg-white rounded flex flex-col items-center justify-center gap-6 shadow">
       <div className="w-full text-left">
@@ -30,7 +18,7 @@ export default function DetailsHolder({ trip }) {
         <ul className="list-disc">
           <li>
             {liText1}&nbsp;
-            {trip && trip.tripOwner.contactEmail}
+            {trip && trip.contactEmail}
           </li>
           <li>{liText2}</li>
         </ul>

@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+const bookingSchema = new mongoose.Schema({
+  bookedFrom: String,
+  bookedTill: String,
+});
+
 const carSchema = new mongoose.Schema(
   {
     model: {
@@ -62,6 +67,9 @@ const carSchema = new mongoose.Schema(
       type: String,
       enum: ["Available", "Not available"],
       default: "Available",
+    },
+    bookings: {
+      type: [bookingSchema],
     },
     status: {
       type: String,

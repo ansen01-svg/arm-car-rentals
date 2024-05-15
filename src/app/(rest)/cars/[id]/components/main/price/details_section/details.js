@@ -18,7 +18,8 @@ export default function PriceDetails(props) {
   const days = calculateDaysBetweenDates(date2, date1);
   const tax = 0;
   const fees = 0;
-  const totalCost = parseInt(car.price) * parseInt(days) + tax + fees;
+  const discount = 0;
+  const totalCost = parseInt(car.rate) * parseInt(days) + tax + fees;
 
   // reserve car
   const handleReserveBtnClick = async () => {
@@ -39,10 +40,11 @@ export default function PriceDetails(props) {
       pickupTime: time.pickupTime,
       dropoffTime: time.dropoffTime,
       carId: car._id,
-      price: car.price,
+      rate: car.rate,
       days,
       tax,
       fees,
+      discount,
     };
 
     try {
@@ -55,14 +57,16 @@ export default function PriceDetails(props) {
         }
       );
 
-      if (response.status === 201) {
+      if (response.status !== 201) {
         const data = await response.json();
-        router.push(`/checkout?tripId=${data.data}`);
-        setDisableBtn(false);
-      } else {
+        console.log(data);
         setDisableBtn(false);
         return;
       }
+
+      const data = await response.json();
+      router.push(`/checkout?tripId=${data.data}`);
+      setDisableBtn(false);
     } catch (error) {
       setDisableBtn(false);
       console.log(error);
@@ -72,7 +76,7 @@ export default function PriceDetails(props) {
   return (
     <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-5 bg-white rounded shadow lg:px-6 lg:py-6">
       <Header />
-      <PriceBreakup price={car.price} days={days} totalCost={totalCost} />
+      <PriceBreakup price={car.rate} days={days} totalCost={totalCost} />
       <div className="w-full h-[1px] bg-slate-200"></div>
       <Total totalCost={totalCost} />
       <Button

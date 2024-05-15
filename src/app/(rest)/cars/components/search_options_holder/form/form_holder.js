@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import dayjs from "dayjs";
 import ErrorMsgHolder from "@/app/components/error_msg/error_msg_holder";
@@ -16,8 +16,10 @@ export default function FormHolder(props) {
     minDate,
     setShowForm,
     dispatch,
+    fetchCars,
   } = props;
 
+  const [disabled, setDisabled] = useState(false);
   const [fieldsError, setFieldsError] = useState("");
   const [dateError, setDateError] = useState(false);
   const [timeError, setTimeError] = useState(false);
@@ -25,6 +27,7 @@ export default function FormHolder(props) {
 
   const router = useRouter();
   const pathname = usePathname();
+  const params = useSearchParams();
 
   const handlePickupDateChange = (date) => {
     dispatch({ type: "SET_PICKUP_DATE", payload: date });
@@ -49,9 +52,28 @@ export default function FormHolder(props) {
   // search cars form submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisabled(true);
+
+    const paramObj = new URLSearchParams(params);
+    const pud = paramObj.get("pickupDate");
+    const dod = paramObj.get("dropoffDate");
+    const put = paramObj.get("pickupTime");
+    const dot = paramObj.get("dropoffTime");
 
     const pickupDay = getDate(pickupDate.format("DD/MM/YY"));
     const dropoffDay = getDate(dropoffDate.format("DD/MM/YY"));
+
+    // check if state values have not changed
+    if (
+      dayjs(pud).format("DD/MM/YY") === dayjs(pickupDate).format("DD/MM/YY") &&
+      dayjs(dod).format("DD/MM/YY") === dayjs(dropoffDate).format("DD/MM/YY") &&
+      dayjs(put).format("HH:mm a") === dayjs(pickupTime).format("HH:mm a") &&
+      dayjs(dot).format("HH:mm a") === dayjs(dropoffTime).format("HH:mm a")
+    ) {
+      setDisabled(false);
+      setShowForm(false);
+      return;
+    }
 
     // if dropoff date is later than pickup date
     if (new Date(dropoffDay).getTime() < new Date(pickupDay).getTime()) {
@@ -59,6 +81,7 @@ export default function FormHolder(props) {
       setTimeError(false);
       setTime1Error(false);
       setDateError(true);
+      setDisabled(false);
       return;
     }
 
@@ -71,6 +94,7 @@ export default function FormHolder(props) {
       setTimeError(false);
       setDateError(false);
       setTime1Error(true);
+      setDisabled(false);
       return;
     }
 
@@ -87,10 +111,12 @@ export default function FormHolder(props) {
         setDateError(false);
         setTime1Error(false);
         setTimeError(true);
+        setDisabled(false);
         return;
       } else {
         setFieldsError(false);
         setTimeError(false);
+        setDisabled(false);
       }
     }
 
@@ -106,16 +132,19 @@ export default function FormHolder(props) {
     paramsObj.set("pickupTime", pickupTime);
     paramsObj.set("dropoffTime", dropoffTime);
 
-    router.replace(`${pathname}?${paramsObj.toString()}`);
+    const date = dayjs(dropoffDate).format("MM/DD/YY");
 
-    // close form
+    router.replace(`${pathname}?${paramsObj.toString()}`);
     setShowForm(false);
+    fetchCars(date);
+    setDisabled(false);
   };
 
   return (
     <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-3 lg:px-20 lg:py-3">
       {fieldsError && <ErrorMsgHolder fieldsError={fieldsError} />}
       <Form
+        disabled={disabled}
         dateError={dateError}
         timeError={timeError}
         time1Error={time1Error}

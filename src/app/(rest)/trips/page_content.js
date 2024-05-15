@@ -27,24 +27,28 @@ export default function Trips({ trips }) {
 
   // cancel booking
   const cancelBooking = async () => {
+    handleClose();
+
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/updateStatus`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/cancelBooking`,
         {
           method: "POST",
           headers: { "Content-Type": "application-json" },
-          body: JSON.stringify({ tripId: cancelId, tripStatus: "cancelled" }),
+          body: JSON.stringify({ tripId: cancelId }),
         }
       );
 
-      if (response.status === 201) {
-        window.location.reload();
+      if (response.status !== 201) {
+        const data = await response.json();
+        console.log(data);
+        return;
       }
+
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
-
-    handleClose();
   };
 
   const keepBooking = () => {
@@ -74,7 +78,7 @@ export default function Trips({ trips }) {
           },
           ".MuiTypography-root": {
             fontSize: "15px",
-            fontFamily: "__Inter_aaf875, __Inter_Fallback_aaf875",
+            // fontFamily: "__Inter_aaf875, __Inter_Fallback_aaf875",
             color: "#000",
           },
           ".MuiDialogActions-root": {
@@ -93,10 +97,16 @@ export default function Trips({ trips }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <button className="button1" onClick={cancelBooking}>
+          <button
+            className="w-[70%] py-[6px] bg-secondary text-[white] text-[14px] font-semibold rounded hover:bg-secondaryLight disabled:bg-secondaryLight"
+            onClick={cancelBooking}
+          >
             {btnTitle1}
           </button>
-          <button className="button2" onClick={keepBooking}>
+          <button
+            className="w-[70%] py-[6px] text-primary text-[14px] font-semibold rounded hover:bg-primary"
+            onClick={keepBooking}
+          >
             {btnTitle2}
           </button>
         </DialogActions>

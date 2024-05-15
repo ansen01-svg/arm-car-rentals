@@ -23,40 +23,40 @@ export default function DetailsHolder(props) {
 }
 
 function CarDetails({ car }) {
-  const { carName, capacity, carType, price, specification } = car;
+  const { model, capacity, type, rate, specification } = car;
 
   return (
     <div className="flex-1 py-2 flex flex-col items-start justify-center gap-2 md:px-2 md:py-6">
-      {price < 10000 && <Label />}
-      <TitleHolder carType={carType} />
+      {rate < 10000 && <Label />}
+      <TitleHolder type={type} />
       <OtherDetailsholder
-        carName={carName}
+        model={model}
         capacity={capacity}
         specification={specification}
-        price={price}
+        rate={rate}
       />
     </div>
   );
 }
 
-function TitleHolder({ carType }) {
+function TitleHolder({ type }) {
   return (
     <div className="w-full">
-      <p className="font-medium">{carType}</p>
+      <p className="font-medium">{type}</p>
     </div>
   );
 }
 
 function OtherDetailsholder(props) {
-  const { carName, specification, capacity, price } = props;
+  const { model, specification, capacity, rate } = props;
 
   return (
     <div className="w-full flex flex-col items-center justify-center gap-1 md:flex-row">
       <CarDetailsHolder
-        carName={carName}
+        model={model}
         specification={specification}
         capacity={capacity}
-        price={price}
+        rate={rate}
       />
       {/* <ExtraTextsHolder /> */}
     </div>
@@ -64,12 +64,12 @@ function OtherDetailsholder(props) {
 }
 
 function CarDetailsHolder(props) {
-  const { carName, capacity, price, specification } = props;
+  const { model, capacity, rate, specification } = props;
 
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="w-full">
-        <p className="text-[14px] text-primary">{carName}</p>
+        <p className="text-[14px] text-primary">{model}</p>
       </div>
       <div className="text-[14px] text-gray1 flex flex-row items-center content-center gap-7">
         <div className="flex flex-row items-center content-center gap-2">
@@ -82,7 +82,7 @@ function CarDetailsHolder(props) {
         </div>
       </div>
       <div className="w-full">
-        <p className="font-bold text-[18px] text-primary">Rs {price}</p>
+        <p className="font-bold text-[18px] text-primary">Rs {rate}</p>
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import Car from "../car/car";
+import User from "../user/user";
 
 const bookingSchema = new mongoose.Schema(
   {
@@ -18,9 +20,12 @@ const bookingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    carId: {
+    vehicleId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Car",
+      required: true,
+    },
+    vehicleNumber: {
       type: String,
       required: true,
     },
@@ -35,41 +40,33 @@ const bookingSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["in booking process", "booked", "cancelled", "completed"],
-      default: "in booking process",
+      enum: ["In booking process", "Booked", "Cancelled", "Completed"],
+      default: "In booking process",
     },
-    driver: {
-      name: String,
-      phoneNumber: Number,
-      contactEmail: String,
-      liscenceNumber: String,
+    driver: String,
+    phoneNumber: Number,
+    contactEmail: String,
+    liscenceNumber: String,
+    rate: {
+      type: Number,
+      required: true,
     },
-    totalCost: {
-      price: {
-        type: Number,
-        required: true,
-      },
-      days: {
-        type: Number,
-        required: true,
-      },
-      tax: Number,
-      fees: Number,
-      discount: Number,
-      total: Number,
+    days: {
+      type: Number,
+      required: true,
     },
-    payment: {
-      promoCode: String,
-      status: {
-        type: String,
-        enum: ["Pending", "Completed"],
-        default: "Pending",
-      },
-      method: {
-        type: String,
-        enum: ["Cash", "Online"],
-        default: "Cash",
-      },
+    tax: Number,
+    fees: Number,
+    discount: Number,
+    total: Number,
+    paymentStatus: {
+      type: String,
+      enum: ["Pending", "Completed"],
+      default: "Pending",
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["Cash", "Online"],
     },
     itineraryNumber: Number,
   },

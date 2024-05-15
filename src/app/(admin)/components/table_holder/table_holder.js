@@ -19,6 +19,7 @@ export default function TableHolder(props) {
           boxShadow: "none",
           borderRadius: "0",
           border: "1px solid rgb(226 232 240)",
+          // background: "rgb(247, 247, 247)",
         }}
       >
         <Table sx={{ width: "100%", minWidth: 650 }} aria-label="simple table">

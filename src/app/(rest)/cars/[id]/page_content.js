@@ -61,7 +61,7 @@ export default function PageContent(props) {
     );
   }
 
-  if (!car) {
+  if (!car.length) {
     return (
       <div className="w-full">
         <Error />
@@ -72,10 +72,10 @@ export default function PageContent(props) {
   return (
     <div className="w-full relative">
       <Header searchParams={searchParams} />
-      {dataReady && <Links />}
+      <Links />
       <Main
         token={token}
-        car={car}
+        car={car[0]}
         dates={dates}
         time={time}
         disableBtn={disableBtn}
@@ -84,7 +84,7 @@ export default function PageContent(props) {
       {mobileScreen && dataReady && (
         <Checkout
           token={token}
-          car={car}
+          car={car[0]}
           dates={dates}
           time={time}
           disableBtn={disableBtn}

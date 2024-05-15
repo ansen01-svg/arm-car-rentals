@@ -8,13 +8,19 @@ import { address } from "@/app/utils/constants";
 const headerTitle = "Your booking";
 
 export default function CarDetails({ trip }) {
-  const { tripStartDate, tripEndDate, pickupTime, dropoffTime, vehicle } = trip;
+  const {
+    tripStartDate,
+    tripEndDate,
+    pickupTime,
+    dropoffTime,
+    vehicleId: { capacity, specification, type },
+  } = trip;
 
   return (
     <div className="w-full flex flex-col items-start justify-center gap-4">
       <Header headerTitle={headerTitle} />
       <div className="text-primary">
-        <p className="text-[14px] font-semibold">{vehicle.type}</p>
+        <p className="text-[14px] font-semibold">{type}</p>
         <p className="text-[14px] font-medium">{address}</p>
         <div className="text-[12px] flex flex-row items-center justify-center gap-2 md:text-[14px]">
           <p>
@@ -30,7 +36,7 @@ export default function CarDetails({ trip }) {
         <div className="flex flex-col items-start justify-center gap-2">
           <div className="flex flex-row items-start justify-center gap-2">
             <PersonOutlineOutlinedIcon fontSize="small" />
-            <p>{vehicle.capacity} Passengers</p>
+            <p>{capacity} Passengers</p>
           </div>
           <div className="flex flex-row items-start justify-center gap-2">
             <AcUnitIcon fontSize="small" />
@@ -40,7 +46,7 @@ export default function CarDetails({ trip }) {
         <div className="flex flex-col items-start justify-center gap-2">
           <div className="flex flex-row items-start justify-center gap-2">
             <DriveEtaOutlinedIcon fontSize="small" />
-            <p>{vehicle.specification}</p>
+            <p>{specification}</p>
           </div>
           <div className="flex flex-row items-start justify-center gap-2">
             <LocalGasStationOutlinedIcon fontSize="small" />

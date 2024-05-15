@@ -7,6 +7,7 @@ import Button from "./button";
 
 export default function Form(props) {
   const {
+    disabled,
     dateError,
     timeError,
     time1Error,
@@ -55,7 +56,7 @@ export default function Form(props) {
           timeError={time1Error}
         />
       </FieldsHolder>
-      <Button />
+      <Button disabled={disabled} />
     </form>
   );
 }

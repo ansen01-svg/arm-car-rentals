@@ -1,3 +1,5 @@
+"use client";
+
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect, useReducer } from "react";
 import { useMediaQuery } from "@mui/material";
@@ -6,7 +8,7 @@ import { initialFormState, reducer } from "../../reducers/form_reducer";
 import SearchFieldsHolder from "./search_fields_holder";
 import FormHolder from "./form/form_holder";
 
-export default function SearchOptionsHolder() {
+export default function SearchOptionsHolder({ fetchCars }) {
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [showForm, setShowForm] = useState(false);
 
@@ -67,6 +69,7 @@ export default function SearchOptionsHolder() {
           dropoffTime={state.dropoffTime}
           minDate={state.minDate}
           setShowForm={setShowForm}
+          fetchCars={fetchCars}
         />
       )}
     </div>

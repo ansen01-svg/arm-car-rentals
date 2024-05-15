@@ -19,7 +19,7 @@ export default function Checkout(props) {
   const tax = 0;
   const fees = 0;
 
-  const totalCost = parseInt(car.price) * parseInt(days) + tax + fees;
+  const totalCost = parseInt(car.rate) * parseInt(days) + tax + fees;
 
   // reserve car
   const handleReserveBtnClick = async () => {
@@ -40,10 +40,11 @@ export default function Checkout(props) {
       pickupTime: time.pickupTime,
       dropoffTime: time.dropoffTime,
       carId: car._id,
-      price: car.price,
+      rate: car.rate,
       days,
       tax,
       fees,
+      discount: 0,
     };
 
     try {
@@ -56,14 +57,16 @@ export default function Checkout(props) {
         }
       );
 
-      if (response.status === 201) {
+      if (response.status !== 201) {
         const data = await response.json();
-        router.push(`/checkout?tripId=${data.data}`);
-        setDisableBtn(false);
-      } else {
+        console.log(data);
         setDisableBtn(false);
         return;
       }
+
+      const data = await response.json();
+      router.push(`/checkout?tripId=${data.data}`);
+      setDisableBtn(false);
     } catch (error) {
       console.log(error);
       setDisableBtn(false);
@@ -90,7 +93,7 @@ export default function Checkout(props) {
 
   return (
     <div className={`scroll-button-wrapper ${isVisible ? "show" : "hidden"}`}>
-      <DetailsHolder price={car.price} days={days} totalCost={totalCost} />
+      <DetailsHolder price={car.rate} days={days} totalCost={totalCost} />
       <ButtonHolder
         handleReserveBtnClick={handleReserveBtnClick}
         disableBtn={disableBtn}

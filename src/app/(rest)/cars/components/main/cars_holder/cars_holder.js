@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HourglassEmptyOutlinedIcon from "@mui/icons-material/HourglassEmptyOutlined";
 import Card from "./card/card";
 
 export default function CarsHolder(props) {
@@ -8,9 +9,7 @@ export default function CarsHolder(props) {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-3">
-      {cars.length < 1 ? (
-        <NoCars />
-      ) : (
+      {cars.length > 0 ? (
         cars.map((car) => {
           return (
             <Card
@@ -21,6 +20,8 @@ export default function CarsHolder(props) {
             />
           );
         })
+      ) : (
+        <NoCars />
       )}
     </div>
   );
@@ -28,8 +29,11 @@ export default function CarsHolder(props) {
 
 function NoCars() {
   return (
-    <div className="mt-[100px] font-semibold text-gray2">
-      <p>No cars to show</p>
+    <div className="mt-[100px] text-gray2 flex flex-col items-center justify-center gap-3">
+      <HourglassEmptyOutlinedIcon fontSize="large" />
+      <p className="text-[14px]">
+        No cars found. Adjust your search and try again.
+      </p>
     </div>
   );
 }

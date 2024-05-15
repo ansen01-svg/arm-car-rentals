@@ -7,7 +7,7 @@ connectDb();
 export async function GET(request) {
   try {
     const cars = await Car.find({}).select(
-      "-ac -createdAt -doors -image -updatedAt -__v"
+      "-bookings -ac -createdAt -doors -image -updatedAt -__v"
     );
 
     return NextResponse.json(
