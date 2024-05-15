@@ -16,7 +16,7 @@ export default function FilterOptionsDisplayHolder(props) {
 
       return {
         type: res[0],
-        price: res[1],
+        rate: res[1],
         capacity: res[2],
         specification: res[3],
       };
@@ -27,7 +27,7 @@ export default function FilterOptionsDisplayHolder(props) {
   const clearFilters = () => {
     setFilters({
       type: [],
-      price: [],
+      rate: [],
       capacity: [],
       specification: [],
     });

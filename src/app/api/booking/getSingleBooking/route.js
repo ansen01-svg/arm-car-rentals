@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDb from "@/mongo_config/mongo_config";
 import Booking from "@/models/booking/booking";
+import Car from "@/models/car/car";
 
 connectDb();
 
@@ -9,9 +10,11 @@ export async function GET(request) {
     const bookingId = request.nextUrl.searchParams.get("bookingId");
 
     // get trip with given id
-    const booking = await Booking.findOne({ _id: bookingId })
-      .populate("carId")
-      .exec();
+    const booking = await Booking.findOne({ _id: bookingId }).populate({
+      path: "vehicleId",
+      select: "type capacity specification",
+      model: Car,
+    });
 
     if (!booking) {
       return NextResponse.json(

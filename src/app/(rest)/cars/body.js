@@ -28,7 +28,7 @@ export default function Body(props) {
   const [filteredCars, setFilteredCars] = useState(cars);
   const [filters, setFilters] = useState({
     type: [],
-    price: [],
+    rate: [],
     capacity: [],
     specification: [],
   });
@@ -44,16 +44,16 @@ export default function Body(props) {
     // Apply type filter
     if (filters.type.length > 0) {
       filtered = filtered.filter((product) =>
-        filters.type.includes(product.carType)
+        filters.type.includes(product.type)
       );
     }
 
     // Apply price filter
-    if (filters.price.length > 0) {
+    if (filters.rate.length > 0) {
       filtered = filtered.filter(
         (product) =>
-          product.price >= parseInt(filters.price[0].split("-")[0]) &&
-          product.price <= parseInt(filters.price[0].split("-")[1])
+          product.rate >= parseInt(filters.rate[0].split("-")[0]) &&
+          product.rate <= parseInt(filters.rate[0].split("-")[1])
       );
     }
 
@@ -77,7 +77,7 @@ export default function Body(props) {
   }, [
     cars,
     filters.type,
-    filters.price,
+    filters.rate,
     filters.capacity,
     filters.specification,
   ]);
@@ -94,9 +94,9 @@ export default function Body(props) {
     }
 
     // Add or remove price filter from URL
-    if (filters.price.length > 0) {
+    if (filters.rate.length > 0) {
       // searchParams.set("price", filters.price.join(","));
-      url = url + `&price=${filters.price.join(",")},`;
+      url = url + `&rate=${filters.rate.join(",")},`;
     }
 
     // Add or remove capacity filter from URL
@@ -156,7 +156,7 @@ export default function Body(props) {
 
   return (
     <div>
-      {mobileScreen && cars && (
+      {mobileScreen && cars.length > 0 && (
         <FilterButtonHolder setShowFilterModal={setShowFilterModal} />
       )}
       {mobileScreen && showFilterModal && (

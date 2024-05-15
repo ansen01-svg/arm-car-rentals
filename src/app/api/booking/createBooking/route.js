@@ -3,6 +3,7 @@ import connectDb from "../../../../mongo_config/mongo_config";
 import Booking from "@/models/booking/booking";
 import verifyToken from "@/app/_lib/backend/jose_verifyJwt";
 import User from "@/models/user/user";
+import Car from "@/models/car/car";
 
 connectDb();
 
@@ -15,10 +16,11 @@ export async function POST(request) {
       pickupTime,
       dropoffTime,
       carId,
-      price,
+      rate,
       days,
       tax,
       fees,
+      discount,
     } = requestBody;
 
     const fieldsArray = [
@@ -27,13 +29,14 @@ export async function POST(request) {
       pickupTime,
       dropoffTime,
       carId,
-      price,
+      rate,
       days,
       tax,
       fees,
+      discount,
     ];
     // check if all details are provided
-    if (fieldsArray.length < 9) {
+    if (fieldsArray.length < 10) {
       return NextResponse.json(
         {
           message: "Please provide all the details",
@@ -46,23 +49,25 @@ export async function POST(request) {
     const userId = await verifyToken(request);
     const user = await User.findOne({ _id: userId });
 
+    // get car
+    const car = await Car.findOne({ _id: carId });
+
     // create a new booking
     const booking = {
       tripStartDate,
       tripEndDate,
       pickupTime,
       dropoffTime,
-      carId,
+      vehicleId: carId,
+      vehicleNumber: car.numberPlate,
       userId,
       email: user.email,
-      totalCost: {
-        price,
-        days,
-        tax,
-        fees,
-        discount: 0,
-        total: price * days + tax + fees,
-      },
+      rate: parseInt(rate),
+      days: parseInt(days),
+      tax: parseInt(tax),
+      fees: parseInt(fees),
+      discount: parseInt(discount),
+      total: parseInt(rate) * parseInt(days) + parseInt(tax) + parseInt(fees),
     };
 
     const newBooking = await Booking.create(booking);

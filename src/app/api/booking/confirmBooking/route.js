@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import User from "@/models/user/user";
-import Trips from "@/models/trips/booking";
 import connectDb from "@/mongo_config/mongo_config";
-import getDataFromToken from "@/app/_lib/backend/get_data_from_token";
+import User from "@/models/user/user";
+import Booking from "@/models/booking/booking";
+import verifyProvidedToken from "@/app/_lib/backend/verify_provided_token";
+import verifyToken from "@/app/_lib/backend/jose_verifyJwt";
 import sendConfirmationEmail from "@/app/services/mailgun/confirmationEmail";
 
 connectDb();
@@ -10,10 +11,10 @@ connectDb();
 export async function POST(request) {
   try {
     const requestBody = await request.json();
-    const { tripId } = requestBody;
+    const { tripId, token } = requestBody;
 
     // check if all details are provided
-    if (!tripId) {
+    if (!tripId && !token) {
       return NextResponse.json(
         {
           message: "Please provide trip id",
@@ -22,7 +23,7 @@ export async function POST(request) {
       );
     }
 
-    const trip = await Trips.findOne({ _id: tripId });
+    const trip = await Booking.findOne({ _id: tripId });
 
     // check if id is valid
     if (!trip) {
@@ -35,7 +36,7 @@ export async function POST(request) {
     }
 
     // check if trip is already booked
-    if (trip.status === "booked") {
+    if (trip.status === "Booked") {
       return NextResponse.json(
         {
           message: `Your trip has already been confirmed`,
@@ -45,11 +46,11 @@ export async function POST(request) {
     }
 
     // change trip status
-    trip.status = "booked";
+    trip.status = "Booked";
     await trip.save();
 
     // get current user
-    const userId = await getDataFromToken(request);
+    const userId = await verifyProvidedToken(token);
     const user = await User.findOne({ _id: userId });
 
     // attach trip to user

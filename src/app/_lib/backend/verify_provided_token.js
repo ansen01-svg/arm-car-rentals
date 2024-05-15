@@ -1,0 +1,15 @@
+import * as jose from "jose";
+
+const verifyProvidedToken = async (token) => {
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+
+  try {
+    const { payload } = await jose.jwtVerify(token, secret);
+
+    return payload.id;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export default verifyProvidedToken;

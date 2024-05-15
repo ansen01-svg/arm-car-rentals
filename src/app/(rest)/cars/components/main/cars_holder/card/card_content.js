@@ -11,7 +11,7 @@ export default function CardContent(props) {
         disableBtnId={disableBtnId}
         setDisableBtnId={setDisableBtnId}
       />
-      <ImgHolder url={car.img} />
+      <ImgHolder url={car.image} />
     </div>
   );
 }

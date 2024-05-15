@@ -52,14 +52,14 @@ export default function DialogBox(props) {
         </DialogContent>
         <DialogActions>
           <button
-            className="w-[70%] py-[6px] bg-secondary text-[white] text-[13px] font-semibold rounded hover:bg-secondaryLight disabled:bg-secondaryLight"
+            className="w-[70%] py-[6px] bg-secondary text-[white] text-[14px] font-semibold rounded hover:bg-secondaryLight disabled:bg-secondaryLight"
             disabled={disableBtn}
             onClick={deleteRow}
           >
             Delete row
           </button>
           <button
-            className="w-[70%] py-[6px] text-primary text-[13px] font-semibold rounded hover:bg-primary"
+            className="w-[70%] py-[6px] text-primary text-[15px] font-semibold rounded hover:bg-primary"
             onClick={handleClose}
           >
             Cancel

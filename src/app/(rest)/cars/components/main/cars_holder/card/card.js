@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useMediaQuery } from "@mui/material";
 import CardContent from "./card_content";
-import CarCardContentSkeleton from "@/app/(rest)/cars/skeletons/car_card_content_skeleton";
 
 export default function Card(props) {
   const { car, disableBtnId, setDisableBtnId } = props;
@@ -18,16 +17,12 @@ export default function Card(props) {
 
   return (
     <div className="w-full px-1 py-1 bg-white rounded shadow relative md:h-56 md:hover:shadow-md">
-      {car ? (
-        <CardContent
-          car={car}
-          disableBtnId={disableBtnId}
-          setDisableBtnId={setDisableBtnId}
-        />
-      ) : (
-        <CarCardContentSkeleton />
-      )}
-      {car && mobileScreen && (
+      <CardContent
+        car={car}
+        disableBtnId={disableBtnId}
+        setDisableBtnId={setDisableBtnId}
+      />
+      {mobileScreen && (
         <Link
           href={`/cars/${car._id}?${details}`}
           target="_blank"

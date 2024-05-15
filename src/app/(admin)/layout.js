@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import AdminHeader from "./components/admin_header/admin_header";
 import DesktopAside from "./components/desktop_aside/desktop_aside";
-import useMediaQuery from "../_lib/frontend/hooks/useMediaQuery";
 import { drawerNavItems } from "../utils/arrays";
+import { useMediaQuery } from "@mui/material";
 import styled from "@emotion/styled";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -16,6 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { MaterialDesignContent, SnackbarProvider } from "notistack";
 
+// custom notistack toast
 const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
   "&.notistack-MuiContent-success": {
     backgroundColor: "#2D7708",
@@ -30,7 +31,7 @@ export default function Layout({ children }) {
   const [user, setUser] = useState(null);
 
   const router = useRouter();
-  const { mobileScreen } = useMediaQuery();
+  const mobileScreen = useMediaQuery("(max-width:1024px)");
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -84,7 +85,7 @@ export default function Layout({ children }) {
 
   if (mobileScreen) {
     return (
-      <div className="max-w-full flex flex-col items-center justify-center">
+      <div className="max-w-full">
         <AdminHeader toggleDrawer={toggleDrawer} user={user} />
         <SnackbarProvider
           autoHideDuration={3000}

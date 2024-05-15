@@ -42,7 +42,7 @@ export default function FormHolder({ tripId }) {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/trips/update_trip`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/updateBooking`,
         {
           method: "POST",
           headers: { "Content-Type": "application-json" },
@@ -50,13 +50,16 @@ export default function FormHolder({ tripId }) {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status !== 201) {
         const data = await response.json();
-        router.push(`/bookingConfirmation?tripId=${data.data}`);
+        console.log(data);
         setDisableBtn(false);
-      } else {
-        setDisableBtn(false);
+        return;
       }
+
+      const data = await response.json();
+      router.push(`/bookingConfirmation?tripId=${data.data}`);
+      setDisableBtn(false);
     } catch (error) {
       console.log(error);
       setDisableBtn(false);

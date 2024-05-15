@@ -11,7 +11,7 @@ export default function CardHeader(props) {
           {status}
         </p>
       </div>
-      {status === "booked" && (
+      {status === "Booked" && (
         <div>
           <button
             className="text-[14px] font-medium text-secondary"
