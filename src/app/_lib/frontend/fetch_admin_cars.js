@@ -6,11 +6,12 @@ const fetchCars = async () => {
 
     if (response.status !== 200) {
       const data = await response.json();
-      console.log(data);
+      console.log("fetch unsuccesssful data ->", data);
       return [];
     }
 
     const data = await response.json();
+    console.log("fetch successsful data ->", data);
     return data.data;
   } catch (error) {
     console.log(error);

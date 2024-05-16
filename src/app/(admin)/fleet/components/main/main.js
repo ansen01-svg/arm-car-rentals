@@ -18,7 +18,7 @@ export default function Main({ cars }) {
   const [availableFilters, setAvailableFilters] = useState(filterFields);
 
   const router = useRouter();
-
+  console.log(cars, filteredCars);
   // open dialog
   const handleClickOpen = () => {
     setOpen(true);

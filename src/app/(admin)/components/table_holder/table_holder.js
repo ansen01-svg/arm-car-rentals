@@ -44,7 +44,7 @@ export default function TableHolder(props) {
           </TableHead>
           <TableBody>
             {filteredValues.length < 1 ? (
-              <NotFound />
+              <NotFound tableHeadValues={tableHeadValues} />
             ) : (
               <CarsAvailable
                 filteredValues={filteredValues}
