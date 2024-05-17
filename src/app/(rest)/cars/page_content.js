@@ -8,24 +8,22 @@ import Body from "./body";
 import SearchOptionsHolder from "./components/search_options_holder/search_options-holder";
 import CarsPageSkeleton from "./components/skeleton/skeleton";
 
-// get dropoff date
-const getFromDate = (inputDate) => {
-  const date = dayjs(inputDate).format("MM/DD/YYYY");
-  return date;
-};
-
 export default function PageContent(props) {
   const { searchParams } = props;
 
   const [cars, setCars] = useState(null);
 
-  const date = getFromDate(searchParams.dropoffDate);
+  const { faultyAccess } = useCheckFaultyAccess(searchParams);
+  const pickupDate = searchParams.pickupDate;
 
   // fetch cars
   const fetchCars = (date) => {
     setCars(null);
 
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAllCars?from=${date}`)
+    fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAllCars?from=${date}`,
+      { cache: "no-store" }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.data) {
@@ -38,14 +36,12 @@ export default function PageContent(props) {
       .catch((err) => console.log(err));
   };
 
-  // fetch cars on load
   useEffect(() => {
+    const date = dayjs(pickupDate).format("MM/DD/YYYY");
     fetchCars(date);
 
     return () => setCars(null);
-  }, [date]);
-
-  const { faultyAccess } = useCheckFaultyAccess(searchParams);
+  }, [pickupDate]);
 
   if (faultyAccess) {
     return (

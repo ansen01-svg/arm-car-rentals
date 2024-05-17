@@ -19,6 +19,7 @@ export default function FormHolder(props) {
   const [carProps, setCarProps] = useState({
     rate: oneCar.rate,
     status: oneCar.status,
+    availabilityStatus: oneCar.availabilityStatus,
   });
 
   // edit button click
@@ -31,18 +32,20 @@ export default function FormHolder(props) {
     e.preventDefault();
     setDisableBtn(true);
 
-    // check if values are same
-    if (carProps.rate === oneCar.rate && carProps.status === oneCar.status) {
-      setIsEditing(false);
-      setDisableBtn(false);
-      return;
+    const { rate, status, availabilityStatus } = carProps;
+    const body = { carId: oneCar._id };
+
+    if (oneCar.rate !== parseInt(rate)) {
+      body.rate = rate;
     }
 
-    const body = {
-      carId: oneCar._id,
-      rate: carProps.rate,
-      status: carProps.status,
-    };
+    if (oneCar.status !== status) {
+      body.status = status;
+    }
+
+    if (oneCar.availabilityStatus !== availabilityStatus) {
+      body.availabilityStatus = availabilityStatus;
+    }
 
     try {
       const response = await fetch(
@@ -56,20 +59,18 @@ export default function FormHolder(props) {
 
       if (response.status !== 201) {
         const data = await response.json();
-        console.log(data);
+        console.log("Error:", data);
         setIsEditing(false);
-        setDisableBtn(false);
         return;
       }
 
-      setIsEditing(false);
-      setDisableBtn(false);
       enqueueSnackbar("Row saved", { variant: "success" });
       router.push("/fleet");
       revalidateAction("/fleet");
       revalidateAction("/cars");
     } catch (error) {
-      console.log(error);
+      console.error("Request failed:", error);
+    } finally {
       setIsEditing(false);
       setDisableBtn(false);
     }
@@ -126,15 +127,22 @@ export default function FormHolder(props) {
             labelFor="fuelType"
             defaultValue={oneCar.fuelType}
           />
-          <UneditableSelectField
-            labelTitle="Availability status"
-            labelFor="availabilityStatus"
-            defaultValue={oneCar.availabilityStatus}
-          />
           <EditableTextField
             labelTitle="Rate"
             labelFor="rate"
             value={carProps.rate}
+            handleChange={handleChange}
+            isEditing={isEditing}
+          />
+          <EditableSelectField
+            labelTitle="Availability status"
+            labelFor="availabilityStatus"
+            value={carProps.availabilityStatus}
+            selectValue={
+              carProps.availabilityStatus === "Available"
+                ? "Not available"
+                : "Available"
+            }
             handleChange={handleChange}
             isEditing={isEditing}
           />
