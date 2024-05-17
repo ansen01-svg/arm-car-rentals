@@ -2,8 +2,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { EditButton, SaveButton } from "../buttons";
 import UneditableSelectField from "@/app/(admin)/fleet/[id]/components/main/form_holder/uneditable_select_field_holder";
+import EditableSelectField from "@/app/(admin)/fleet/[id]/components/main/form_holder/editable_select_field_holder";
 import UneditableTextField from "@/app/(admin)/fleet/[id]/components/main/form_holder/uneditable_text_field_holder";
-import EditableSelectField from "./editable_select_field_holder";
 import { enqueueSnackbar } from "notistack";
 import revalidateAction from "@/app/actions/revalidate";
 
@@ -108,6 +108,7 @@ export default function FormHolder({ user }) {
             labelTitle="Role"
             labelFor="role"
             value={userProps.role}
+            selectValue={userProps.role === "User" ? "Admin" : "User"}
             handleChange={handleChange}
             isEditing={isEditing}
           />

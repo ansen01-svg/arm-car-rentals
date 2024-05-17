@@ -17,7 +17,7 @@ export default function RowsAvailable(props) {
         >
           {Object.entries(obj).map((field, index) => {
             // check if field is id, shorten it
-            if (field[0] === "_id") {
+            if (field[0] === "_id" || field[0] === "userId") {
               return (
                 <TableCell
                   key={index}

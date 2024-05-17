@@ -38,7 +38,7 @@ export default function DialogBox(props) {
       open={open}
       sx={{
         ".MuiPaper-root": {
-          minWidth: "90%",
+          width: "90%",
         },
       }}
     >

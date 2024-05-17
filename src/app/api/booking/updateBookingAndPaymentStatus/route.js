@@ -8,7 +8,11 @@ connectDb();
 export async function POST(request) {
   try {
     const requestBody = await request.json();
-    const { tripId, tripStatus, paymentStatus, paymentMethod } = requestBody;
+    const { tripId, status, paymentStatus, paymentMethod, liscenceNumber } =
+      requestBody;
+
+    // check if user is authorized(admin)
+    await authCheck(request);
 
     // check if the trip id is provided
     if (!tripId) {
@@ -32,33 +36,32 @@ export async function POST(request) {
       );
     }
 
-    // update trip status
-    if (tripStatus) {
-      trip.status = tripStatus;
+    // update liscence number
+    if (liscenceNumber) {
+      trip.liscenceNumber = liscenceNumber;
+    }
+
+    if (status) {
+      // update trip status
+      trip.status = status;
     }
 
     // update payment status
     if (paymentStatus && paymentMethod) {
-      // check if uaer is authorized(admin)
-      await authCheck();
-
-      const payment = {
-        status: paymentStatus,
-        method: paymentMethod,
-      };
-
-      trip.payment = payment;
+      trip.paymentStatus = paymentStatus;
+      trip.paymentMethod = paymentMethod;
     }
 
     await trip.save();
 
     return NextResponse.json(
       {
-        message: `Your trip status with id ${tripId} has been changed`,
+        message: `Your trip with id ${tripId} has been updated`,
       },
       { status: 201 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

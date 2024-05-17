@@ -1,12 +1,12 @@
-const fetchCars = async () => {
+const fetchBookings = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAdminCars`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/getAllBookings`
     );
 
     if (response.status !== 200) {
       const data = await response.json();
-      console.log("fetch unsuccesssful data ->", data);
+      console.log(data);
       return [];
     }
 
@@ -18,4 +18,4 @@ const fetchCars = async () => {
   }
 };
 
-export default fetchCars;
+export default fetchBookings;

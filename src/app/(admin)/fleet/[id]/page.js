@@ -11,7 +11,7 @@ export const generateMetadata = async ({ params }) => {
   };
 };
 
-export default async function Fleet({ params }) {
+export default async function SingleCar({ params }) {
   return (
     <div
       id="custom-scrollbar"

@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SearchAndFilterHolder from "@/app/(admin)/components/search_and_filter_holder/search_and_filter_holder";
 import FilterButton from "@/app/(admin)/components/search_and_filter_holder/filter_holder";
 import TableHolder from "@/app/(admin)/components/table_holder/table_holder";
+import PaginationHolder from "@/app/(admin)/components/pagination_holder/pagination_holder";
 import DialogBox from "@/app/(admin)/components/dialog/dialog";
 import { tableHeadValues } from "@/app/utils/arrays";
 import applyFilters from "@/app/_lib/frontend/applyFilters";
@@ -18,7 +19,40 @@ export default function Main({ cars }) {
   const [availableFilters, setAvailableFilters] = useState(filterFields);
 
   const router = useRouter();
-  console.log(cars, filteredCars);
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [renderedItems, setRenderedItems] = useState([]);
+
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
+
+  // get items for each page
+  const getItemsForPage = useCallback(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredCars.slice(startIndex, endIndex);
+  }, [currentPage, filteredCars]);
+
+  // generate items to render to each page
+  useEffect(() => {
+    setRenderedItems(getItemsForPage());
+  }, [currentPage, getItemsForPage]);
+
+  // handle prev page button
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // handle next page button
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   // open dialog
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,13 +93,6 @@ export default function Main({ cars }) {
     router.push(`/fleet/${id}`);
   };
 
-  // set filters
-  const confirmFilters = () => {
-    const myFilteredCars = applyFilters(cars, filters);
-    setFilteredCars(myFilteredCars);
-    handleClose();
-  };
-
   // handle available filters button click
   const handleAvailableFiltersBtnClick = (title) => {
     const newAvailableFilters = availableFilters.filter(
@@ -86,18 +113,27 @@ export default function Main({ cars }) {
     setAvailableFilters(newAvailableFilters);
   };
 
+  // clear filters
+  const clearFilters = () => {
+    setAvailableFilters(filterFields);
+    setFilters([]);
+  };
+
   // handle cancel button click
   const handleCancelBtnClick = () => {
     setAvailableFilters(filterFields);
     setFilters([]);
     setFilteredCars(cars);
+    setCurrentPage(1);
     handleClose();
   };
 
-  // clear filters
-  const clearFilters = () => {
-    setAvailableFilters(filterFields);
-    setFilters([]);
+  // set filters
+  const confirmFilters = () => {
+    const myFilteredCars = applyFilters(cars, filters);
+    setFilteredCars(myFilteredCars);
+    setCurrentPage(1);
+    handleClose();
   };
 
   return (
@@ -109,12 +145,24 @@ export default function Main({ cars }) {
         handleChange={handleChange}
         handleSubmit={handleSearchFormSubmit}
       >
-        <FilterButton handleClickOpen={handleClickOpen} />
+        <FilterButton
+          handleClickOpen={handleClickOpen}
+          highlight={filters.length > 0 ? true : false}
+        />
       </SearchAndFilterHolder>
       <TableHolder
         filteredValues={filteredCars}
         tableHeadValues={tableHeadValues}
         handleTableRowClick={handleTableRowClick}
+      />
+      <PaginationHolder
+        currentPage={currentPage}
+        handlePrevBtn={handlePrevPage}
+        handleNextBtn={handleNextPage}
+        disablePrevBtn={currentPage === 1}
+        disableNextBtn={
+          currentPage === totalPages || renderedItems.length === 0
+        }
       />
       <DialogBox
         open={open}

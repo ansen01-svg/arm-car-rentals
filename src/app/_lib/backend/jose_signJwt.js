@@ -7,7 +7,7 @@ const createJwt = async (id, username, email, role) => {
   const session = await new jose.SignJWT({ id, username, email, role })
     .setProtectedHeader({ alg })
     .setIssuedAt()
-    .setExpirationTime("1d")
+    .setExpirationTime("5d")
     .sign(secret);
 
   return session;

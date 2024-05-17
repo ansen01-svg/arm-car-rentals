@@ -31,7 +31,8 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function EditableSelectField(props) {
-  const { isEditing, value, handleChange, labelTitle, labelFor } = props;
+  const { isEditing, value, selectValue, handleChange, labelTitle, labelFor } =
+    props;
 
   return (
     <div className="w-full flex flex-col items-start justify-center gap-2">
@@ -59,11 +60,8 @@ export default function EditableSelectField(props) {
           <MenuItem value={value} sx={{ fontSize: "13px" }}>
             <em>{value}</em>
           </MenuItem>
-          <MenuItem
-            value={value === "Checked in" ? "Checked out" : "Checked in"}
-            sx={{ fontSize: "13px" }}
-          >
-            {value === "Checked in" ? "Checked out" : "Checked in"}
+          <MenuItem value={selectValue} sx={{ fontSize: "13px" }}>
+            {selectValue}
           </MenuItem>
         </Select>
       </FormControl>
