@@ -40,7 +40,9 @@ export function FleetManagement({ handleClose }) {
 
   return (
     <div className="w-full px-5 text-[14px]">
-      <button onClick={handleClick}>Admin panel</button>
+      <button className="w-full text-left" onClick={handleClick}>
+        Admin panel
+      </button>
     </div>
   );
 }
@@ -74,7 +76,9 @@ export function SignOutBtnHolder({ handleClose }) {
 
   return (
     <div className="w-full px-5 text-[14px]">
-      <button onClick={signOut}>Sign out</button>
+      <button className="w-full text-left" onClick={signOut}>
+        Sign out
+      </button>
     </div>
   );
 }

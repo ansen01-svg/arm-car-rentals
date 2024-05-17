@@ -104,7 +104,21 @@ export const usersTableHeadValues = [
   { id: 2, value: "EMAIL" },
   { id: 3, value: "ROLE" },
   { id: 4, value: "IS VERIFIED" },
-  { id: 5, value: "TRIPS" },
+  { id: 5, value: "Phone number" },
+  { id: 6, value: "TRIPS" },
 ];
 
 export const usersFilterFields = ["Admin", "User"];
+
+export const bookingsTableHeadValues = [
+  { id: 0, value: "ID" },
+  { id: 1, value: "TRIP START" },
+  { id: 2, value: "TRIP END" },
+  { id: 3, value: "VEHICLE NUMBER" },
+  { id: 4, value: "USER ID" },
+  { id: 5, value: "EMAIL" },
+  { id: 6, value: "STATUS" },
+  { id: 7, value: "ITINERARY NUMBER" },
+];
+
+export const bookingsFilterFields = ["Booked", "Cancelled", "Completed"];

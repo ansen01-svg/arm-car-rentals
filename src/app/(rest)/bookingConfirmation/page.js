@@ -22,6 +22,9 @@ const confirmTrip = async (tripId, token) => {
         body: JSON.stringify({ tripId, token }),
       }
     );
+
+    const data = await response.json();
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -37,8 +40,11 @@ export default async function Bookingconfirmation({ searchParams }) {
   // update current trip status
   await confirmTrip(searchParams.tripId, token);
 
-  // revalidate trips page because a new trip is added
+  // revalidate pages
   revalidateAction("/trips");
+  revalidateAction("/bookings");
+  revalidateAction("/users");
+  revalidateAction("/fleet");
 
   return (
     <div className="max-w-full bg-primary">

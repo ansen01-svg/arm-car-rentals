@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Loading from "./loading/loading";
-import NotFound from "./not_found/not_found";
+import Loading from "@/app/(admin)/fleet/[id]/components/main/loading/loading";
+import NotFound from "@/app/(admin)/fleet/[id]/components/main/not_found/not_found";
 import TitleAndImageHolder from "./title_and_image_holder/title_and_image_holder";
 import FormHolder from "./form_holder/form_holder";
 

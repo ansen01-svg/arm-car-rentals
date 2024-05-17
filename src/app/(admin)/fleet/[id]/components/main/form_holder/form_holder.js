@@ -142,6 +142,9 @@ export default function FormHolder(props) {
             labelTitle="Status"
             labelFor="status"
             value={carProps.status}
+            selectValue={
+              carProps.status === "Checked in" ? "Checked out" : "Checked in"
+            }
             handleChange={handleChange}
             isEditing={isEditing}
           />

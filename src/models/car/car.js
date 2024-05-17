@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
-  bookedFrom: String,
-  bookedTill: String,
+  bookedFrom: Date,
+  bookedTill: Date,
 });
 
 const carSchema = new mongoose.Schema(

@@ -88,7 +88,7 @@ export default function Main(props) {
 
   return (
     <div className="w-full px-6 py-4 flex items-start justify-center lg:px-0">
-      <TitleAndImageHolder car={oneCar} />
+      <TitleAndImageHolder title={oneCar[0].model} src={oneCar[0].image} />
       <FormHolder car={oneCar} handleClickOpen={handleClickOpen} />
       <DialogBox
         open={open}

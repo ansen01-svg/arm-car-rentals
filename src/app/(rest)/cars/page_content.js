@@ -10,7 +10,7 @@ import CarsPageSkeleton from "./components/skeleton/skeleton";
 
 // get dropoff date
 const getFromDate = (inputDate) => {
-  const date = dayjs(inputDate).format("MM/DD/YY");
+  const date = dayjs(inputDate).format("MM/DD/YYYY");
   return date;
 };
 
@@ -43,7 +43,7 @@ export default function PageContent(props) {
     fetchCars(date);
 
     return () => setCars(null);
-  }, []);
+  }, [date]);
 
   const { faultyAccess } = useCheckFaultyAccess(searchParams);
 

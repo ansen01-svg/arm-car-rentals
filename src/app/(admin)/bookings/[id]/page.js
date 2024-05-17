@@ -1,7 +1,26 @@
-export default function Fleet() {
+import "../../styles/scrollbar.css";
+import Header from "../../fleet/new/components/header/header";
+import Main from "./components/main/main";
+import fetchTrip from "@/app/_lib/frontend/fetchTrip";
+
+export const generateMetadata = async ({ params }) => {
+  const booking = await fetchTrip(params.id);
+
+  return {
+    title: booking ? `Booking: ${booking._id}` : "ARM: Error",
+  };
+};
+
+export default async function SingleBooking({ params }) {
   return (
-    <>
-      <p>bookings id page</p>
-    </>
+    <div
+      id="custom-scrollbar"
+      className="w-full h-[calc(100vh-56px)] flex flex-col items-center justify-start overflow-y-scroll md:h-[calc(100vh-64px)] lg:h-screen lg:py-6"
+    >
+      <div className="w-full lg:w-[55%]">
+        <Header title={params.id} link={"/bookings"} linkTitle={"Bookings"} />
+        <Main id={params.id} />
+      </div>
+    </div>
   );
 }

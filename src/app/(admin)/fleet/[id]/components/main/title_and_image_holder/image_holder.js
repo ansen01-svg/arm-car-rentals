@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function ImageHolder({ src }) {
   return (
     <div className="w-full">
-      <div className="w-[200px] h-[100px] relative">
+      <div className="w-[80%] h-[100px] relative">
         <Image
           src={src}
           alt="car-pic"

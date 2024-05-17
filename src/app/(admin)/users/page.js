@@ -16,7 +16,7 @@ export default async function Users() {
       className="w-full h-[calc(100vh-56px)] flex flex-col items-center justify-start overflow-y-scroll md:h-[calc(100vh-64px)] lg:h-screen lg:py-6"
     >
       <div className="w-full lg:w-[67%]">
-        <Header />
+        <Header title="Users" />
         <Main users={users} />
       </div>
     </div>

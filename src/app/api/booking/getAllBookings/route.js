@@ -6,11 +6,14 @@ connectDb();
 
 export async function GET(request) {
   try {
-    const bookings = await Booking.find({});
+    const bookings = await Booking.find({
+      status: { $ne: "In booking process" },
+    }).select(
+      "tripStartDate tripEndDate vehicleNumber userId email status itineraryNumber"
+    );
 
     return NextResponse.json(
       {
-        message: "All bookings",
         data: bookings,
       },
       { status: 200 }

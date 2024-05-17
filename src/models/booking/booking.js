@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import Car from "../car/car";
-import User from "../user/user";
 
 const bookingSchema = new mongoose.Schema(
   {
