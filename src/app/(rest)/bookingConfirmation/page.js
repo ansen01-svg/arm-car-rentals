@@ -23,8 +23,15 @@ const confirmTrip = async (tripId, token) => {
       }
     );
 
-    const data = await response.json();
-    console.log(data);
+    if (response.status === 404 || response.status === 500) {
+      return { message: "error" };
+    } else if (response.status === 409) {
+      return { message: "duplicate" };
+    } else if (response.status === 400) {
+      return { message: "unavailable" };
+    } else if (response.status === 201) {
+      return data.data;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -34,11 +41,10 @@ export default async function Bookingconfirmation({ searchParams }) {
   // revalidate current path to bring in fresh trip data with itinerary number and other details
   revalidateAction(`/bookingConfirmation?tripId=${searchParams.tripId}`);
 
-  const trip = await fetchTrip(searchParams.tripId);
   const token = cookies().get("token")?.value || "";
 
   // update current trip status
-  await confirmTrip(searchParams.tripId, token);
+  const data = await confirmTrip(searchParams.tripId, token);
 
   // revalidate pages
   revalidateAction("/trips");
@@ -48,7 +54,7 @@ export default async function Bookingconfirmation({ searchParams }) {
 
   return (
     <div className="max-w-full bg-primary">
-      <PageContent trip={trip} />
+      <PageContent data={data} />
     </div>
   );
 }
