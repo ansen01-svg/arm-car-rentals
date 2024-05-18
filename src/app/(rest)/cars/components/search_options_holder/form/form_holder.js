@@ -132,11 +132,12 @@ export default function FormHolder(props) {
     paramsObj.set("pickupTime", pickupTime);
     paramsObj.set("dropoffTime", dropoffTime);
 
-    const date = dayjs(pickupDate).format("MM/DD/YYYY");
+    const from = dayjs(pickupDate).format("MM/DD/YYYY");
+    const to = dayjs(dropoffDate).format("MM/DD/YYYY");
 
     router.replace(`${pathname}?${paramsObj.toString()}`);
     setShowForm(false);
-    fetchCars(date);
+    fetchCars(from, to);
     setDisabled(false);
   };
 

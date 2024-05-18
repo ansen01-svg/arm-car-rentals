@@ -15,13 +15,13 @@ export default function PageContent(props) {
 
   const { faultyAccess } = useCheckFaultyAccess(searchParams);
   const pickupDate = searchParams.pickupDate;
+  const dropoffDate = searchParams.dropoffDate;
 
-  // fetch cars
-  const fetchCars = (date) => {
+  const fetchCars = (from, to) => {
     setCars(null);
 
     fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAllCars?from=${date}`,
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/cars/getAllCars?from=${from},to=${to}`,
       { cache: "no-store" }
     )
       .then((response) => response.json())
@@ -36,12 +36,15 @@ export default function PageContent(props) {
       .catch((err) => console.log(err));
   };
 
+  // fetch cars on load
   useEffect(() => {
-    const date = dayjs(pickupDate).format("MM/DD/YYYY");
-    fetchCars(date);
+    const from = dayjs(pickupDate).format("MM/DD/YYYY");
+    const to = dayjs(dropoffDate).format("MM/DD/YYYY");
+
+    fetchCars(from, to);
 
     return () => setCars(null);
-  }, [pickupDate]);
+  }, [pickupDate, dropoffDate]);
 
   if (faultyAccess) {
     return (

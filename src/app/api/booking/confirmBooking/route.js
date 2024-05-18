@@ -8,7 +8,7 @@ import sendConfirmationEmail from "@/app/services/mailgun/confirmationEmail";
 
 connectDb();
 
-// modify date to mm/dd/yy format
+// modify date to mm/dd/yyyy format
 const restructureDate = (dateString) => {
   const dateArray = dateString.split("/");
   const restructuredDate = `${dateArray[1]}/${dateArray[0]}/20${dateArray[2]}`;
@@ -39,7 +39,7 @@ export async function POST(request) {
         {
           message: `No trip found with id ${tripId}`,
         },
-        { status: 400 }
+        { status: 404 }
       );
     }
 
@@ -49,17 +49,24 @@ export async function POST(request) {
         {
           message: `Your trip has already been confirmed`,
         },
-        { status: 400 }
+        { status: 409 }
       );
     }
 
-    // 4. check if the given vehicle is available
+    // 4. check if car is available for the provided time period
+    const from = restructureDate(trip.tripStartDate);
+    const to = restructureDate(trip.tripEndDate);
+
     const car = await Car.findOne({ _id: trip.vehicleId });
 
-    if (car.availabilityStatus === "Not available") {
+    const isAvailable = car.bookings.every(
+      (booking) => booking.bookedTill <= from || booking.bookedFrom >= to
+    );
+
+    if (!isAvailable) {
       return NextResponse.json(
         {
-          message: "This car is not available at the moment",
+          message: `Car is not available for the selected dates`,
         },
         { status: 400 }
       );
@@ -78,8 +85,8 @@ export async function POST(request) {
 
     // 3. update car
     const newBooking = {
-      bookedFrom: restructureDate(trip.tripStartDate),
-      bookedTill: restructureDate(trip.tripEndDate),
+      bookedFrom: from,
+      bookedTill: to,
     };
 
     car.availabilityStatus = "Not available";
@@ -101,10 +108,11 @@ export async function POST(request) {
     return NextResponse.json(
       {
         message: `Your trip has been booked successfully`,
+        data: trip,
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
