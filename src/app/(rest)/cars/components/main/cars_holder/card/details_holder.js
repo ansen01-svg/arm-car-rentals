@@ -58,7 +58,6 @@ function OtherDetailsholder(props) {
         capacity={capacity}
         rate={rate}
       />
-      {/* <ExtraTextsHolder /> */}
     </div>
   );
 }
@@ -83,6 +82,7 @@ function CarDetailsHolder(props) {
       </div>
       <div className="w-full">
         <p className="font-bold text-[18px] text-primary">Rs {rate}</p>
+        <p className="text-[12px] text-primary">per day</p>
       </div>
     </div>
   );

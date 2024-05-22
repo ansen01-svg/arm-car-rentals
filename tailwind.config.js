@@ -14,11 +14,11 @@ module.exports = {
         primary: "#24272c",
         secondary: "#f75d34",
         secondaryLight: "#f7724e",
-        // secondaryLight: "#dd370a",
         gray1: "rgba(36,39,44,.7)",
         gray2: "rgba(36,39,44,.5)",
         red: "#ee4b2b",
         blue: "#2176ae",
+        blueLight: "#b1e0ff",
         green: "#6bad23",
       },
       fontSize: {

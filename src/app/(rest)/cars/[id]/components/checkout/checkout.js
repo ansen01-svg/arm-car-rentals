@@ -1,17 +1,12 @@
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import "./checkout.css";
 import getDate from "@/app/_lib/frontend/getDate";
 import calculateDaysBetweenDates from "@/app/_lib/frontend/getDays";
 
 export default function Checkout(props) {
-  const { token, car, dates, time, disableBtn, setDisableBtn } = props;
+  const { car, dates, disableBtn, handleReserveBtnClick } = props;
 
   const [isVisible, setIsVisible] = useState(true);
-
-  const router = useRouter();
-  const path = usePathname();
-  const searchParams = useSearchParams();
 
   const date1 = getDate(dates.pickupDate);
   const date2 = getDate(dates.dropoffDate);
@@ -20,58 +15,6 @@ export default function Checkout(props) {
   const fees = 0;
 
   const totalCost = parseInt(car.rate) * parseInt(days) + tax + fees;
-
-  // reserve car
-  const handleReserveBtnClick = async () => {
-    setDisableBtn(true);
-
-    if (!token) {
-      const params = new URLSearchParams(searchParams).toString();
-      const redirectUrl = `/signin?callbackUrl=${path}?${params}`;
-
-      router.push(redirectUrl);
-      setDisableBtn(false);
-      return;
-    }
-
-    const body = {
-      tripStartDate: dates.pickupDate,
-      tripEndDate: dates.dropoffDate,
-      pickupTime: time.pickupTime,
-      dropoffTime: time.dropoffTime,
-      carId: car._id,
-      rate: car.rate,
-      days,
-      tax,
-      fees,
-      discount: 0,
-    };
-
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/createBooking`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application-json" },
-          body: JSON.stringify(body),
-        }
-      );
-
-      if (response.status !== 201) {
-        const data = await response.json();
-        console.log(data);
-        setDisableBtn(false);
-        return;
-      }
-
-      const data = await response.json();
-      router.push(`/checkout?tripId=${data.data}`);
-      setDisableBtn(false);
-    } catch (error) {
-      console.log(error);
-      setDisableBtn(false);
-    }
-  };
 
   // adjust scroll position
   const handleScroll = () => {

@@ -63,7 +63,7 @@ export default function FormHolder(props) {
     const pickupDay = getDate(pickupDate.format("DD/MM/YY"));
     const dropoffDay = getDate(dropoffDate.format("DD/MM/YY"));
 
-    // check if state values have not changed
+    // 1. check if state values have not changed
     if (
       dayjs(pud).format("DD/MM/YY") === dayjs(pickupDate).format("DD/MM/YY") &&
       dayjs(dod).format("DD/MM/YY") === dayjs(dropoffDate).format("DD/MM/YY") &&
@@ -75,7 +75,7 @@ export default function FormHolder(props) {
       return;
     }
 
-    // if dropoff date is later than pickup date
+    // 2. check if dropoff date is later than pickup date
     if (new Date(dropoffDay).getTime() < new Date(pickupDay).getTime()) {
       setFieldsError("Please enter the correct date and time.");
       setTimeError(false);
@@ -85,7 +85,7 @@ export default function FormHolder(props) {
       return;
     }
 
-    // check if both dates are same but pickup time is later than dropoff time
+    // 3. check if both dates are same but pickup time is later than dropoff time
     if (
       pickupDate.format("DD/MM/YY") === dropoffDate.format("DD/MM/YY") &&
       compareTimes(dropoffTime.format("HH:mm a"), pickupTime.format("HH:mm a"))
@@ -98,7 +98,7 @@ export default function FormHolder(props) {
       return;
     }
 
-    // check if pick up date is today but pick time is set in the past
+    // 4. check if pick up date is today but pick time is set in the past
     if (pickupDate.format("DD/MM/YY") === dayjs().format("DD/MM/YY")) {
       const todaysPickupTime = getMilliseconds(
         pickupTime.format("HH:mm a"),

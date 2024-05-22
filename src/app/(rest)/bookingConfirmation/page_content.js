@@ -23,7 +23,7 @@ export default function PageContent({ data }) {
 
   if (data.message === "duplicate") {
     const errorMsg1 = "Booked trip.";
-    const errorMsg2 = "Your trip has already been booked.";
+    const errorMsg2 = "Thank you, your booking is complete.";
     const errorMsg3 = "your trips to view your booking.";
 
     return (
