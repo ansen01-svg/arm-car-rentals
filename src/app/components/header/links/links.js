@@ -21,7 +21,7 @@ export default function Links(props) {
   );
 
   return (
-    <div className="flex justify-center items-center gap-5 text-primary">
+    <div className="flex flex-row items-center justify-center gap-5 text-primary">
       <Link href={"/trips"}>{tripsLinkContent}</Link>
       <button onClick={handleClick}>{userLinkContent}</button>
     </div>

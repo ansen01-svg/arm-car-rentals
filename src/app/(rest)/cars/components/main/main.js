@@ -5,7 +5,14 @@ import CarsHolder from "./cars_holder/cars_holder";
 import TotalCarsDisplay from "./total_cars_display/total_cars_display";
 
 export default function Main(props) {
-  const { cars, filters, setFilters, handleFilterChange } = props;
+  const {
+    cars,
+    sort,
+    handleSortChange,
+    filters,
+    setFilters,
+    handleFilterChange,
+  } = props;
 
   const desktopScreen = useMediaQuery("(min-width:1024px)");
 
@@ -22,7 +29,9 @@ export default function Main(props) {
       <FiltersAndCarsWrapper
         cars={cars}
         filters={filters}
+        sort={sort}
         setFilters={setFilters}
+        handleSortChange={handleSortChange}
       />
     </div>
   );
@@ -33,7 +42,7 @@ function FilterSectionWrapper({ children }) {
 }
 
 function FiltersAndCarsWrapper(props) {
-  const { cars, filters, setFilters } = props;
+  const { cars, sort, handleSortChange, filters, setFilters } = props;
 
   const filtersArr = [
     ...Object.values(filters)[0],
@@ -47,7 +56,13 @@ function FiltersAndCarsWrapper(props) {
       {filtersArr.length > 0 && (
         <FilterOptionsDisplayHolder filters={filters} setFilters={setFilters} />
       )}
-      {cars.length > 0 && <TotalCarsDisplay cars={cars} />}
+      {cars.length > 0 && (
+        <TotalCarsDisplay
+          carsLength={cars.length}
+          value={sort}
+          handleChange={handleSortChange}
+        />
+      )}
       <CarsHolder cars={cars} />
     </div>
   );

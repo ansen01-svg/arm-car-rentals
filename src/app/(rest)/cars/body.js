@@ -25,6 +25,7 @@ export default function Body(props) {
   const { cars } = props;
 
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [sort, setSort] = useState("Price low to high");
   const [filteredCars, setFilteredCars] = useState(cars);
   const [filters, setFilters] = useState({
     type: [],
@@ -36,6 +37,27 @@ export default function Body(props) {
   const router = useRouter();
   const params = useSearchParams();
   const mobileScreen = useMediaQuery("(max-width:1024px)");
+
+  // filters values array
+  const filtersArr = [
+    ...Object.values(filters)[0],
+    ...Object.values(filters)[1],
+    ...Object.values(filters)[2],
+    ...Object.values(filters)[3],
+  ];
+
+  // sort cars on load
+  useEffect(() => {
+    if (filteredCars) {
+      if (sort === "Price low to high") {
+        const sortedCars = filteredCars.sort((a, b) => a.rate - b.rate);
+        setFilteredCars(sortedCars);
+      } else {
+        const sortedCars = filteredCars.sort((a, b) => b.rate - a.rate);
+        setFilteredCars(sortedCars);
+      }
+    }
+  }, [filteredCars, sort]);
 
   // Function to apply filters
   const applyFilters = useCallback(() => {
@@ -137,6 +159,7 @@ export default function Body(props) {
   // }, [params]);
 
   // handle filters change
+
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters };
@@ -154,6 +177,31 @@ export default function Body(props) {
     });
   };
 
+  // clear filters
+  const clearFilters = () => {
+    setSort("Price low to high");
+    setFilters({
+      type: [],
+      rate: [],
+      capacity: [],
+      specification: [],
+    });
+  };
+
+  // handle sort change
+  const handleSortChange = (e) => {
+    setSort(e.target.value);
+    const sort = e.target.value;
+
+    if (sort === "Price low to high") {
+      const sortedCars = filteredCars.sort((a, b) => a.rate - b.rate);
+      setFilteredCars(sortedCars);
+    } else {
+      const sortedCars = filteredCars.sort((a, b) => b.rate - a.rate);
+      setFilteredCars(sortedCars);
+    }
+  };
+
   return (
     <div>
       {mobileScreen && cars.length > 0 && (
@@ -161,16 +209,22 @@ export default function Body(props) {
       )}
       {mobileScreen && showFilterModal && (
         <FilterModal
+          sort={sort}
           filters={filters}
+          handleSortChange={handleSortChange}
           handleFilterChange={handleFilterChange}
           showFilterModal={showFilterModal}
           setShowFilterModal={setShowFilterModal}
+          clearFilters={clearFilters}
+          disableClearBtn={filtersArr.length < 1}
         />
       )}
       <Main
         cars={filteredCars}
+        sort={sort}
         filters={filters}
         setFilters={setFilters}
+        handleSortChange={handleSortChange}
         handleFilterChange={handleFilterChange}
       />
     </div>

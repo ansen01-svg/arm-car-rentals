@@ -49,13 +49,6 @@ export default function SelectInputHolder(props) {
             name={labelFor}
             value={value}
             onChange={handleChange}
-            // InputProps={{
-            //   "aria-label": "Without label",
-            //   style: {
-            //     color: "#24272c",
-            //     fontSize: "14px",
-            //   },
-            // }}
             sx={{
               height: "32.39px",
               color: "#24272c",

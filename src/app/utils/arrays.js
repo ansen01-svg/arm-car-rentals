@@ -1,6 +1,62 @@
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import InsertInvitationOutlinedIcon from "@mui/icons-material/InsertInvitationOutlined";
+import LoginIcon from "@mui/icons-material/Login";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
+
+export const faqsTexts = [
+  {
+    id: 1,
+    title: "Is there a speed limit?",
+    text: "Car-lease.com allows up to 125 km/hr. However it is 80 km/hr in a few cities where some cars might be equipped with speed governors as per government directives. Car-lease.com strictly advises to follow local speed limits.",
+  },
+  {
+    id: 2,
+    title: "Can I extend/ cancel/ modify my booking?",
+    text: "Yes, extensions are possible subject to availability & charges. Cancellations & modifications will attract nominal charges as per our policy.",
+  },
+  {
+    id: 3,
+    title: "Booking criteria & documents?",
+    text: "Min. 21 years old, have valid original government ID (Aadhar, Passport, or PAN only) and a valid driving licence for “Light Motor Vehicles”, which is min. 1 year old at the time of starting the trip.",
+  },
+];
+
+export const workingsTexts = [
+  {
+    id: 1,
+    title: "Sign up",
+    icon: <LoginIcon fontSize="large" sx={{ color: "#2176ae" }} />,
+    text: "Create your account.",
+  },
+  {
+    id: 2,
+    title: "Select car",
+    icon: (
+      <DirectionsCarFilledOutlinedIcon
+        fontSize="large"
+        sx={{ color: "#2176ae" }}
+      />
+    ),
+    text: "Choose your desired car.",
+  },
+  {
+    id: 3,
+    title: "Finalize booking",
+    icon: (
+      <AssignmentIndOutlinedIcon fontSize="large" sx={{ color: "#2176ae" }} />
+    ),
+    text: "Add your documents and information and complete your booking.",
+  },
+  {
+    id: 4,
+    title: "Pick up",
+    icon: <LocationOnOutlinedIcon fontSize="large" sx={{ color: "#2176ae" }} />,
+    text: "Pick up your car from our address.",
+  },
+];
 
 export const carTypes = ["standard", "luxury", "premium", "van"];
 export const carSpecifications = ["manual", "automatic"];

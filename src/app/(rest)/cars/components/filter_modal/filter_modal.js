@@ -6,8 +6,16 @@ import Header from "./header";
 import Main from "./main/main";
 
 export default function FilterModal(props) {
-  const { filters, showFilterModal, setShowFilterModal, handleFilterChange } =
-    props;
+  const {
+    sort,
+    handleSortChange,
+    filters,
+    showFilterModal,
+    setShowFilterModal,
+    handleFilterChange,
+    clearFilters,
+    disableClearBtn,
+  } = props;
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -27,10 +35,16 @@ export default function FilterModal(props) {
       }}
     >
       <DialogContent>
-        <Header setShowFilterModal={setShowFilterModal} />
+        <Header
+          setShowFilterModal={setShowFilterModal}
+          clearFilters={clearFilters}
+          disableClearBtn={disableClearBtn}
+        />
         <Main
+          sort={sort}
           filters={filters}
           setShowFilterModal={setShowFilterModal}
+          handleSortChange={handleSortChange}
           handleFilterChange={handleFilterChange}
         />
       </DialogContent>
