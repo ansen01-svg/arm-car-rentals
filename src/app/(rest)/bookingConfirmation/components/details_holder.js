@@ -5,7 +5,7 @@ const liText2 = "You can cancel your booking anytime.";
 
 export default function DetailsHolder({ trip }) {
   return (
-    <div className="w-full px-4 py-5 text-primary bg-white rounded flex flex-col items-center justify-center gap-6 shadow">
+    <div className="w-full px-4 py-5 text-primary bg-white rounded-2xl border-[1px] border-slate-200 flex flex-col items-center justify-center gap-6 shadow">
       <div className="w-full text-left">
         <p>
           ARM itinerary number:&nbsp;
@@ -26,7 +26,7 @@ export default function DetailsHolder({ trip }) {
       <div className="w-full flex flex-row items-center justify-start">
         <Link
           href={`/trips#${trip._id}`}
-          className="px-4 py-2 bg-secondary rounded text-white font-medium"
+          className="px-4 py-2 bg-secondary rounded-lg text-white font-medium"
         >
           View my booking
         </Link>

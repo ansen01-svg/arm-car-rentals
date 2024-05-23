@@ -52,7 +52,7 @@ export default function TotalCarsDisplay(props) {
 
 function SortHolder({ value, handleChange }) {
   return (
-    <div className="w-[30%] border-[1px] border-slate-200 rounded">
+    <div className="w-[30%] border-[1px] border-slate-200 rounded-lg">
       <TextField
         id="cars-sort-select"
         fullWidth
@@ -67,7 +67,7 @@ function SortHolder({ value, handleChange }) {
         }}
         sx={{
           background: "white",
-          borderRadius: "4px",
+          borderRadius: "8px",
           paddingBottom: "2px",
           ".MuiFormLabel-root": {
             top: "5px",
@@ -88,6 +88,7 @@ function SortHolder({ value, handleChange }) {
           value={value}
           sx={{
             fontSize: "14px",
+            borderRadius: "8px",
             "&.Mui-selected": {
               backgroundColor: "white",
             },

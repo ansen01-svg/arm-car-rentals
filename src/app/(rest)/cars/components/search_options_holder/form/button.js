@@ -4,7 +4,7 @@ export default function Button({ disabled }) {
       <button
         type="submit"
         disabled={disabled}
-        className="w-full h-[50px] bg-secondary rounded text-white font-medium md:w-80 hover:bg-secondaryLight disabled:bg-secondaryLight"
+        className="w-full h-[50px] bg-secondary rounded-lg text-white font-medium md:w-80 hover:bg-secondaryLight disabled:bg-secondaryLight"
       >
         Search
       </button>

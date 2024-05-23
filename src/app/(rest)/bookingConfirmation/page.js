@@ -30,6 +30,7 @@ const confirmTrip = async (tripId, token) => {
     } else if (response.status === 400) {
       return { message: "unavailable" };
     } else if (response.status === 201) {
+      const data = await response.json();
       return data.data;
     }
   } catch (error) {

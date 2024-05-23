@@ -2,7 +2,7 @@ export default function PolicyHolder() {
   return (
     <div
       id="policies"
-      className="w-full px-3 py-3 text-primary bg-white flex flex-col items-center justify-center gap-3 rounded shadow"
+      className="w-full px-3 py-3 text-primary bg-white flex flex-col items-center justify-center gap-3 border-[1px] border-slate-200 rounded-2xl shadow"
     >
       <div className="w-full font-bold">
         <p>Rental Policies</p>

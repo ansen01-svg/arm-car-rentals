@@ -153,15 +153,17 @@ export default function Main({ bookings }) {
         tableHeadValues={bookingsTableHeadValues}
         handleTableRowClick={handleTableRowClick}
       />
-      <PaginationHolder
-        currentPage={currentPage}
-        handlePrevBtn={handlePrevPage}
-        handleNextBtn={handleNextPage}
-        disablePrevBtn={currentPage === 1}
-        disableNextBtn={
-          currentPage === totalPages || renderedItems.length === 0
-        }
-      />
+      {filteredBookings.length > itemsPerPage && (
+        <PaginationHolder
+          currentPage={currentPage}
+          handlePrevBtn={handlePrevPage}
+          handleNextBtn={handleNextPage}
+          disablePrevBtn={currentPage === 1}
+          disableNextBtn={
+            currentPage === totalPages || renderedItems.length === 0
+          }
+        />
+      )}
       <DialogBox
         open={open}
         handleClose={handleClose}

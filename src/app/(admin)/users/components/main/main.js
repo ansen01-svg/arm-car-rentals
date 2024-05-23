@@ -153,15 +153,17 @@ export default function Main({ users }) {
         tableHeadValues={usersTableHeadValues}
         handleTableRowClick={handleTableRowClick}
       />
-      <PaginationHolder
-        currentPage={currentPage}
-        handlePrevBtn={handlePrevPage}
-        handleNextBtn={handleNextPage}
-        disablePrevBtn={currentPage === 1}
-        disableNextBtn={
-          currentPage === totalPages || renderedItems.length === 0
-        }
-      />
+      {filteredUsers.length > itemsPerPage && (
+        <PaginationHolder
+          currentPage={currentPage}
+          handlePrevBtn={handlePrevPage}
+          handleNextBtn={handleNextPage}
+          disablePrevBtn={currentPage === 1}
+          disableNextBtn={
+            currentPage === totalPages || renderedItems.length === 0
+          }
+        />
+      )}
       <DialogBox
         open={open}
         handleClose={handleClose}

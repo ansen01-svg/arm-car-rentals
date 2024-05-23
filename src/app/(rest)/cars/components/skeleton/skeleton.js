@@ -9,7 +9,7 @@ export default function CarsPageSkeleton() {
     <div className="w-full py-3">
       {mobileScreen && (
         <div className="w-full px-3 py-3 lg:px-20 flex justify-center content-center">
-          <div className="w-full h-10 bg-white rounded md:w-80"></div>
+          <div className="w-full h-10 bg-white border-[1px] border-slate-200 rounded-lg md:w-80"></div>
         </div>
       )}
       <div className="w-full px-3 flex flex-row items-start justify-center gap-12 lg:px-20 md:py-7">
@@ -41,7 +41,7 @@ function CarsHolder() {
 
 function Card() {
   return (
-    <div className="w-full px-1 py-1 bg-white rounded shadow relative md:h-56 md:hover:shadow-md">
+    <div className="w-full px-1 py-1 bg-white rounded-2xl shadow relative md:h-56 md:hover:shadow-md">
       <div className="w-full px-3 py-5 flex flex-row items-start content-center gap-6 md:flex-row-reverse">
         <div className="flex-1 flex flex-col items-start content-center gap-2">
           <Skeleton

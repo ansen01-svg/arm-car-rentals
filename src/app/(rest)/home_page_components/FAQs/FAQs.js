@@ -20,7 +20,7 @@ export default function FAQsHolder() {
       <div className="w-full text-left">
         <h1 className="text-slate-400 text-xl font-bold md:text-3xl">FAQs</h1>
       </div>
-      <div className="w-full bg-white rounded shadow-sm">
+      <div className="w-full bg-white border-[1px] border-slate-200 rounded-2xl shadow-sm">
         {faqsTexts.map((textObj) => {
           if (tabletScreen) {
             return (

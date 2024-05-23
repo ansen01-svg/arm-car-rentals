@@ -35,6 +35,7 @@ export default function FieldHolder(props) {
           style: {
             color: "#24272c",
             fontSize: "14px",
+            borderRadius: "8px",
             // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
           },
         }}
