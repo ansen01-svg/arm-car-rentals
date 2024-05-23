@@ -110,7 +110,7 @@ function ReserveButton(props) {
   return (
     <div className="px-3">
       <button
-        className="w-28 h-10 text-[14px] text-secondary border-[1px] border-secondary rounded-sm"
+        className="w-28 h-10 text-[14px] text-secondary border-[1px] border-secondary rounded-lg"
         disabled={id === disableBtnId}
         onClick={() => handleClick(id)}
       >

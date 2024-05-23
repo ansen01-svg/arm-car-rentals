@@ -75,10 +75,10 @@ export default function Trips({ trips }) {
         sx={{
           ".MuiPaper-root": {
             maxWidth: "500px",
+            borderRadius: "12px",
           },
           ".MuiTypography-root": {
             fontSize: "15px",
-            // fontFamily: "__Inter_aaf875, __Inter_Fallback_aaf875",
             color: "#000",
           },
           ".MuiDialogActions-root": {
@@ -98,13 +98,13 @@ export default function Trips({ trips }) {
         </DialogContent>
         <DialogActions>
           <button
-            className="w-[70%] py-[6px] bg-secondary text-[white] text-[14px] font-semibold rounded hover:bg-secondaryLight disabled:bg-secondaryLight"
+            className="w-[70%] py-[6px] bg-secondary text-[white] text-[14px] font-semibold rounded-lg hover:bg-secondaryLight disabled:bg-secondaryLight"
             onClick={cancelBooking}
           >
             {btnTitle1}
           </button>
           <button
-            className="w-[70%] py-[6px] text-primary text-[14px] font-semibold rounded hover:bg-primary"
+            className="w-[70%] py-[6px] text-primary text-[14px] font-semibold rounded-lg hover:bg-primary"
             onClick={keepBooking}
           >
             {btnTitle2}

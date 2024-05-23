@@ -22,13 +22,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body className={inter.className}>
-//         <div role="main">Website is under maintainance.</div>
-//       </body>
-//     </html>
-//   );
-// }

@@ -1,12 +1,12 @@
 import "../styles/picker_holder.css";
+import { useMediaQuery } from "@mui/material";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
-import useWindowWidth from "@/app/_lib/frontend/hooks/useWindowWidth";
 
 export default function TimepickerHolder(props) {
   const { labelTitle, value, handleChange, timeError } = props;
 
-  const { mobileScreen } = useWindowWidth();
+  const mobileScreen = useMediaQuery("(max-width:1024px)");
 
   return (
     <div className={`picker-holder ${timeError ? "error" : ""}`}>

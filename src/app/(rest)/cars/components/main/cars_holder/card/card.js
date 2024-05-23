@@ -16,7 +16,7 @@ export default function Card(props) {
   }, []);
 
   return (
-    <div className="w-full px-1 py-1 bg-white rounded shadow relative md:h-56 md:hover:shadow-md">
+    <div className="w-full px-1 py-1 bg-white rounded-2xl border-[1px] border-slate-200 shadow relative md:h-56 md:hover:shadow-md">
       <CardContent
         car={car}
         disableBtnId={disableBtnId}

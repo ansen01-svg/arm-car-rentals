@@ -132,7 +132,7 @@ export default function FormHoler() {
   };
 
   return (
-    <div className="w-full h-full px-6 py-10 flex flex-col gap-5 bg-white relative z-30 md:rounded">
+    <div className="w-full h-full px-6 py-10 flex flex-col gap-5 bg-white relative z-30 md:rounded-2xl">
       <FormHeader />
       {fieldsError && <ErrorMsgHolder fieldsError={fieldsError} />}
       <Form

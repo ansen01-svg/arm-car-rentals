@@ -4,7 +4,7 @@ const headerTitle = "Important information";
 
 export default function ImportantInfo() {
   return (
-    <div className="w-full px-3 py-5 bg-white rounded relative shadow">
+    <div className="w-full px-3 py-5 bg-white rounded-2xl border-[1px] border-slate-200 relative shadow">
       <div className="w-full flex flex-col items-center justify-center gap-5">
         <Header headerTitle={headerTitle} />
         <Ul />

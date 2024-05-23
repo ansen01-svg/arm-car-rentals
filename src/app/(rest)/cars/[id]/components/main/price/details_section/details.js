@@ -16,7 +16,7 @@ export default function PriceDetails(props) {
   const totalCost = parseInt(car.rate) * parseInt(days) + tax + fees;
 
   return (
-    <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-5 bg-white rounded shadow lg:px-6 lg:py-6">
+    <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-5 border-[1px] border-slate-200 bg-white rounded-2xl shadow lg:px-6 lg:py-6">
       <Header />
       <PriceBreakup price={car.rate} days={days} totalCost={totalCost} />
       <div className="w-full h-[1px] bg-slate-200"></div>
