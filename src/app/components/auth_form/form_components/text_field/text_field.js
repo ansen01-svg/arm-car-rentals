@@ -19,13 +19,13 @@ export default function Field(props) {
           disableUnderline: true,
           style: {
             fontSize: "15px",
-            fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
+            // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
           },
         }}
         sx={{
           ".MuiFormLabel-root": {
             fontSize: "15px",
-            fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
+            // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             color: "#666",
             fontWeight: 600,
           },
@@ -33,6 +33,9 @@ export default function Field(props) {
             "&.Mui-focused": {
               color: "#666",
             },
+          },
+          "& input:-webkit-autofill": {
+            WebkitBoxShadow: "0 0 0 1000px white inset",
           },
         }}
       />

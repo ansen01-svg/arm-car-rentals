@@ -65,15 +65,13 @@ export default function Main(props) {
         return;
       }
 
-      const data = await response.json();
-      console.log(data);
-      setDisableBtn(false);
       enqueueSnackbar("Row deleted", { variant: "success" });
       router.push("/fleet");
-      revalidateAction("/fleet");
-      revalidateAction("/cars");
+      await revalidateAction("/fleet");
+      await revalidateAction("/cars");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
       setDisableBtn(false);
     }
   };

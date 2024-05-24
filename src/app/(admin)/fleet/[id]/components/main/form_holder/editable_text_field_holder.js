@@ -32,6 +32,9 @@ const EditableTextField = forwardRef(function EditableTextField(props, ref) {
               border: "1px solid #666",
             },
           },
+          "& input:-webkit-autofill": {
+            WebkitBoxShadow: "0 0 0 1000px white inset",
+          },
         }}
       />
     </div>
