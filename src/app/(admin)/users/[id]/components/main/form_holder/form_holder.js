@@ -56,13 +56,12 @@ export default function FormHolder({ user }) {
         return;
       }
 
-      setIsEditing(false);
-      setDisableBtn(false);
       enqueueSnackbar("Row saved", { variant: "success" });
       router.push("/users");
-      revalidateAction("/users");
+      await revalidateAction("/users");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
       setIsEditing(false);
       setDisableBtn(false);
     }

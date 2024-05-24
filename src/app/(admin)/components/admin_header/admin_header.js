@@ -3,7 +3,7 @@ import Logo from "@/app/components/header/logo/logo";
 import Popover from "@mui/material/Popover";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { SignOutBtnHolder } from "@/app/components/header/user_modal/authenticated_content";
+import SignOutBtnHolder from "../desktop_aside/signout_btn";
 
 export default function AdminHeader(props) {
   const { toggleDrawer, user } = props;
@@ -62,7 +62,7 @@ const UserIcon = ({ user }) => {
           horizontal: "right",
         }}
       >
-        <div className="w-[95px] py-3 flex items-center justify-center">
+        <div className="py-3 flex items-center justify-center">
           <SignOutBtnHolder handleClose={handleClose} />
         </div>
       </Popover>

@@ -5,9 +5,10 @@ export default function ImgHolder({ url }) {
     <div className="w-[165px] h-[83px] relative">
       <Image
         src={url}
-        alt="car-pic"
-        fill={true}
-        sizes="(max-width:200px), 10vw"
+        alt="car image"
+        fill
+        // sizes="(max-width:640px), 10vw"
+        sizes="165px"
         quality={80}
         style={{ objectFit: "cover" }}
       />

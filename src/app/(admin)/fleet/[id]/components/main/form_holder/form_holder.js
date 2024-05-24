@@ -66,8 +66,8 @@ export default function FormHolder(props) {
 
       enqueueSnackbar("Row saved", { variant: "success" });
       router.push("/fleet");
-      revalidateAction("/fleet");
-      revalidateAction("/cars");
+      await revalidateAction("/fleet");
+      await revalidateAction("/cars");
     } catch (error) {
       console.error("Request failed:", error);
     } finally {
