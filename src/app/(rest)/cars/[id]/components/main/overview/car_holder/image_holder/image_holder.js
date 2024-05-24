@@ -9,7 +9,8 @@ export default function ImageHolder(props) {
         src={src}
         alt="car image"
         fill={true}
-        sizes="(max-width: 640px) 10vw, 165px"
+        // sizes="(max-width: 640px) 10vh, 165px"
+        sizes="165px"
         quality={80}
         style={{ objectFit: "cover" }}
       />

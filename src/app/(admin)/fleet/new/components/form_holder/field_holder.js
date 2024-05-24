@@ -34,6 +34,9 @@ export default function FieldHolder(props) {
                 // border: "1px solid #f75d34",
               },
             },
+            "& input:-webkit-autofill": {
+              WebkitBoxShadow: "0 0 0 1000px white inset",
+            },
           }}
         />
       </div>

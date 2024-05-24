@@ -7,7 +7,7 @@ export default function ImgHolder({ url }) {
         src={url}
         alt="car image"
         fill
-        // sizes="(max-width:640px), 10vw"
+        // sizes="(max-width:640px) 10vw, 165px"
         sizes="165px"
         quality={80}
         style={{ objectFit: "cover" }}
