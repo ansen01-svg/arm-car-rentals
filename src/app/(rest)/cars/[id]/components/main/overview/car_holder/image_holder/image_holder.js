@@ -4,12 +4,12 @@ export default function ImageHolder(props) {
   const { src } = props;
 
   return (
-    <div className="w-[168px] h-[102px] relative lg:w-[202px]">
+    <div className="w-[165px] h-[83px] relative">
       <Image
         src={src}
         alt="car image"
         fill={true}
-        sizes="(max-width: 640px) 10vw, 168px"
+        sizes="(max-width: 640px) 10vw, 165px"
         quality={80}
         style={{ objectFit: "cover" }}
       />
