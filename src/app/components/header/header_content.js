@@ -53,6 +53,7 @@ export default function HeaderContent(props) {
           vertical: "top",
           horizontal: "right",
         }}
+        sx={{ ".MuiPaper-root": { borderRadius: "12px" } }}
       >
         {user ? (
           <AuthenticatedContent

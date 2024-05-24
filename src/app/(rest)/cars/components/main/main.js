@@ -18,7 +18,7 @@ export default function Main(props) {
 
   return (
     <div className="w-full px-3 flex flex-row items-start justify-center gap-12 lg:px-20 md:py-7">
-      {desktopScreen && (
+      {desktopScreen && cars.length > 0 && (
         <FilterSectionWrapper>
           <DesktopFilterSection
             filters={filters}
@@ -52,7 +52,7 @@ function FiltersAndCarsWrapper(props) {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-7 flex-1">
+    <div className="flex-1 flex flex-col items-center justify-center gap-7">
       {filtersArr.length > 0 && (
         <FilterOptionsDisplayHolder filters={filters} setFilters={setFilters} />
       )}

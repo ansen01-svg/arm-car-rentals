@@ -1,3 +1,17 @@
+/* layout styles */
+.display-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.grow-width {
+  flex: 1;
+}
+
 #highlightText {
   /* color: "#2176ae"; */
   color: "red";

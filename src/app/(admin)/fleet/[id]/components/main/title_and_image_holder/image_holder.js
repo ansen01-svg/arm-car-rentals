@@ -8,7 +8,7 @@ export default function ImageHolder({ src }) {
           src={src}
           alt="car-pic"
           fill={true}
-          sizes="(max-width:200px), 10vw"
+          sizes="(max-width:640px) 10vh, 165px"
           quality={80}
           style={{ objectFit: "cover" }}
         />

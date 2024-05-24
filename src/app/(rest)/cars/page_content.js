@@ -29,11 +29,14 @@ export default function PageContent(props) {
         if (data.data) {
           setCars(data.data);
         } else {
-          console.log(data);
+          console.error(data);
           setCars([]);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.error(error);
+        setCars([]);
+      });
   };
 
   // fetch cars on load

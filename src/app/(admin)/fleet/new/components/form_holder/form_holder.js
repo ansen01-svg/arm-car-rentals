@@ -72,12 +72,12 @@ export default function FormHolder() {
         rate: "",
         image: "",
       });
-      setDisableBtn(false);
       router.push("/fleet");
-      revalidateAction("/fleet");
-      revalidateAction("/cars");
+      await revalidateAction("/fleet");
+      await revalidateAction("/cars");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
       setDisableBtn(false);
     }
   };

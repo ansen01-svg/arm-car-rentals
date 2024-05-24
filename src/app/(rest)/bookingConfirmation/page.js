@@ -18,7 +18,7 @@ const confirmTrip = async (tripId, token) => {
       `${process.env.NEXT_PUBLIC_DOMAIN}/api/booking/confirmBooking`,
       {
         method: "POST",
-        headers: { "Content-Type": "application-json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tripId, token }),
       }
     );
@@ -33,14 +33,17 @@ const confirmTrip = async (tripId, token) => {
       const data = await response.json();
       return data.data;
     }
+
+    return { message: "unknown" };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return { message: "error" };
   }
 };
 
 export default async function Bookingconfirmation({ searchParams }) {
   // revalidate current path to bring in fresh trip data with itinerary number and other details
-  revalidateAction(`/bookingConfirmation?tripId=${searchParams.tripId}`);
+  await revalidateAction(`/bookingConfirmation?tripId=${searchParams.tripId}`);
 
   const token = cookies().get("token")?.value || "";
 
@@ -48,10 +51,10 @@ export default async function Bookingconfirmation({ searchParams }) {
   const data = await confirmTrip(searchParams.tripId, token);
 
   // revalidate pages
-  revalidateAction("/trips");
-  revalidateAction("/bookings");
-  revalidateAction("/users");
-  revalidateAction("/fleet");
+  await revalidateAction("/trips");
+  await revalidateAction("/bookings");
+  await revalidateAction("/users");
+  await revalidateAction("/fleet");
 
   return (
     <div className="max-w-full bg-primary">

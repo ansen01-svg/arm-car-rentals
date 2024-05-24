@@ -67,14 +67,13 @@ export default function FormHolder({ booking }) {
         return;
       }
 
-      setIsEditing(false);
-      setDisableBtn(false);
       enqueueSnackbar("Row saved", { variant: "success" });
       router.push("/bookings");
-      revalidateAction("/bookings");
-      revalidateAction("/trips");
+      await revalidateAction("/bookings");
+      await revalidateAction("/trips");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
       setIsEditing(false);
       setDisableBtn(false);
     }

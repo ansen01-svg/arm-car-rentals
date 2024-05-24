@@ -7,11 +7,11 @@ export default function ImageHolder(props) {
     <div className="w-[168px] h-[102px] relative lg:w-[202px]">
       <Image
         src={src}
-        alt="car"
+        alt="car image"
         fill={true}
-        sizes="(max-width:200px), 10vw"
+        sizes="(max-width: 640px) 10vw, 168px"
         quality={80}
-        style={{ objectFit: "contain" }}
+        style={{ objectFit: "cover" }}
       />
     </div>
   );

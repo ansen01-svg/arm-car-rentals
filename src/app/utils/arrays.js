@@ -29,7 +29,7 @@ export const workingsTexts = [
     id: 1,
     title: "Sign up",
     icon: <LoginIcon fontSize="large" sx={{ color: "#2176ae" }} />,
-    text: "Create your account.",
+    text: "Create an account for a seamless experience.",
   },
   {
     id: 2,
@@ -40,15 +40,13 @@ export const workingsTexts = [
         sx={{ color: "#2176ae" }}
       />
     ),
-    text: "Choose your desired car.",
+    text: "Choose your desired car from our fleet.",
   },
   {
     id: 3,
     title: "Finalize booking",
-    icon: (
-      <AssignmentIndOutlinedIcon fontSize="large" sx={{ color: "#2176ae" }} />
-    ),
-    text: "Add your documents and information and complete your booking.",
+    icon: <AssignmentOutlinedIcon fontSize="large" sx={{ color: "#2176ae" }} />,
+    text: "Add your informations and complete your booking.",
   },
   {
     id: 4,
