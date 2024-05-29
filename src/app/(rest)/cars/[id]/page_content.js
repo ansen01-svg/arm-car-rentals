@@ -181,7 +181,7 @@ export default function PageContent(props) {
 function InProgress({ animationClass }) {
   return (
     <div
-      className={`px-2 py-2 bg-white flex items-center justify-center rounded-full fixed bottom-[0] left-[50%] translate-x-[50%] shadow-xl ${animationClass}`}
+      className={`px-2 py-2 bg-white flex items-center justify-center rounded-full fixed bottom-[0] left-[calc(50%-25.5px)] translate-x-[calc(50%-25.5px)] shadow-xl ${animationClass}`}
     >
       <CircularProgress size={35} thickness={6} />
     </div>

@@ -1,34 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Error from "@/app/(rest)/checkout/components/error/error";
+import Header from "../signup/components/header/header";
 import AuthForm from "@/app/components/auth_form/auth_form";
 import LinkHolder from "../signup/components/link_holder/link_holder";
-import Header from "../signup/components/header/header";
 
-export default function Content() {
-  const [email, setEmail] = useState("");
+const errorMsg1 = "Page not found.";
+const errorMsg2 =
+  "We apologize, but we cannot find the page you’re looking for.";
+const errorMsg3 = "home page.";
+
+export default function Content({ token }) {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [disableBtn, setDisableBtn] = useState(false);
-  const [callbackUrl, setCallbackUrl] = useState("");
 
   const router = useRouter();
 
-  useEffect(() => {
-    const currentUrl = window.location.href;
-
-    if (currentUrl.includes("/car")) {
-      setCallbackUrl(currentUrl.split("callbackUrl=")[1]);
-    }
-  }, []);
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -36,44 +33,43 @@ export default function Content() {
     setError("");
     setDisableBtn(true);
 
-    if (!email || !password) {
+    if (!password || !confirmPassword) {
       setError("Please fill up all the fields.");
+      setDisableBtn(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Password does not match.");
       setDisableBtn(false);
       return;
     }
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/signin`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/confirm_password`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
-            password: password,
+            password,
+            token,
           }),
         }
       );
 
-      if (response.status !== 200) {
+      if (response.status !== 201) {
         const data = await response.json();
         setError(data.error);
         setDisableBtn(false);
         return;
       }
 
-      if (callbackUrl) {
-        router.push(callbackUrl);
-        router.refresh();
-      } else {
-        window.location.reload();
-        router.push("/");
-      }
-
-      setEmail("");
       setPassword("");
+      setConfirmPassword("");
+      router.push("/signin");
     } catch (error) {
       console.error(error);
       setError("An error ocurred, try again after sometime.");
@@ -82,32 +78,35 @@ export default function Content() {
     }
   };
 
+  if (!token) {
+    return (
+      <div className="w-full px-3 py-3 flex flex-col items-center justify-center gap-5 md:flex-row-reverse md:items-start lg:px-20 lg:py-6">
+        <Error
+          errorMsg1={errorMsg1}
+          errorMsg2={errorMsg2}
+          errorMsg3={errorMsg3}
+          link={"/"}
+          linkTitle={"Go to"}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="w-[352px] max-w-[352px] h-full flex flex-col items-center justify-center gap-4">
-      <Header title={"Sign in with email"} />
+      <Header title={"Reset Password"} />
       <AuthForm
-        email={email}
         password={password}
-        handleEmailChange={handleEmailChange}
+        confirmPassword={confirmPassword}
         handlePasswordChange={handlePasswordChange}
+        handleConfirmPasswordChange={handleConfirmPasswordChange}
         handleSubmit={handleSubmit}
         error={error}
         setError={setError}
         disableBtn={disableBtn}
-        btnTitle="Sign in"
+        btnTitle="Submit"
       />
-      <div className="w-full flex flex-col items-center justify-center gap-2">
-        <LinkHolder
-          linkText={"or"}
-          linkTo={"/resetPassword"}
-          linkTitle={"Forgot Password"}
-        />
-        <LinkHolder
-          linkText={`Don't have an account?`}
-          linkTo={"/signup"}
-          linkTitle={"Sign up"}
-        />
-      </div>
+      <LinkHolder linkText={`or`} linkTo={"/signin"} linkTitle={"Sign in"} />
     </div>
   );
 }

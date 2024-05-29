@@ -1,5 +1,5 @@
-import connectDb from "@/mongo_config/mongo_config";
 import { NextResponse } from "next/server";
+import connectDb from "@/mongo_config/mongo_config";
 import User from "@/models/user/user";
 
 connectDb();
@@ -30,7 +30,7 @@ export async function POST(request) {
       {
         message: "Your email has been successfully verified",
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

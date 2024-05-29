@@ -1,8 +1,8 @@
-import connectDb from "../../../../mongo_config/mongo_config";
-import User from "@/models/user/user";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import sendVerificationEmail from "@/app/services/mailgun/password_reset_email";
+import connectDb from "../../../../mongo_config/mongo_config";
+import User from "@/models/user/user";
+import sendVerificationEmail from "@/app/services/brevo/verificationEmail";
 
 connectDb();
 
@@ -16,7 +16,10 @@ export async function POST(request) {
 
     // check if user is valid
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Cannot find a user with this email." },
+        { status: 400 }
+      );
     }
 
     // if user is valid-
@@ -25,7 +28,7 @@ export async function POST(request) {
 
     // attach token to user
     user.passwordResetToken = hashedToken;
-    user.passwordResetTokenExpiry = Date.now() + 3600000;
+    user.passwordResetTokenExpiry = new Date(Date.now() + 172800000);
     await user.save();
 
     // send password reset email

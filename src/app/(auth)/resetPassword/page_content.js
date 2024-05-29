@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Header from "./components/header/header";
+import Header from "../signup/components/header/header";
 import AuthForm from "@/app/components/auth_form/auth_form";
-import LinkHolder from "./components/link_holder/link_holder";
+import LinkHolder from "../signup/components/link_holder/link_holder";
 
 export default function Content() {
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ export default function Content() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setDisableBtn(true);
 
     if (!email) {
@@ -35,23 +36,25 @@ export default function Content() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
+            email,
           }),
         }
       );
 
-      if (response.status === 200) {
-        setError("");
-        setEmail("");
-        setDisableBtn(false);
-        setHideMainContent(true);
-      } else {
+      if (response.status !== 200) {
         const data = await response.json();
         setError(data.error);
         setDisableBtn(false);
+        return;
       }
+
+      setEmail("");
+      setHideMainContent(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      setError("An error occured. Try again after sometime.");
+    } finally {
+      setDisableBtn(false);
     }
   };
 
@@ -76,9 +79,9 @@ export default function Content() {
 function FormContent(props) {
   return (
     <div className="w-full flex flex-col items-center justify-center gap-4">
-      <Header />
+      <Header title={"Forgot Password"} />
       <AuthForm {...props} btnTitle="Reset Password" />
-      <LinkHolder />
+      <LinkHolder linkText={"or"} linkTo={"/signin"} linkTitle={"Sign in"} />
     </div>
   );
 }
@@ -87,7 +90,7 @@ const text2 = `You should soon receive an email allowing you to reset your passw
 
 function MessageContent() {
   return (
-    <div className="w-full px-4 py-5 flex flex-row items-start justify-center gap-4 bg-[#acd2cc] rounded">
+    <div className="w-full px-4 py-5 flex flex-row items-start justify-center gap-4 bg-[#acd2cc] rounded-lg">
       <div>
         <CheckCircleIcon />
       </div>
