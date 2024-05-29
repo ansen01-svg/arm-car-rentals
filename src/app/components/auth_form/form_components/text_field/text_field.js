@@ -1,10 +1,10 @@
 import TextField from "@mui/material/TextField";
 
 export default function Field(props) {
-  const { value, handleChange, label, type, name } = props;
+  const { value, handleChange, label, type, name, handleClick, icon } = props;
 
   return (
-    <div className="w-full h-[60px] px-4 pt-1 border-[1px] border-slate-200 rounded-lg">
+    <div className="w-full flex items-center justify-items-center h-[60px] px-4 pt-1 border-[1px] border-slate-200 rounded-lg">
       <TextField
         id={name}
         variant="standard"
@@ -19,13 +19,11 @@ export default function Field(props) {
           disableUnderline: true,
           style: {
             fontSize: "15px",
-            // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
           },
         }}
         sx={{
           ".MuiFormLabel-root": {
             fontSize: "15px",
-            // fontFamily: "__Inter_e66fe9,__Inter_Fallback_e66fe9",
             color: "#666",
             fontWeight: 600,
           },
@@ -39,6 +37,15 @@ export default function Field(props) {
           },
         }}
       />
+      {icon && value && (
+        <button
+          className="px-1 py-1 flex items-center justify-center text-gray2 rounded-full hover:bg-primary hover:text-primary"
+          type="button"
+          onClick={handleClick}
+        >
+          {icon}
+        </button>
+      )}
     </div>
   );
 }

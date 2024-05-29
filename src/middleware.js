@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 import verifySession from "./app/_lib/global/data_access_layer";
 
-const publicPath = ["/signin", "/signup", "/resetPassword"];
-const privatePath = [
-  "/trips",
-  "/checkout",
-  "/bookingConfirmation",
-  "/emailVerification",
-];
 const adminPath = ["/fleet", "/users", "/bookings"];
+const privatePath = ["/trips", "/checkout", "/bookingConfirmation"];
+const publicPath = [
+  "/signin",
+  "/signup",
+  "/verify_email",
+  "/resetPassword",
+  "/reset_password",
+];
 
 export async function middleware(request) {
   const path = request.nextUrl.pathname;
@@ -23,14 +24,17 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
   }
 
-  if (isPublicPath && token) {
+  // if user is logged in and tries to access public(auth) pages except for "/verify_email"
+  if (isPublicPath && token && path !== "/verify_email") {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
+  // if user is not logged in and tries to access private pages
   if (isPrivatePath && !token) {
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
   }
 
+  // if user is not admin and tries to access admin pages
   if (isAdminPath && session?.role !== "Admin") {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
@@ -43,8 +47,9 @@ export const config = {
     "/not-found",
     "/signin",
     "/signup",
-    "/emailVerification",
+    "/verify_email",
     "/resetPassword",
+    "/reset_password",
     "/trips",
     "/checkout",
     "/bookingConfirmation",

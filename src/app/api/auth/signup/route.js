@@ -1,8 +1,8 @@
-import connectDb from "../../../../mongo_config/mongo_config";
-import User from "@/models/user/user";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import sendVerificationEmail from "@/app/services/mailgun/password_reset_email";
+import User from "@/models/user/user";
+import connectDb from "../../../../mongo_config/mongo_config";
+import sendVerificationEmail from "@/app/services/brevo/verificationEmail";
 
 connectDb();
 
@@ -58,11 +58,11 @@ export async function POST(request) {
 
     // attach verification tokens and expiry to the user and save
     newUser.verificationToken = hashedToken;
-    newUser.verificationTokenExpiry = Date.now() + 3600000;
+    newUser.verificationTokenExpiry = new Date(Date.now() + 172800000);
     await newUser.save();
 
     // send mail
-    // await sendVerificationEmail(email, "VERIFY-EMAIL", hashedToken);
+    await sendVerificationEmail(email, "VERIFY-EMAIL", hashedToken);
 
     return NextResponse.json({
       message: "User created successfully",

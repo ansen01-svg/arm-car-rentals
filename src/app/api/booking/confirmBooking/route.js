@@ -4,7 +4,7 @@ import Booking from "@/models/booking/booking";
 import User from "@/models/user/user";
 import Car from "@/models/car/car";
 import verifyProvidedToken from "@/app/_lib/backend/verify_provided_token";
-import sendConfirmationEmail from "@/app/services/mailgun/confirmationEmail";
+import sendConfirmationEmail from "@/app/services/brevo/confirmationEmail";
 
 connectDb();
 
@@ -103,7 +103,7 @@ export async function POST(request) {
     };
 
     // send confirmation email
-    // await sendConfirmationEmail(emailOptions);
+    await sendConfirmationEmail(emailOptions);
 
     return NextResponse.json(
       {

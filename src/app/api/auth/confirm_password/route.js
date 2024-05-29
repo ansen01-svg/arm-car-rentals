@@ -1,6 +1,8 @@
-import connectDb from "../../../../mongo_config/mongo_config";
-import User from "@/models/user/user";
 import { NextResponse } from "next/server";
+import bcryptjs from "bcryptjs";
+
+import User from "@/models/user/user";
+import connectDb from "../../../../mongo_config/mongo_config";
 
 connectDb();
 
@@ -17,11 +19,18 @@ export async function POST(request) {
 
     // if user does not exist
     if (!user) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Your password reset link has expired." },
+        { status: 400 }
+      );
     }
 
+    //hash password
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
+
     // update user password and save
-    user.password = password;
+    user.password = hashedPassword;
     user.passwordResetToken = "";
     user.passwordResetTokenExpiry = "";
     await user.save();

@@ -1,6 +1,9 @@
+import { useState } from "react";
 import AuthErrorMsg from "./form_components/auth_error_msg/auth_error_msg";
 import Field from "./form_components/text_field/text_field";
 import Button from "./form_components/button/button";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 export default function AuthForm(props) {
   const {
@@ -19,13 +22,25 @@ export default function AuthForm(props) {
     btnTitle,
   } = props;
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const handleErrorBtnClick = () => {
     setError("");
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
     <form
       className="w-full flex flex-col items-center justify-center gap-4"
+      method="post"
       onSubmit={handleSubmit}
     >
       {error && (
@@ -40,6 +55,10 @@ export default function AuthForm(props) {
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
         handleConfirmPasswordChange={handleConfirmPasswordChange}
+        showPassword={showPassword}
+        showConfirmPassword={showConfirmPassword}
+        handleShowPassword={handleShowPassword}
+        handleShowConfirmPassword={handleShowConfirmPassword}
       />
       <Button disableBtn={disableBtn} title={btnTitle} />
     </form>
@@ -56,8 +75,13 @@ function FieldsHolder(props) {
     handleEmailChange,
     handlePasswordChange,
     handleConfirmPasswordChange,
+    showPassword,
+    showConfirmPassword,
+    handleShowPassword,
+    handleShowConfirmPassword,
   } = props;
 
+  // forgot password fields
   if (password == undefined) {
     return (
       <div className="w-full flex flex-col items-center justify-center gap-2">
@@ -72,6 +96,45 @@ function FieldsHolder(props) {
     );
   }
 
+  // reset password fields
+  if (email == undefined) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center gap-2">
+        <Field
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          name="password"
+          value={password}
+          handleChange={handlePasswordChange}
+          handleClick={handleShowPassword}
+          icon={
+            showPassword ? (
+              <VisibilityIcon fontSize="small" />
+            ) : (
+              <VisibilityOffIcon fontSize="small" />
+            )
+          }
+        />
+        <Field
+          label="Confirm Password"
+          type={showConfirmPassword ? "text" : "password"}
+          name="confirmPassword"
+          value={confirmPassword}
+          handleChange={handleConfirmPasswordChange}
+          handleClick={handleShowConfirmPassword}
+          icon={
+            showConfirmPassword ? (
+              <VisibilityIcon fontSize="small" />
+            ) : (
+              <VisibilityOffIcon fontSize="small" />
+            )
+          }
+        />
+      </div>
+    );
+  }
+
+  // sign in fields
   if (username == undefined) {
     return (
       <div className="w-full flex flex-col items-center justify-center gap-2">
@@ -84,15 +147,24 @@ function FieldsHolder(props) {
         />
         <Field
           label="Password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           name="password"
           value={password}
           handleChange={handlePasswordChange}
+          handleClick={handleShowPassword}
+          icon={
+            showPassword ? (
+              <VisibilityIcon fontSize="small" />
+            ) : (
+              <VisibilityOffIcon fontSize="small" />
+            )
+          }
         />
       </div>
     );
   }
 
+  // sign up fields
   return (
     <div className="w-full flex flex-col items-center justify-center gap-2">
       <Field
@@ -111,17 +183,33 @@ function FieldsHolder(props) {
       />
       <Field
         label="Password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         name="password"
         value={password}
         handleChange={handlePasswordChange}
+        handleClick={handleShowPassword}
+        icon={
+          showPassword ? (
+            <VisibilityIcon fontSize="small" />
+          ) : (
+            <VisibilityOffIcon fontSize="small" />
+          )
+        }
       />
       <Field
         label="Confirm Password"
-        type="password"
+        type={showConfirmPassword ? "text" : "password"}
         name="confirmPassword"
         value={confirmPassword}
         handleChange={handleConfirmPasswordChange}
+        handleClick={handleShowConfirmPassword}
+        icon={
+          showConfirmPassword ? (
+            <VisibilityIcon fontSize="small" />
+          ) : (
+            <VisibilityOffIcon fontSize="small" />
+          )
+        }
       />
     </div>
   );

@@ -34,6 +34,7 @@ export default function Content() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setDisableBtn(true);
 
     if (!username || !email || !password || !confirmPassword) {
@@ -64,15 +65,7 @@ export default function Content() {
         }
       );
 
-      if (response.status === 200) {
-        router.push("/signin");
-        setError("");
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        setDisableBtn(false);
-      } else {
+      if (response.status !== 200) {
         const data = await response.json();
 
         if (data.error.includes("user validation")) {
@@ -81,16 +74,27 @@ export default function Content() {
         } else {
           setError(data.error);
         }
+
         setDisableBtn(false);
+        return;
       }
+
+      router.push("/signin");
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      setError("An error occured. Try again after sometime.");
+    } finally {
+      setDisableBtn(false);
     }
   };
 
   return (
     <div className="w-[352px] max-w-[352px] h-full flex flex-col items-center justify-center gap-4">
-      <Header />
+      <Header title={"Create an account"} />
       <AuthForm
         username={username}
         email={email}
@@ -106,7 +110,11 @@ export default function Content() {
         disableBtn={disableBtn}
         btnTitle="Sign up"
       />
-      <LinkHolder />
+      <LinkHolder
+        linkText={"Already have an account?"}
+        linkTo={"/signin"}
+        linkTitle={"Sign in"}
+      />
     </div>
   );
 }
