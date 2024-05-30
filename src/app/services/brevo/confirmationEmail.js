@@ -19,7 +19,7 @@ const sendConfirmationEmail = async ({
     The ARM team</p></body></html>`;
 
   const payload = {
-    sender: { email: "no-reply@car-lease.com", name: "Mozil" },
+    sender: { email: "no-reply@carko.in", name: "team@carko.in" },
     to: [{ email }],
     subject,
     htmlContent: emailContent,
