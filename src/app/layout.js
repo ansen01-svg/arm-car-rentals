@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import DateLocalizationProvider from "./components/date_localization_provider/date_localization_provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <div role="main">
           <DateLocalizationProvider>{children}</DateLocalizationProvider>
         </div>
+        <Analytics />
       </body>
     </html>
   );
