@@ -42,7 +42,7 @@ function CarDetails({ car }) {
 function TitleHolder({ type }) {
   return (
     <div className="w-full">
-      <p className="font-medium">{type}</p>
+      <h1 className="font-medium">{type}</h1>
     </div>
   );
 }
@@ -81,7 +81,7 @@ function CarDetailsHolder(props) {
         </div>
       </div>
       <div className="w-full">
-        <p className="font-bold text-[18px] text-primary">Rs {rate}</p>
+        <h2 className="font-bold text-[18px] text-primary">Rs {rate}</h2>
         <p className="text-[12px] text-primary">per day</p>
       </div>
     </div>

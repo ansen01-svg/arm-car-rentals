@@ -20,7 +20,7 @@ export default function FiltersSection(props) {
 function TitleHolder({ title }) {
   return (
     <div className="w-full flex flex-row items-center justify-start">
-      <p className="font-bold text-sm text-primary">{title}</p>
+      <h2 className="font-bold text-sm text-primary">{title}</h2>
     </div>
   );
 }

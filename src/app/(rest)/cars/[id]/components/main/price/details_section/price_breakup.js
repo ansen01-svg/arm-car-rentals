@@ -12,7 +12,7 @@ export default function PriceBreakup(props) {
 function Header() {
   return (
     <div className="w-full">
-      <p className="text-[14px] font-bold">Pay at pick-up</p>
+      <h2 className="text-[14px] font-bold">Pay at pick-up</h2>
     </div>
   );
 }

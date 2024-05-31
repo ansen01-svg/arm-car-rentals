@@ -20,7 +20,7 @@ function CloseButtonAndTitleHolder({ setShowFilterModal }) {
       <button onClick={() => setShowFilterModal(false)}>
         <CloseOutlinedIcon fontSize="medium" />
       </button>
-      <p className="font-medium text-[15px]">Sort & Filter</p>
+      <h1 className="font-medium text-[15px]">Sort & Filter</h1>
     </div>
   );
 }
