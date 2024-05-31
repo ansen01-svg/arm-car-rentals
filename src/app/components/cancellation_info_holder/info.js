@@ -3,7 +3,7 @@ export default function Info(props) {
 
   return (
     <div className="flex-1">
-      <p className="font-bold text-[14px]">{title1}</p>
+      <h1 className="font-bold text-[14px]">{title1}</h1>
       <p className="text-primary  text-[12px] md:text-[14px]">{title2}</p>
     </div>
   );

@@ -16,7 +16,7 @@ export default function TabContent(props) {
         className={`flex-1 flex flex-col items-center justify-center gap-2 text-container`}
       >
         <div className="w-full text-left">
-          <p className="font-semibold text-[15px] text-primary">{title}</p>
+          <h2 className="font-semibold text-[15px] text-primary">{title}</h2>
         </div>
         <div
           className={`w-full text-left max-h[${isExpanded ? "150px" : "50px"}]`}

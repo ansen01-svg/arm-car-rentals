@@ -35,7 +35,7 @@ function FieldsHolder(props) {
   return (
     <div className="text-primary flex flex-col items-start content-center gap-1">
       <div>
-        <p className="font-medium">{address}</p>
+        <h1 className="font-medium">{address}</h1>
       </div>
       <div className="text-xs text-primary flex items-start content-center gap-2">
         {pickupDate && <p>{dayjs(pickupDate).format("DD/MM/YY")},</p>}

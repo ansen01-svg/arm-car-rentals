@@ -17,7 +17,7 @@ function Ul() {
   return (
     <div className="w-full text-primary flex flex-col items-center justify-center gap-3">
       <div className="w-full text-[14px] font-medium">
-        <p>Rental Policies</p>
+        <h2>Rental Policies</h2>
       </div>
       <div className="w-full px-4 text-[12px]">
         <ul className="list-disc">

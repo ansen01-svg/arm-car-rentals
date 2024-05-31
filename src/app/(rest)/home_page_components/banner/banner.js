@@ -7,7 +7,7 @@ export default function Banner() {
     <div className="w-full relative md:px-6 md:py-6 lg:px-20 lg:py-12">
       <Image
         src={img}
-        alt="bg-pic"
+        alt="background-wallpaper"
         fill={true}
         priority
         style={{

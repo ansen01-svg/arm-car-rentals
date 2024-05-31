@@ -1,5 +1,3 @@
-import { ExtraTextsHolder } from "@/app/(rest)/cars/components/main/cars_holder/card/details_holder";
-
 export default function PriceDisplay({ car }) {
   return (
     <div

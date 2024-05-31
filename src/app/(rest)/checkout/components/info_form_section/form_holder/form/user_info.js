@@ -32,8 +32,8 @@ export default function UserInfo(props) {
 
 export function Header({ headerTitle }) {
   return (
-    <div className="w-full text-left text-[20px] text-primary font-semibold">
-      {headerTitle}
+    <div className="w-full text-left">
+      <h1 className="text-[20px] text-primary font-semibold">{headerTitle}</h1>
     </div>
   );
 }

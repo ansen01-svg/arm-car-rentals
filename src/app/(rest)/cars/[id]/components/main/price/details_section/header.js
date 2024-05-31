@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <div className="w-full text-primary">
-      <p className="font-bold">Price details</p>
+      <h1 className="font-bold">Price details</h1>
     </div>
   );
 }
