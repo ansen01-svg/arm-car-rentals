@@ -12,7 +12,7 @@ const sendVerificationEmail = async (email, emailType, token) => {
   }?token=${token}">Click here.</a></p></body></html>`;
 
   const payload = {
-    sender: { email: "no-reply@carko.in", name: "team@carko.in" },
+    sender: { email: "team@carko.in", name: "Carko" },
     to: [{ email }],
     subject,
     htmlContent: emailContent,

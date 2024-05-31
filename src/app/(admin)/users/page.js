@@ -4,7 +4,8 @@ import Main from "./components/main/main";
 import fetchUsers from "@/app/_lib/frontend/fetchUsers";
 
 export const metadata = {
-  title: "Users",
+  title: "Users | Carko.in",
+  description: "Showing all the users of Carko.in.",
 };
 
 export default async function Users() {

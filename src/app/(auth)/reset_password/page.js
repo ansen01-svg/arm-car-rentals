@@ -1,7 +1,9 @@
 import Content from "./page_content";
 
 export const metadata = {
-  title: "Reset your password",
+  title: "Reset Your Password | Carko.in",
+  description:
+    "Create a new password for your Carko.in account. Enter your new password to secure your account and get back to managing your bookings. Reset your password now.",
 };
 
 export default function ResetPassword({ searchParams }) {

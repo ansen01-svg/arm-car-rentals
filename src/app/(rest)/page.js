@@ -4,7 +4,9 @@ import Workings from "./home_page_components/workings/workings";
 import FAQsHolder from "./home_page_components/FAQs/FAQs";
 
 export const metadata = {
-  title: "ARM-cheap car rentals",
+  title: "Affordable Car Rental Services | Carko.in",
+  description:
+    "Discover affordable cars for rental with Carko in Guwahati. Choose from a wide range of vehicles and enjoy great rates. Book your rental today!",
 };
 
 export default async function Home() {

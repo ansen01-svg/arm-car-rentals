@@ -10,7 +10,9 @@ export const generateMetadata = async ({ params }) => {
   return {
     title: user.length
       ? `User: ${capitalizeFirstLetter(user[0].username)}`
-      : "ARM: Error",
+      : "Carko.in: Error",
+    description:
+      "Showing personal details of particular user. Make changes to the user role from the properties below.",
   };
 };
 
