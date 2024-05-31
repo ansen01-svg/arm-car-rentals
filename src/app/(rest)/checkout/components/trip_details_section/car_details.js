@@ -19,7 +19,7 @@ export default function CarDetails({ trip }) {
   return (
     <div className="w-full flex flex-col items-start justify-center gap-4">
       <Header headerTitle={headerTitle} />
-      <div className="text-primary">
+      <div className="text-primary flex flex-col items-start justify-center gap-1">
         <p className="text-[14px] font-semibold">{type}</p>
         <p className="text-[14px] font-medium">{address}</p>
         <div className="text-[12px] flex flex-row items-center justify-center gap-2 md:text-[14px]">

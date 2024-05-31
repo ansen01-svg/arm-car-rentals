@@ -5,6 +5,7 @@ import fetchCars from "@/app/_lib/frontend/fetch_admin_cars";
 
 export const metadata = {
   title: "Fleet",
+  decription: "All the cars available in Carko.in system.",
 };
 
 export default async function Fleet() {

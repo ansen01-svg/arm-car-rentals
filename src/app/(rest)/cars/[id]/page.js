@@ -6,7 +6,14 @@ export const generateMetadata = async ({ params }) => {
   const car = await fetchSingleCar(params.id);
 
   return {
-    title: car.length ? `Details for ${car[0].model}` : "ARM: Error",
+    title: car.length
+      ? "Book self driving car rental in Guwahati with Carko.in."
+      : "ARM: Error",
+    description: `Experience the comfort and style of the ${
+      car.length ? car[0].title : "car"
+    } with Carko.in. Check out features, pricing, and availability. Reserve your ${
+      car.length ? car[0].title : "car"
+    } rental today!`,
   };
 };
 

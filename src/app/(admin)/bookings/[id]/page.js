@@ -7,7 +7,9 @@ export const generateMetadata = async ({ params }) => {
   const booking = await fetchTrip(params.id);
 
   return {
-    title: booking ? `Booking: ${booking._id}` : "ARM: Error",
+    title: booking ? `Booking: ${booking._id}` : "Carko.in: Error",
+    description:
+      "Showing full details of the particular booking. Make changes to the status and other properties from the available fields.",
   };
 };
 

@@ -1,14 +1,15 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import DateLocalizationProvider from "./components/date_localization_provider/date_localization_provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: {
-    default: "ARM",
+    default: "Carko.in",
   },
-  description: "ARM provides car rentals at a cheap rate",
+  description:
+    "Carko.in provides car rentals at a cheap rate. Book your rental now!",
 };
 
 export default function RootLayout({ children }) {

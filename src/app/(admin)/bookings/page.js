@@ -4,7 +4,8 @@ import Main from "./components/main/main";
 import fetchBookings from "@/app/_lib/frontend/fetchBookings";
 
 export const metadata = {
-  title: "Bookings",
+  title: "Bookings | Carko.in",
+  description: "Dispplaying all the bookings made in Carko.in till date.",
 };
 
 export default async function Bookings() {

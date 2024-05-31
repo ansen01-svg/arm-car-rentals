@@ -7,7 +7,12 @@ export const generateMetadata = async ({ params }) => {
   const car = await fetchSingleCar(params.id);
 
   return {
-    title: car.length ? `Details for ${car[0].model}` : "ARM: Error",
+    title: car.length
+      ? `Details for ${car[0].model} | Carko.in`
+      : "Carko.in: Error",
+    description: `Details for car ${
+      car.length ? car[0].title : "car"
+    }. Make changes to the price, availability status and other properties of the car from the details.`,
   };
 };
 

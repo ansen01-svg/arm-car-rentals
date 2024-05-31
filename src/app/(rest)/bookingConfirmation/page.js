@@ -7,7 +7,9 @@ export const generateMetadata = async ({ searchParams }) => {
   const trip = await fetchTrip(searchParams.tripId);
 
   return {
-    title: trip ? "ARM: Confirmation" : "ARM: Not Found",
+    title: trip ? "Booking Confirmation | Carko.in" : "Carko.in: Not Found",
+    description:
+      "Your car rental booking is confirmed! View your booking details and receive important information about your rental. Thank you for choosing Carko.in.",
   };
 };
 
