@@ -20,22 +20,28 @@ export async function middleware(request) {
   const isPrivatePath = privatePath.includes(path);
   const isAdminPath = adminPath.includes(path);
 
-  if (!session.username && !isPublicPath) {
-    return NextResponse.redirect(new URL("/signin", request.nextUrl));
-  }
+  console.log("middleware ran");
+
+  // if (!session.username && !isPublicPath) {
+  //   console.log("condition 1 ran");
+  //   return NextResponse.redirect(new URL("/signin", request.nextUrl));
+  // }
 
   // if user is logged in and tries to access public(auth) pages except for "/verify_email"
   if (isPublicPath && token && path !== "/verify_email") {
+    console.log("public path mdlwre ran");
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
   // if user is not logged in and tries to access private pages
   if (isPrivatePath && !token) {
+    console.log("private path mdlwre ran");
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
   }
 
   // if user is not admin and tries to access admin pages
   if (isAdminPath && session?.role !== "Admin") {
+    console.log("admin path mdlwre ran");
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 

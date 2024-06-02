@@ -7,9 +7,9 @@ export default function Error(props) {
 
   return (
     <div className="w-full h-[355px] px-3 flex flex-col items-center justify-center gap-2">
-      <p className="font-bold">{errorMsg1}</p>
-      <p className="text-primary text-[14px]">{errorMsg2}</p>
-      <p className="text-primary text-[14px]">
+      <p className="font-bold text-center">{errorMsg1}</p>
+      <p className="text-primary text-[14px] text-center">{errorMsg2}</p>
+      <p className="text-primary text-[14px] text-center">
         <Link href={link} className="text-orange-500 underline text-[14px]">
           {linkTitle}
         </Link>
