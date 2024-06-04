@@ -3,7 +3,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
 export default async function PageContent() {
   return (
-    <div className="w-full h-[calc(100vh-64px-224px)] px-5 md:px-6 lg:px-20">
+    <div className="w-full h-[calc(100vh-55px-64px-224px)] px-5 md:h-[calc(100vh-35.5px-64px-224px)] md:px-6 lg:h-[calc(100vh-45px-64px-224px)] lg:px-20">
       <div className="w-full h-[50px] py-2 text-[12px] flex items-start justify-start gap-2">
         <Link href={"/"}>Home</Link>
         <p>{">"}</p>
