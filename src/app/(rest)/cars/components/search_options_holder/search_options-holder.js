@@ -50,7 +50,7 @@ export default function SearchOptionsHolder({ fetchCars }) {
   }, [state.pickupDate]);
 
   return (
-    <div className="w-full bg-white shadow-md">
+    <div className="w-full bg-white sticky top-[56px] left-0 z-50 shadow-md md:top-[64px]">
       {mobileScreen && !showForm && (
         <SearchFieldsHolder
           pickupDate={state.pickupDate}
