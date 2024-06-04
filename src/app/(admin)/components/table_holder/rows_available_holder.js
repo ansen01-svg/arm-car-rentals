@@ -67,6 +67,22 @@ export default function RowsAvailable(props) {
               );
             }
 
+            // if (obj.hasOwnProperty("phoneNumber")) {
+            //   return (
+            //     <TableCell
+            //       component="th"
+            //       scope="row"bh
+            //       key={index}
+            //       sx={{
+            //         fontSize: "13px",
+            //         color: "rgba(36,39,44,.7)",
+            //       }}
+            //     >
+            //       {obj.phoneNumber ? obj.phoneNumber : "not provided"}
+            //     </TableCell>
+            //   );
+            // }
+
             return (
               <TableCell
                 key={index}

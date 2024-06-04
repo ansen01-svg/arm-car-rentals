@@ -4,7 +4,6 @@ import InsertInvitationOutlinedIcon from "@mui/icons-material/InsertInvitationOu
 import LoginIcon from "@mui/icons-material/Login";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
-import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 
 export const faqsTexts = [
   {
@@ -158,8 +157,8 @@ export const usersTableHeadValues = [
   { id: 2, value: "EMAIL" },
   { id: 3, value: "ROLE" },
   { id: 4, value: "IS VERIFIED" },
-  { id: 5, value: "Phone number" },
-  { id: 6, value: "TRIPS" },
+  { id: 5, value: "TRIPS" },
+  { id: 6, value: "PHONE NUMBER" },
 ];
 
 export const usersFilterFields = ["Admin", "User"];
