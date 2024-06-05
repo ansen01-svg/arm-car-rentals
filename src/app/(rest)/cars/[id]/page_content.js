@@ -146,16 +146,9 @@ export default function PageContent(props) {
   if (
     faultyAccess ||
     isFaultyPickupTiming ||
-    new Date(pickupDate) >= new Date(dropoffDate)
+    new Date(pickupDate) >= new Date(dropoffDate) ||
+    car.length < 1
   ) {
-    return (
-      <div className="w-full">
-        <Error />
-      </div>
-    );
-  }
-
-  if (!car.length) {
     return (
       <div className="w-full">
         <Error />
