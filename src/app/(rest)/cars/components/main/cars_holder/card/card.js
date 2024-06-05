@@ -26,7 +26,7 @@ export default function Card(props) {
         <Link
           href={`/cars/${car._id}?${details}`}
           target="_blank"
-          className="w-full h-full top-0 left-0 absolute z-50"
+          className="w-full h-full top-0 left-0 absolute z-40"
         ></Link>
       )}
     </div>
