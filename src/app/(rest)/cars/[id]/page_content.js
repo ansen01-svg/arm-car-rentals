@@ -14,6 +14,7 @@ import Checkout from "./components/checkout/checkout";
 import useCheckFaultyAccess from "@/app/_lib/frontend/hooks/useCheckFaultyAccess";
 import getDate from "@/app/_lib/frontend/getDate";
 import calculateDaysBetweenDates from "@/app/_lib/frontend/getDays";
+import faultyDateAndTime from "@/app/_lib/frontend/faultyDateAndTime";
 
 export default function PageContent(props) {
   const { searchParams, token, car } = props;
@@ -30,8 +31,13 @@ export default function PageContent(props) {
   const path = usePathname();
   const searchParams1 = useSearchParams();
 
+  const pickupDate = searchParams.pickupDate;
+  const dropoffDate = searchParams.dropoffDate;
+  const pickupTime = searchParams.pickupTime;
+
   const mobileScreen = useMediaQuery("(max-width:1024px)");
   const { faultyAccess } = useCheckFaultyAccess(searchParams);
+  const isFaultyPickupTiming = faultyDateAndTime(pickupTime, pickupDate);
 
   const dataReady = dates.pickupDate;
 
@@ -137,7 +143,11 @@ export default function PageContent(props) {
     }
   };
 
-  if (faultyAccess) {
+  if (
+    faultyAccess ||
+    isFaultyPickupTiming ||
+    new Date(pickupDate) >= new Date(dropoffDate)
+  ) {
     return (
       <div className="w-full">
         <Error />

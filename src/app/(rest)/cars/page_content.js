@@ -2,20 +2,24 @@
 
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import useCheckFaultyAccess from "@/app/_lib/frontend/hooks/useCheckFaultyAccess";
 import ErrorMessageHolder from "./components/error_message_holder/error_message_holder";
 import Body from "./body";
 import SearchOptionsHolder from "./components/search_options_holder/search_options-holder";
 import CarsPageSkeleton from "./components/skeleton/skeleton";
+import useCheckFaultyAccess from "@/app/_lib/frontend/hooks/useCheckFaultyAccess";
+import faultyDateAndTime from "@/app/_lib/frontend/faultyDateAndTime";
 
 export default function PageContent(props) {
   const { searchParams } = props;
 
   const [cars, setCars] = useState(null);
 
-  const { faultyAccess } = useCheckFaultyAccess(searchParams);
   const pickupDate = searchParams.pickupDate;
   const dropoffDate = searchParams.dropoffDate;
+  const pickupTime = searchParams.pickupTime;
+
+  const { faultyAccess } = useCheckFaultyAccess(searchParams);
+  const isFaultyPickupTiming = faultyDateAndTime(pickupTime, pickupDate);
 
   const fetchCars = (from, to) => {
     setCars(null);
@@ -49,7 +53,11 @@ export default function PageContent(props) {
     return () => setCars(null);
   }, [pickupDate, dropoffDate]);
 
-  if (faultyAccess) {
+  if (
+    faultyAccess ||
+    isFaultyPickupTiming ||
+    new Date(pickupDate) >= new Date(dropoffDate)
+  ) {
     return (
       <div className="w-full">
         <SearchOptionsHolder fetchCars={fetchCars} />

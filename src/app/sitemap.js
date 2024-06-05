@@ -110,6 +110,18 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${process.env.NEXT_PUBLIC_DOMAIN}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${process.env.NEXT_PUBLIC_DOMAIN}/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${process.env.NEXT_PUBLIC_DOMAIN}/fleet`,
       lastModified: new Date(),
       changeFrequency: "monthly",
