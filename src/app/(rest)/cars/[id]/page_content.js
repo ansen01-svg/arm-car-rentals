@@ -132,7 +132,7 @@ export default function PageContent(props) {
 
   if (
     faultyAccess ||
-    isFaultyPickupTiming ||
+    // isFaultyPickupTiming ||
     new Date(pickupDate) >= new Date(dropoffDate) ||
     car.length < 1
   ) {
