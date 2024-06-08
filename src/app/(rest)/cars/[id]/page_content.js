@@ -22,6 +22,7 @@ export default function PageContent(props) {
   const [dates, setDates] = useState({ pickupDate: "", dropoffDate: "" });
   const [time, setTime] = useState({ pickupTime: "", dropoffTime: "" });
   const [disableBtn, setDisableBtn] = useState(false);
+  const [isFaultyPickupTiming, setIsFaultyPickupTiming] = useState(false);
 
   // loading animation
   const [inProcess, setInProcess] = useState(false);
@@ -34,10 +35,10 @@ export default function PageContent(props) {
   const pickupDate = searchParams.pickupDate;
   const dropoffDate = searchParams.dropoffDate;
   const pickupTime = searchParams.pickupTime;
+  const dropoffTime = searchParams.dropoffTime;
 
   const mobileScreen = useMediaQuery("(max-width:1024px)");
   const { faultyAccess } = useCheckFaultyAccess(searchParams);
-  const isFaultyPickupTiming = faultyDateAndTime(pickupTime, pickupDate);
 
   const dataReady = dates.pickupDate;
 
@@ -47,36 +48,22 @@ export default function PageContent(props) {
   const tax = 0;
   const fees = 0;
 
-  // store searchParams to session storage
-  useEffect(() => {
-    const params = sessionStorage.getItem("params");
-
-    if (params) {
-      sessionStorage.removeItem("params");
-    }
-
-    sessionStorage.setItem("params", JSON.stringify(searchParams));
-  }, [searchParams]);
+  // check for faulty pickup timings
+  useState(() => {
+    setIsFaultyPickupTiming(faultyDateAndTime(pickupTime, pickupDate));
+  }, []);
 
   // set dates and time to states
   useEffect(() => {
-    const params = sessionStorage.getItem("params");
-
-    if (params) {
-      const storedParams = JSON.parse(sessionStorage.getItem("params"));
-
-      const { pickupDate, dropoffDate, pickupTime, dropoffTime } = storedParams;
-
-      setDates({
-        pickupDate: dayjs(pickupDate).format("DD/MM/YY"),
-        dropoffDate: dayjs(dropoffDate).format("DD/MM/YY"),
-      });
-      setTime({
-        pickupTime: dayjs(pickupTime).format("HH:mm a"),
-        dropoffTime: dayjs(dropoffTime).format("HH:mm a"),
-      });
-    }
-  }, []);
+    setDates({
+      pickupDate: dayjs(pickupDate).format("DD/MM/YY"),
+      dropoffDate: dayjs(dropoffDate).format("DD/MM/YY"),
+    });
+    setTime({
+      pickupTime: dayjs(pickupTime).format("HH:mm a"),
+      dropoffTime: dayjs(dropoffTime).format("HH:mm a"),
+    });
+  }, [pickupTime, dropoffDate, pickupDate, dropoffTime]);
 
   // apply animation
   useEffect(() => {
@@ -145,8 +132,8 @@ export default function PageContent(props) {
 
   if (
     faultyAccess ||
-    // isFaultyPickupTiming ||
-    // new Date(pickupDate) >= new Date(dropoffDate) ||
+    isFaultyPickupTiming ||
+    new Date(pickupDate) >= new Date(dropoffDate) ||
     car.length < 1
   ) {
     return (
