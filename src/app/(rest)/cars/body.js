@@ -25,7 +25,7 @@ export default function Body(props) {
   const { cars } = props;
 
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [sort, setSort] = useState("Price low to high");
+  const [sort, setSort] = useState("Price: low to high");
   const [filteredCars, setFilteredCars] = useState(cars);
   const [filters, setFilters] = useState({
     type: [],
@@ -49,7 +49,7 @@ export default function Body(props) {
   // sort cars on load
   useEffect(() => {
     if (filteredCars) {
-      if (sort === "Price low to high") {
+      if (sort === "Price: low to high") {
         const sortedCars = filteredCars.sort((a, b) => a.rate - b.rate);
         setFilteredCars(sortedCars);
       } else {
@@ -193,7 +193,7 @@ export default function Body(props) {
     setSort(e.target.value);
     const sort = e.target.value;
 
-    if (sort === "Price low to high") {
+    if (sort === "Price: low to high") {
       const sortedCars = filteredCars.sort((a, b) => a.rate - b.rate);
       setFilteredCars(sortedCars);
     } else {

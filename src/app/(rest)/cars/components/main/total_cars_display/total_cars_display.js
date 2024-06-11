@@ -1,5 +1,6 @@
 import { useMediaQuery } from "@mui/material";
 import SortHolder from "./sort_holder";
+// import SortHolder1 from "./sort_holder copy";
 
 export default function TotalCarsDisplay(props) {
   const { carsLength, value, handleChange } = props;
