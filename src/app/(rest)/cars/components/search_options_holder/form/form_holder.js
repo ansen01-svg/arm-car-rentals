@@ -21,7 +21,7 @@ export default function FormHolder(props) {
 
   const [disabled, setDisabled] = useState(false);
   const [fieldsError, setFieldsError] = useState("");
-  const [dateError, setDateError] = useState(false);
+  const [date1Error, setDate1Error] = useState(false);
   const [timeError, setTimeError] = useState(false);
   const [time1Error, setTime1Error] = useState(false);
 
@@ -52,7 +52,12 @@ export default function FormHolder(props) {
   // search cars form submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setDisabled(true);
+    setFieldsError("");
+    setDate1Error(false);
+    setTimeError(false);
+    setTime1Error(false);
 
     const paramObj = new URLSearchParams(params);
     const pud = paramObj.get("pickupDate");
@@ -78,22 +83,18 @@ export default function FormHolder(props) {
     // 2. check if dropoff date is later than pickup date
     if (new Date(dropoffDay).getTime() < new Date(pickupDay).getTime()) {
       setFieldsError("Please enter the correct date and time.");
-      setTimeError(false);
-      setTime1Error(false);
-      setDateError(true);
+      setDate1Error(true);
       setDisabled(false);
       return;
     }
 
     // 3. check if both dates are same but pickup time is later than dropoff time
     if (
-      pickupDate.format("DD/MM/YY") === dropoffDate.format("DD/MM/YY") &&
-      compareTimes(dropoffTime.format("HH:mm a"), pickupTime.format("HH:mm a"))
+      pickupDate.format("DD/MM/YY") === dropoffDate.format("DD/MM/YY")
+      // compareTimes(dropoffTime.format("HH:mm a"), pickupTime.format("HH:mm a"))
     ) {
       setFieldsError("Please enter the correct date and time.");
-      setTimeError(false);
-      setDateError(false);
-      setTime1Error(true);
+      setDate1Error(true);
       setDisabled(false);
       return;
     }
@@ -104,26 +105,15 @@ export default function FormHolder(props) {
         pickupTime.format("HH:mm a"),
         pickupDay
       );
-      const currentTime = new Date(Date.now()).getTime();
+      const currentTime = Date.now();
 
       if (todaysPickupTime < currentTime) {
         setFieldsError("Please enter the correct date and time.");
-        setDateError(false);
-        setTime1Error(false);
         setTimeError(true);
         setDisabled(false);
         return;
-      } else {
-        setFieldsError(false);
-        setTimeError(false);
-        setDisabled(false);
       }
     }
-
-    setFieldsError("");
-    setDateError(false);
-    setTimeError(false);
-    setTime1Error(false);
 
     // update url with fresh params
     const paramsObj = new URLSearchParams();
@@ -146,7 +136,7 @@ export default function FormHolder(props) {
       {fieldsError && <ErrorMsgHolder fieldsError={fieldsError} />}
       <Form
         disabled={disabled}
-        dateError={dateError}
+        date1Error={date1Error}
         timeError={timeError}
         time1Error={time1Error}
         pickupDate={pickupDate}

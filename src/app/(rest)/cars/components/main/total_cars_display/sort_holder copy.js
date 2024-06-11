@@ -1,14 +1,14 @@
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 
-export default function SortHolder({ value, handleChange }) {
+export default function SortHolder1({ value, handleChange }) {
   return (
-    <div className="w-[30%] border-[1px] border-slate-200 rounded-lg">
+    <div className="flex items-center justify-center">
+      <p className="text-gray2 text-[14px]">Sort by:</p>
       <TextField
         id="cars-sort-select"
-        fullWidth
+        // fullWidth
         select
-        label="Sort by"
         helperText=""
         variant="standard"
         value={value}
@@ -17,7 +17,6 @@ export default function SortHolder({ value, handleChange }) {
           disableUnderline: true,
         }}
         sx={{
-          background: "white",
           borderRadius: "8px",
           paddingBottom: "2px",
           ".MuiFormLabel-root": {
@@ -33,17 +32,17 @@ export default function SortHolder({ value, handleChange }) {
             fontSize: "14px",
             top: "2px",
           },
-          ".MuiSelect-select": {
-            backgroundColor: "white",
-            "&.Mui-selected": { backgroundColor: "white" },
-            "&.Mui-focused": {
-              backgroundColor: "white",
-            },
-          },
+          // ".MuiSelect-select": {
+          //   backgroundColor: "white",
+          //   "&.Mui-selected": { backgroundColor: "white" },
+          //   "&.Mui-focused": {
+          //     backgroundColor: "white",
+          //   },
+          // },
         }}
       >
         <MenuItem
-          value={value}
+          value={"Price low to high"}
           sx={{
             fontSize: "14px",
             "&.Mui-selected": {
@@ -54,19 +53,10 @@ export default function SortHolder({ value, handleChange }) {
             },
           }}
         >
-          {value}
+          {"Price low to high"}
         </MenuItem>
-        <MenuItem
-          value={
-            value === "Price: low to high"
-              ? "Price: high to low"
-              : "Price: low to high"
-          }
-          sx={{ fontSize: "14px" }}
-        >
-          {value === "Price: low to high"
-            ? "Price: high to low"
-            : "Price: low to high"}
+        <MenuItem value={"Price high to low"} sx={{ fontSize: "14px" }}>
+          {"Price high to low"}
         </MenuItem>
       </TextField>
     </div>

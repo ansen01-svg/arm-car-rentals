@@ -8,7 +8,7 @@ import Button from "./button";
 export default function Form(props) {
   const {
     disabled,
-    dateError,
+    date1Error,
     timeError,
     time1Error,
     pickupDate,
@@ -33,13 +33,13 @@ export default function Form(props) {
           labelTitle={"Pick-up Date"}
           value={dayjs(pickupDate)}
           handleChange={handlePickupDateChange}
-          dateError={dateError}
         />
         <DatePickerHolder
           labelTitle={"Drop-off Date"}
           value={dayjs(dropoffDate)}
           handleChange={handleDropoffDateChange}
           minDate={minDate}
+          dateError={date1Error}
         />
       </FieldsHolder>
       <FieldsHolder>

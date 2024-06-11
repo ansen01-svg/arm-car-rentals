@@ -9,13 +9,12 @@ import FormHeader from "../form_header/form_header";
 import getDate from "@/app/_lib/frontend/getDate";
 import getMilliseconds from "@/app/_lib/frontend/getMilliseconds";
 import { initialFormState, reducer } from "../form/form_reducer";
-import compareTimes from "@/app/_lib/frontend/compareTimes";
+// import compareTimes from "@/app/_lib/frontend/compareTimes";
 
 export default function FormHoler() {
   const [state, dispatch] = useReducer(reducer, initialFormState);
 
   const [fieldsError, setFieldsError] = useState("");
-  const [dateError, setDateError] = useState(false);
   const [date1Error, setDate1Error] = useState(false);
   const [timeError, setTimeError] = useState(false);
   const [time1Error, setTime1Error] = useState(false);
@@ -57,6 +56,11 @@ export default function FormHoler() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setFieldsError("");
+    setDate1Error(false);
+    setTimeError(false);
+    setTime1Error(false);
+
     const pickupDay = getDate(state.pickupDate.format("DD/MM/YY"));
     const dropoffDay = getDate(state.dropoffDate.format("DD/MM/YY"));
 
@@ -73,30 +77,24 @@ export default function FormHoler() {
       return;
     }
 
-    // check if dropoff date is later than pickup date
+    // check if dropoff date is earlier than pickup date
     if (new Date(dropoffDay).getTime() < new Date(pickupDay).getTime()) {
       setFieldsError("Please enter the correct date and time.");
-      setTimeError(false);
-      setTime1Error(false);
-      setDate1Error(false);
-      setDateError(true);
+      setDate1Error(true);
       return;
     }
 
-    // check if both dates are same but pickup time is later than dropoff time
+    // check if both dates are same
     if (
       state.pickupDate.format("DD/MM/YY") ===
-        state.dropoffDate.format("DD/MM/YY") &&
-      compareTimes(
-        state.dropoffTime.format("HH:mm a"),
-        state.pickupTime.format("HH:mm a")
-      )
+      state.dropoffDate.format("DD/MM/YY")
+      // compareTimes(
+      //   state.dropoffTime.format("HH:mm a"),
+      //   state.pickupTime.format("HH:mm a")
+      // )
     ) {
       setFieldsError("Please enter the correct date and time.");
-      setTime1Error(true);
-      setTimeError(false);
-      setDateError(false);
-      setDate1Error(false);
+      setDate1Error(true);
       return;
     }
 
@@ -106,26 +104,14 @@ export default function FormHoler() {
         state.pickupTime.format("HH:mm a"),
         pickupDay
       );
-      const currentTime = new Date(Date.now()).getTime();
+      const currentTime = Date.now();
 
       if (todaysPickupTime < currentTime) {
         setFieldsError("Please enter the correct date and time.");
-        setDateError(false);
-        setDate1Error(false);
-        setTime1Error(false);
         setTimeError(true);
         return;
-      } else {
-        setFieldsError("");
-        setTimeError(false);
       }
     }
-
-    setFieldsError("");
-    setDateError(false);
-    setDate1Error(false);
-    setTimeError(false);
-    setTime1Error(false);
 
     const link = `/cars?pickupDate=${state.pickupDate}&dropoffDate=${state.dropoffDate}&pickupTime=${state.pickupTime}&dropoffTime=${state.dropoffTime}`;
     router.push(link);
@@ -137,7 +123,6 @@ export default function FormHoler() {
       {fieldsError && <ErrorMsgHolder fieldsError={fieldsError} />}
       <Form
         setFieldsError={setFieldsError}
-        dateError={dateError}
         date1Error={date1Error}
         timeError={timeError}
         time1Error={time1Error}
